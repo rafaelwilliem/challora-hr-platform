@@ -44,6 +44,25 @@ function currentRole(): string {
 }
 
 /**
+ * Cek apakah profil user sudah lengkap (field wajib saja, tidak termasuk opsional)
+ */
+function isProfileComplete(): bool {
+    if (!isLoggedIn() || currentRole() !== 'user') {
+        return true;
+    }
+    $user = (new User())->findById(currentUserId());
+    if (!$user) return true;
+    $required = ['name', 'phone', 'address', 'gender', 'religion', 'birth_place', 'birth_date',
+        'father_name', 'mother_name', 'marital_status',
+        'education_level', 'graduation_year', 'education_major', 'education_university'];
+    foreach ($required as $field) {
+        $v = trim((string) ($user[$field] ?? ''));
+        if ($v === '') return false;
+    }
+    return true;
+}
+
+/**
  * Render view with layout. Layout auto-detected: hr/* => sidebar, else => clean
  */
 function render_view(string $view, array $data = []): void {

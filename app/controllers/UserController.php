@@ -163,6 +163,6 @@ class UserController {
                 redirect('/user/settings');
             }
         }
-        render_view('user/settings/edit', ['user' => $user, 'workExperiences' => $workExperiences, 'achievements' => $achievements, 'error' => $error, 'pageTitle' => 'Pengaturan Profil']);
+        render_view('user/settings/edit', ['user' => $user, 'workExperiences' => $workExperiences, 'achievements' => $achievements, 'error' => $error, 'pageTitle' => 'Pengaturan Profil', 'hideProfileBar' => true]);
     }
 }

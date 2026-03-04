@@ -46,6 +46,12 @@
         <div class="alert alert-danger"><?= e($_SESSION['flash_error']) ?></div>
         <?php unset($_SESSION['flash_error']); ?>
     <?php endif; ?>
+    <?php if (isLoggedIn() && currentRole() === 'user' && !($hideProfileBar ?? false) && !isProfileComplete()): ?>
+        <div class="alert alert-warning d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+            <span>Datamu belum dilengkapi, lengkapi agar HR semakin yakin untuk menerima mu.</span>
+            <a href="<?= BASE_URL ?>/user/settings/edit" class="btn btn-warning btn-sm">Lengkapi Data</a>
+        </div>
+    <?php endif; ?>
     <?= $content ?? '' ?>
 </main>
 <?php require APP_PATH . '/views/layouts/footer.php'; ?>
