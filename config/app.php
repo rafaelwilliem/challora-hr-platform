@@ -8,6 +8,8 @@ define('BASE_PATH', dirname(__DIR__));
 define('APP_PATH', BASE_PATH . '/app');
 define('BASE_URL', '/challorav2/public');
 define('STORAGE_CV', BASE_PATH . '/storage/cv');
+define('STORAGE_DIPLOMA', BASE_PATH . '/storage/diplomas');
+define('STORAGE_PHOTO', BASE_PATH . '/storage/photos');
 
 $autoloadPath = BASE_PATH . '/vendor/autoload.php';
 if (file_exists($autoloadPath)) {

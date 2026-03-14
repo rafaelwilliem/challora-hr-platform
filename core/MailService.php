@@ -17,6 +17,18 @@ class MailService {
     }
 
     /**
+     * Kirim email reset password
+     */
+    public function sendPasswordReset(string $toEmail, string $toName, string $resetLink): bool {
+        if (!$this->isEnabled()) return false;
+        $subject = 'Reset Password Akun Anda';
+        $body = "Yth. {$toName},\n\nKami menerima permintaan reset password untuk akun Anda.\n\n"
+              . "Silakan klik tautan berikut untuk mereset password:\n{$resetLink}\n\n"
+              . "Tautan ini berlaku selama 1 jam.\n\nJika Anda tidak meminta reset password, abaikan email ini.";
+        return $this->send($toEmail, $toName, $subject, $body);
+    }
+
+    /**
      * Kirim email hasil lamaran (diterima/ditolak)
      */
     public function sendApplicationResult(string $toEmail, string $toName, string $jobTitle, string $status): bool {

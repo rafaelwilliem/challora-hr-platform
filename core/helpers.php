@@ -70,6 +70,8 @@ function render_view(string $view, array $data = []): void {
     ob_start();
     require APP_PATH . '/views/' . $view . '.php';
     $content = ob_get_clean();
-    $layout = (strpos($view, 'hr/') === 0) ? 'hr' : 'user'; // auth/*, user/* => user layout
+    $layout = (strpos($view, 'hr/') === 0) ? 'hr' : (
+        in_array($view, ['auth/login', 'auth/forgot', 'auth/register'], true) ? 'auth' : 'user'
+    );
     require APP_PATH . '/views/layouts/' . $layout . '.php';
 }

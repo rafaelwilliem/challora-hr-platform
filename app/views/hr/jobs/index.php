@@ -91,13 +91,13 @@ $filter = $filter ?? 'all';
                         <?php else: ?>
                         <?php foreach ($jobs as $j): ?>
                             <tr>
-                                <td><?= e($j['title']) ?></td>
+                                <td><?php if (!empty($j['is_urgent'])): ?><span class="badge bg-danger me-1">Urgent</span><?php endif; ?><?= e($j['title']) ?></td>
                                 <td><?= e($j['location'] ?? '-') ?></td>
                                 <td><?= !empty($j['created_at']) ? date('d/m/Y H:i', strtotime($j['created_at'])) : '-' ?></td>
                                 <td>
                                     <a href="<?= BASE_URL ?>/hr/jobs/applicants?id=<?= (int) $j['id'] ?>">
                                         <?= (int) ($j['applicant_count'] ?? 0) ?> pelamar
-                                        <?php if (($j['applicant_accepted'] ?? 0) > 0 || ($j['applicant_rejected'] ?? 0) > 0): ?>
+                                        <?php if ($filter === 'all' && (($j['applicant_accepted'] ?? 0) > 0 || ($j['applicant_rejected'] ?? 0) > 0)): ?>
                                             <small class="text-muted">(<?= (int) ($j['applicant_accepted'] ?? 0) ?> diterima, <?= (int) ($j['applicant_rejected'] ?? 0) ?> ditolak)</small>
                                         <?php endif; ?>
                                     </a>

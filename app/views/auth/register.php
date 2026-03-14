@@ -1,36 +1,89 @@
-<div class="card mx-auto" style="max-width: 480px;">
-    <div class="card-body">
-        <h1 class="card-title h4 mb-4">Daftar (Kandidat)</h1>
-        <form method="post" action="<?= BASE_URL ?>/index.php?url=auth/register">
-            <div class="mb-3">
-                <label class="form-label" for="name">Nama</label>
-                <input type="text" class="form-control" id="name" name="name" required value="<?= e($old['name']) ?>">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar - Challora</title>
+
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/login-modern.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="auth-body">
+    <div class="login-page">
+        <div class="login-card">
+            <div class="login-left">
+                <div class="brand">
+                    <div class="brand-badge">CV</div>
+                    <div>
+                        <h2>Challora</h2>
+                        <p>Bergabung dan daftar sebagai kandidat.</p>
+                    </div>
+                </div>
+
+                <div class="form-wrap">
+                    <h1>Daftar Akun</h1>
+                    <p class="subtitle">Lengkapi data untuk mendaftar sebagai kandidat.</p>
+
+                    <?php if (!empty($error)): ?>
+                        <div class="alert alert-danger"><?= e($error) ?></div>
+                    <?php endif; ?>
+
+                    <form method="post" action="<?= BASE_URL ?>/index.php?url=auth/register" class="login-form">
+                        <div class="form-group">
+                            <label for="name">Nama</label>
+                            <div class="input-box">
+                                <input type="text" id="name" name="name" placeholder="Masukkan nama" required value="<?= e($old['name'] ?? '') ?>">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <div class="input-box">
+                                <input type="email" id="email" name="email" placeholder="Masukkan email" required value="<?= e($old['email'] ?? '') ?>">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">No. HP</label>
+                            <div class="input-box">
+                                <input type="text" id="phone" name="phone" placeholder="Masukkan nomor HP" value="<?= e($old['phone'] ?? '') ?>">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Alamat</label>
+                            <div class="input-box">
+                                <textarea id="address" name="address" rows="2" placeholder="Masukkan alamat"><?= e($old['address'] ?? '') ?></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password (min. 6 karakter)</label>
+                            <div class="input-box">
+                                <input type="password" id="password" name="password" placeholder="Masukkan password" required minlength="6">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password_confirm">Konfirmasi Password</label>
+                            <div class="input-box">
+                                <input type="password" id="password_confirm" name="password_confirm" placeholder="Konfirmasi password" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-login">Daftar</button>
+                        <div class="extra-links">
+                            <p>Sudah punya akun? <a href="<?= BASE_URL ?>/auth/login">Login</a></p>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="mb-3">
-                <label class="form-label" for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email" required value="<?= e($old['email']) ?>">
+
+            <div class="login-right">
+                <div class="overlay"></div>
+                <div class="right-content">
+                    <span class="mini-badge">HR & Recruitment Platform</span>
+                    <h2>Temukan kandidat terbaik dengan sistem yang efisien</h2>
+                    <p>Kelola data pelamar, lowongan, dan proses seleksi dalam satu dashboard.</p>
+                </div>
             </div>
-            <div class="mb-3">
-                <label class="form-label" for="phone">No. HP</label>
-                <input type="text" class="form-control" id="phone" name="phone" value="<?= e($old['phone']) ?>">
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="address">Alamat</label>
-                <textarea class="form-control" id="address" name="address" rows="3"><?= e($old['address']) ?></textarea>
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="password">Password (min. 6 karakter)</label>
-                <input type="password" class="form-control" id="password" name="password" required minlength="6">
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="password_confirm">Konfirmasi Password</label>
-                <input type="password" class="form-control" id="password_confirm" name="password_confirm" required>
-            </div>
-            <?php if (!empty($error)): ?><p class="text-danger"><?= e($error) ?></p><?php endif; ?>
-            <div class="d-flex gap-2 align-items-center">
-                <button type="submit" class="btn btn-primary">Daftar</button>
-                <a href="<?= BASE_URL ?>/auth/login">Sudah punya akun? Login</a>
-            </div>
-        </form>
+        </div>
     </div>
-</div>
+</body>
+</html>

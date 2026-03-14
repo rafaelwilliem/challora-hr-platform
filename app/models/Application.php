@@ -6,11 +6,16 @@ class Application {
         $this->db = getDB();
     }
 
-    public function create(int $userId, int $jobId, ?string $cvPath = null): int {
-        $stmt = $this->db->prepare('INSERT INTO applications (user_id, job_id, cv_path, status) VALUES (?, ?, ?, ?)');
-        $stmt->execute([$userId, $jobId, $cvPath, 'pending']);
+    public function create(int $userId, int $jobId, ?string $cvPath = null, ?string $diplomaPath = null, ?string $photoPath = null): int {
+        $stmt = $this->db->prepare('INSERT INTO applications (user_id, job_id, cv_path, diploma_path, photo_path, status) VALUES (?, ?, ?, ?, ?, ?)');
+        $stmt->execute([$userId, $jobId, $cvPath, $diplomaPath, $photoPath, 'pending']);
         return (int) $this->db->lastInsertId();
     }
+
+    public const STATUS_PENDING = 'pending';
+    public const STATUS_REVIEWED = 'reviewed';
+    public const STATUS_ACCEPTED = 'accepted';
+    public const STATUS_REJECTED = 'rejected';
 
     /** Cek sudah apply atau belum (unique user_id + job_id) */
     public function hasApplied(int $userId, int $jobId): bool {
@@ -46,7 +51,7 @@ class Application {
     }
 
     public function updateStatus(int $id, string $status): bool {
-        $allowed = ['pending', 'accepted', 'rejected'];
+        $allowed = [self::STATUS_PENDING, self::STATUS_REVIEWED, self::STATUS_ACCEPTED, self::STATUS_REJECTED];
         if (!in_array($status, $allowed, true)) return false;
         $stmt = $this->db->prepare('UPDATE applications SET status = ? WHERE id = ?');
         return $stmt->execute([$status, $id]);
@@ -74,11 +79,12 @@ class Application {
         while ($r = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $rows[$r['status']] = (int) $r['cnt'];
         }
+        $pendingCount = (int) ($rows['pending'] ?? 0) + (int) ($rows['reviewed'] ?? 0);
         return [
-            'total' => (int) ($rows['pending'] ?? 0) + (int) ($rows['accepted'] ?? 0) + (int) ($rows['rejected'] ?? 0),
+            'total' => $pendingCount + (int) ($rows['accepted'] ?? 0) + (int) ($rows['rejected'] ?? 0),
             'accepted' => (int) ($rows['accepted'] ?? 0),
             'rejected' => (int) ($rows['rejected'] ?? 0),
-            'pending' => (int) ($rows['pending'] ?? 0),
+            'pending' => $pendingCount,
         ];
     }
 
@@ -91,12 +97,13 @@ class Application {
             GROUP BY status
         ');
         $stmt->execute([$hrUserId]);
-        $rows = $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
+        $rows = $stmt->fetchAll(PDO::FETCH_KEY_PAIR) ?: [];
+        $pendingCount = (int) ($rows['pending'] ?? 0) + (int) ($rows['reviewed'] ?? 0);
         return [
-            'total' => (int) ($rows['pending'] ?? 0) + (int) ($rows['accepted'] ?? 0) + (int) ($rows['rejected'] ?? 0),
+            'total' => $pendingCount + (int) ($rows['accepted'] ?? 0) + (int) ($rows['rejected'] ?? 0),
             'accepted' => (int) ($rows['accepted'] ?? 0),
             'rejected' => (int) ($rows['rejected'] ?? 0),
-            'pending' => (int) ($rows['pending'] ?? 0),
+            'pending' => $pendingCount,
         ];
     }
 

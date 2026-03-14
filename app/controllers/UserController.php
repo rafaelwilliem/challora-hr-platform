@@ -158,7 +158,7 @@ class UserController {
                 ]);
                 $this->userModel->setWorkExperiences(currentUserId(), $workItems);
                 $this->userModel->setAchievements(currentUserId(), $achItems);
-                $_SESSION['flash'] = 'Profil berhasil diperbarui.';
+                $_SESSION['flash_toast'] = ['message' => 'Profil berhasil diperbarui.'];
                 $_SESSION['user_name'] = $name;
                 redirect('/user/settings');
             }

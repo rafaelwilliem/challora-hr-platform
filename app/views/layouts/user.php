@@ -11,7 +11,8 @@
                     <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>/hr/jobs">Dashboard HR</a></li>
                 <?php elseif (isLoggedIn() && currentRole() === 'user'): ?>
                     <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>/jobs">Lowongan</a></li>
-                    <li class="nav-item" ><a class="nav-link" href="<?= BASE_URL ?>/applications">Yang sudah dilamar</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>/jobs/saved">Tersimpan</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>/applications">Yang sudah dilamar</a></li>
                 <?php endif; ?>
             </ul>
             <ul class="navbar-nav">
@@ -39,7 +40,7 @@
     </div>
 </nav>
 <main class="container py-4">
-    <?php if (!empty($_SESSION['flash'])): ?>
+    <?php if (!empty($_SESSION['flash']) && empty($_SESSION['flash_toast'])): ?>
         <div class="alert alert-success"><?= e($_SESSION['flash']) ?></div>
         <?php unset($_SESSION['flash']); ?>
     <?php endif; ?>
@@ -55,4 +56,95 @@
     <?php endif; ?>
     <?= $content ?? '' ?>
 </main>
+<?php if (isLoggedIn() && currentRole() === 'user' && !empty($_SESSION['flash_toast'])): ?>
+<?php
+$toast = $_SESSION['flash_toast'];
+unset($_SESSION['flash_toast']);
+?>
+<div id="toast-user" class="toast-user" role="alert">
+    <div class="toast-user-inner">
+        <span class="toast-user-msg"><?= e($toast['message']) ?></span>
+        <div class="toast-user-actions">
+            <?php if (!empty($toast['undo'])): ?>
+            <form id="toast-undo-form" method="post" action="<?= e($toast['undo']['url']) ?>" class="d-inline">
+                <?php foreach ($toast['undo']['fields'] ?? [] as $k => $v): ?>
+                <input type="hidden" name="<?= e($k) ?>" value="<?= e($v) ?>">
+                <?php endforeach; ?>
+                <button type="submit" class="btn btn-link btn-sm p-0 text-decoration-none fw-bold toast-undo-btn"><?= e($toast['undo']['label'] ?? 'Undo') ?></button>
+            </form>
+            <span class="toast-user-sep">|</span>
+            <?php endif; ?>
+            <button type="button" class="btn btn-link btn-sm p-0 text-decoration-none fw-bold toast-close-btn" aria-label="Tutup">&times;</button>
+        </div>
+    </div>
+</div>
+<style>
+.toast-user {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 1050;
+    min-width: 280px;
+    max-width: 400px;
+    padding: 1rem 1.25rem;
+    background: #212529;
+    color: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.25);
+    animation: toastSlideIn 0.3s ease-out;
+}
+.toast-user.toast-out {
+    animation: toastSlideOut 0.3s ease-in forwards;
+}
+.toast-user-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+.toast-user-msg {
+    flex: 1;
+}
+.toast-user-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+.toast-user-sep {
+    opacity: 0.6;
+}
+.toast-close-btn, .toast-undo-btn {
+    color: #fff !important;
+    text-decoration: none !important;
+    font-weight: bold;
+    opacity: 0.9;
+}
+.toast-close-btn:hover, .toast-undo-btn:hover {
+    opacity: 1;
+}
+@keyframes toastSlideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+@keyframes toastSlideOut {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(100%); opacity: 0; }
+}
+</style>
+<script>
+(function() {
+    var toast = document.getElementById('toast-user');
+    if (!toast) return;
+    var close = toast.querySelector('.toast-close-btn');
+    var undoForm = document.getElementById('toast-undo-form');
+    function dismiss() {
+        toast.classList.add('toast-out');
+        setTimeout(function() { toast.remove(); }, 300);
+    }
+    if (close) close.addEventListener('click', dismiss);
+    setTimeout(dismiss, 5000);
+})();
+</script>
+<?php endif; ?>
 <?php require APP_PATH . '/views/layouts/footer.php'; ?>

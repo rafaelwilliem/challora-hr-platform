@@ -123,4 +123,36 @@ class User {
         $stmt = $this->db->prepare('UPDATE users SET password = ? WHERE id = ?');
         return $stmt->execute([$hash, $id]);
     }
+
+    /** Password reset token management */
+    public function createPasswordResetToken(int $userId, int $hoursValid = 1): string {
+        $token = bin2hex(random_bytes(32));
+        $expires = date('Y-m-d H:i:s', time() + $hoursValid * 3600);
+        $stmt = $this->db->prepare('INSERT INTO password_resets (user_id, token, expires_at) VALUES (?, ?, ?)');
+        $stmt->execute([$userId, $token, $expires]);
+        return $token;
+    }
+
+    public function getPasswordResetByToken(string $token): ?array {
+        $stmt = $this->db->prepare(
+            'SELECT pr.user_id, pr.expires_at, u.email, u.name
+             FROM password_resets pr
+             JOIN users u ON u.id = pr.user_id
+             WHERE pr.token = ?'
+        );
+        $stmt->execute([$token]);
+        $row = $stmt->fetch();
+        if (!$row) return null;
+        $expires = strtotime($row['expires_at']);
+        if ($expires === false || $expires < time()) {
+            $this->invalidatePasswordResetToken($token);
+            return null;
+        }
+        return $row;
+    }
+
+    public function invalidatePasswordResetToken(string $token): void {
+        $stmt = $this->db->prepare('DELETE FROM password_resets WHERE token = ?');
+        $stmt->execute([$token]);
+    }
 }
