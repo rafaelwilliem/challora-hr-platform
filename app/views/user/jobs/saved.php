@@ -12,6 +12,8 @@
 .job-card-bottom{padding:30px 4px 2px;display:flex;justify-content:space-between;align-items:flex-end;gap:10px;}
 .job-salary{font-size:22px;font-weight:700;color:var(--color-text);line-height:1;}
 .job-loc{font-size:14px;color:var(--gray-500);line-height:1.25;margin-top:6px;}
+.job-progress-cta{display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
+.job-applied-label{font-size:12px;font-weight:600;color:var(--color-secondary);line-height:1;}
 .job-detail-btn{background:var(--color-secondary);color:var(--color-surface);border:0;padding:10px 18px;border-radius:999px;font-size:12px;font-weight:600;line-height:1;}
 .job-bookmark{width:42px;height:42px;border-radius:16px;background:var(--color-surface);display:flex;align-items:center;justify-content:center;}
 .job-bookmark i{font-size:20px;color:var(--color-secondary);}
@@ -87,7 +89,14 @@ $monthId = [
                         <div class="job-salary"><?= e($j['salary_range'] ?? '-') ?></div>
                         <div class="job-loc"><?= e($j['location'] ?? '-') ?></div>
                     </div>
-                    <a href="<?= BASE_URL ?>/jobs/show?id=<?= (int)$j['id'] ?>" class="job-detail-btn text-decoration-none">Detail</a>
+                    <?php if ($applied): ?>
+                        <div class="job-progress-cta">
+                            <span class="job-applied-label">Telah Dilamar</span>
+                            <a href="<?= BASE_URL ?>/jobs/show?id=<?= (int)$j['id'] ?>" class="job-detail-btn text-decoration-none">Lihat Progress</a>
+                        </div>
+                    <?php else: ?>
+                        <a href="<?= BASE_URL ?>/jobs/show?id=<?= (int)$j['id'] ?>" class="job-detail-btn text-decoration-none">Detail</a>
+                    <?php endif; ?>
                 </div>
             </div>
         <?php endforeach; ?>

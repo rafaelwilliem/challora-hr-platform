@@ -394,7 +394,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     <?php
                     $applied = in_array((int)$j['id'], $appliedJobIds ?? [], true);
                     $saved = in_array((int)$j['id'], $savedJobIds ?? [], true);
-                    $isAppliedView = ($jobView ?? 'all') === 'applied';
                     $qs = array_filter(array_merge($searchParams ?? [], ['page' => $page ?? 1, 'job_view' => $jobView]));
                     $redirectBack = '/jobs' . (empty($qs) ? '' : '?' . http_build_query($qs));
                     $jobTypeLabel = ucwords(str_replace('_', ' ', (string)($j['job_type'] ?? 'Part Time')));
@@ -455,7 +454,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <div class="job-salary"><?= e($j['salary_range'] ?? '-') ?></div>
                                 <div class="job-loc"><?= e($j['location'] ?? '-') ?></div>
                             </div>
-                            <?php if ($isAppliedView): ?>
+                            <?php if ($applied): ?>
                                 <div class="job-progress-cta">
                                     <span class="job-applied-label">Telah Dilamar</span>
                                     <a href="<?= BASE_URL ?>/jobs/show?id=<?= (int)$j['id'] ?>" class="job-detail-btn text-decoration-none">Lihat Progress</a>

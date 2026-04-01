@@ -1,7 +1,7 @@
 <?php require APP_PATH . '/views/layouts/header.php'; ?>
 <?php $activeUserPath = currentRoutePath('jobs'); ?>
 <style>
-.user-shell{min-height:100vh;background:var(--color-primary);--user-content-pad-x:10vw;--user-bar-pad-x:5vw;}
+.user-shell{min-height:100vh;background:var(--color-primary);--user-content-pad-x:10vw;--user-bar-pad-x:5vw;display:flex;flex-direction:column;}
 .user-topnav{background:var(--color-secondary);color:var(--color-on-secondary);border-bottom:1px solid rgba(255,255,255,.28);}
 .user-topnav-inner{width:100%;padding:0 var(--user-bar-pad-x);min-height:84px;display:flex;align-items:stretch;justify-content:space-between;gap:22px;}
 .user-brand{display:flex;align-items:center;font-size:28px;font-weight:700;line-height:1;color:var(--color-primary);text-decoration:none;letter-spacing:.4px;}
@@ -10,9 +10,22 @@
 .user-mainnav-link.active{border-bottom-color:#fff;font-weight:600;}
 .user-mainnav-link:hover{color:#fff;background:rgba(255,255,255,.04);}
 .user-avatar-btn{width:40px;height:40px;border-radius:999px;background:#fff;color:var(--color-secondary);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;border:none;}
-.user-main-wrap{width:100%;padding:16px var(--user-content-pad-x) 24px;}
+.user-main-wrap{width:100%;padding:16px var(--user-content-pad-x) 24px;flex:1 0 auto;}
 #user-menu-root{position:relative;z-index:9998;}
 #user-menu-dropdown{z-index:9999 !important;}
+.user-footer{margin-top:24px;border-top:1px solid color-mix(in srgb,var(--color-secondary) 15%,transparent);background:var(--color-secondary);}
+.user-footer-inner{width:100%;padding:16px var(--user-content-pad-x);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.user-footer-copy{font-size:13px;color:var(--color-text-muted);}
+.user-footer-copy strong{color:var(--color-accent);font-weight:700;}
+.user-footer-links{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.user-footer-link{font-size:13px;color:var(--color-accent);text-decoration:none;transition:color .2s ease;}
+.user-footer-link:hover{color:var(--color-accent-hover);text-decoration:underline;}
+@media (max-width:992px){
+    .user-shell{--user-content-pad-x:6vw;--user-bar-pad-x:4vw;}
+}
+@media (max-width:768px){
+    .user-footer-inner{justify-content:center;text-align:center;}
+}
 </style>
 <div class="user-shell">
 <header class="user-topnav">
@@ -78,6 +91,18 @@
     <?php endif; ?>
     <?= $content ?? '' ?>
 </main>
+<footer class="user-footer" aria-label="Footer user">
+    <div class="user-footer-inner">
+        <p class="user-footer-copy mb-0">
+            <strong>CHALLORA</strong> &copy; <?= date('Y') ?>. Semua hak dilindungi.
+        </p>
+        <nav class="user-footer-links" aria-label="Tautan cepat">
+            <a class="user-footer-link" href="<?= BASE_URL ?>/jobs">Lowongan</a>
+            <a class="user-footer-link" href="<?= BASE_URL ?>/applications">Lamaran</a>
+            <a class="user-footer-link" href="<?= BASE_URL ?>/jobs/saved">Tersimpan</a>
+        </nav>
+    </div>
+</footer>
 </div>
 <?php if (isLoggedIn() && currentRole() === 'user' && !empty($_SESSION['flash_toast'])): ?>
 <?php

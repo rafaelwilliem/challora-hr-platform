@@ -1,6 +1,8 @@
 <?php
 class Job {
     private PDO $db;
+    /** @var array<string,bool>|null */
+    private ?array $jobsColumnMap = null;
 
     public function __construct() {
         $this->db = getDB();
@@ -512,6 +514,9 @@ class Job {
      * @param array<string,mixed> $params
      */
     private function appendExperienceLevelCondition(array &$conditions, array &$bind, array $params): void {
+        if (!$this->hasJobsColumn('experience_level')) {
+            return;
+        }
         $raw = trim((string) ($params['experience_level'] ?? ''));
         if ($raw === '') {
             return;
@@ -558,6 +563,11 @@ class Job {
      * @param array<int,mixed> $bind
      */
     private function appendCsvColumnCondition(string $column, array &$conditions, array &$bind, string $raw): void {
+        if (preg_match('/^j\.([a-zA-Z_][a-zA-Z0-9_]*)$/', $column, $m) === 1) {
+            if (!$this->hasJobsColumn($m[1])) {
+                return;
+            }
+        }
         $raw = trim($raw);
         if ($raw === '') {
             return;
@@ -595,6 +605,31 @@ class Job {
         if ($updated === 'year') {
             $conditions[] = 'YEAR(j.created_at) = YEAR(CURDATE())';
         }
+    }
+
+    private function hasJobsColumn(string $column): bool {
+        if ($column === '') {
+            return false;
+        }
+        if ($this->jobsColumnMap === null) {
+            $this->jobsColumnMap = [];
+            try {
+                $stmt = $this->db->query("
+                    SELECT COLUMN_NAME
+                    FROM INFORMATION_SCHEMA.COLUMNS
+                    WHERE TABLE_SCHEMA = DATABASE()
+                      AND TABLE_NAME = 'jobs'
+                ");
+                $rows = $stmt ? $stmt->fetchAll(PDO::FETCH_COLUMN) : [];
+                foreach ($rows as $col) {
+                    $this->jobsColumnMap[(string) $col] = true;
+                }
+            } catch (Throwable $e) {
+                // Fail-safe: avoid fatal query by treating optional columns as unavailable.
+                $this->jobsColumnMap = [];
+            }
+        }
+        return isset($this->jobsColumnMap[$column]);
     }
 
     public function delete(int $id): bool {
