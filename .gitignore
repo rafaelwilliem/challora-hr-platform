@@ -6,3 +6,5 @@ database/
 .env.local
 storage/
 .vscode/
+docs/superpowers/specs/
+.superpowers/brainstorm/12345/
