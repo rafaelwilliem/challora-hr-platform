@@ -365,6 +365,107 @@ $searchLocation = $searchParams['location'] ?? '';
         color: var(--color-text-muted);
         text-transform: lowercase;
     }
+    /* Job Listing Layout with Sidebar */
+    .job-listing-container {
+        display: flex;
+        gap: 40px;
+        align-items: flex-start;
+        position: relative;
+    }
+
+    .job-listing-main {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .chally-ai-sidebar {
+        width: 320px;
+        flex-shrink: 0;
+        position: sticky;
+        top: 40px;
+        animation: slideInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Chally AI Card Styling */
+    .chally-ai-card {
+        background: #111111;
+        border: 1px solid var(--color-border);
+        padding: 32px;
+        color: var(--color-text);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .chally-ai-title {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 4px;
+        letter-spacing: -0.5px;
+    }
+
+    .chally-ai-subtitle {
+        font-size: 14px;
+        color: var(--color-text-muted);
+        margin-bottom: 32px;
+    }
+
+    .chally-ai-prompt {
+        font-size: 16px;
+        font-weight: 500;
+        margin-bottom: 24px;
+    }
+
+    .chally-ai-features {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .chally-ai-feature-item {
+        display: flex;
+        gap: 16px;
+        font-size: 14px;
+        color: var(--color-text);
+        line-height: 1.5;
+    }
+
+    .chally-ai-dot {
+        width: 10px;
+        height: 10px;
+        background: var(--color-accent);
+        border-radius: 50%;
+        margin-top: 5px;
+        flex-shrink: 0;
+        box-shadow: 0 0 10px var(--color-accent);
+        animation: pulseAccent 2s infinite;
+    }
+
+    /* Animations */
+    @keyframes slideInRight {
+        0% { opacity: 0; transform: translateX(40px); }
+        100% { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes pulseAccent {
+        0% { box-shadow: 0 0 0 0 rgba(255, 69, 0, 0.7); }
+        70% { box-shadow: 0 0 0 10px rgba(255, 69, 0, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(255, 69, 0, 0); }
+    }
+
+    @media (max-width: 992px) {
+        .job-listing-container {
+            flex-direction: column;
+        }
+        .chally-ai-sidebar {
+            width: 100%;
+            position: static;
+            order: -1; 
+            margin-bottom: 40px;
+        }
+    }
 </style>
 
 <form method="get" action="<?= BASE_URL ?>/jobs" id="job-filters-form">
@@ -482,6 +583,9 @@ $searchLocation = $searchParams['location'] ?? '';
     </div>
     <input type="hidden" name="job_view" value="<?= e($jobView) ?>">
 </form>
+
+<div class="job-listing-container">
+    <div class="job-listing-main">
 
 <?php if (isset($isProfileComplete) && !$isProfileComplete): ?>
 <div style="background: var(--color-accent); color: var(--color-surface); padding: 16px 24px; border: 2px solid var(--color-border); margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;" class="lowercase font-bold">
@@ -607,6 +711,29 @@ $searchLocation = $searchParams['location'] ?? '';
         <?php endif; ?>
 
     <?php endif; ?>
+    </div> <!-- Close .brutalist-job-list -->
+    </div> <!-- Close .job-listing-main -->
+
+    <!-- Chally AI Sidebar -->
+    <aside class="chally-ai-sidebar">
+        <div class="chally-ai-card lowercase">
+            <h2 class="chally-ai-title">chally ai</h2>
+            <p class="chally-ai-subtitle">your personal assistant.</p>
+            
+            <p class="chally-ai-prompt">What can I help you today?</p>
+            
+            <ul class="chally-ai-features">
+                <li class="chally-ai-feature-item">
+                    <span class="chally-ai-dot"></span>
+                    <span>Help me find the most fit job for me.</span>
+                </li>
+                <li class="chally-ai-feature-item">
+                    <span class="chally-ai-dot"></span>
+                    <span>Help me to evaluate my CV and introductions.</span>
+                </li>
+            </ul>
+        </div>
+    </aside>
 </div>
 
 <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
