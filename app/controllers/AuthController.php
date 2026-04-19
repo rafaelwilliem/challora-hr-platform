@@ -38,6 +38,7 @@ class AuthController {
                         $_SESSION['user_id'] = (int) $user['id'];
                         $_SESSION['role'] = $user['role'];
                         $_SESSION['user_name'] = $user['name'];
+                        $_SESSION['user_email'] = $user['email'] ?? '';
                         $_SESSION['user_avatar_path'] = !empty($user['avatar_path']) ? (string) $user['avatar_path'] : '';
                         $_SESSION['user_avatar_ver'] = !empty($user['avatar_path']) ? md5((string) $user['avatar_path']) : '0';
                         if ($user['role'] === 'hr') {

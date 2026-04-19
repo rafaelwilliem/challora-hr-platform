@@ -5,280 +5,335 @@ $companyName = $companies[$companyIndex];
 $companyInitial = mb_substr($companyName, 0, 1);
 ?>
 <style>
-    /* Brutalist Detail Overrides */
-    .brutalist-back {
+    .job-show-hero {
+        margin-bottom: 60px;
+        position: relative;
+    }
+    .back-btn-brutalist {
         display: inline-flex;
         align-items: center;
-        color: var(--color-text);
+        gap: 8px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 13px;
+        color: var(--color-text-muted);
         text-decoration: none;
-        font-size: 16px;
-        font-weight: 500;
-        margin-bottom: 40px;
-        letter-spacing: -0.5px;
+        margin-bottom: 32px;
         transition: color 0.2s;
     }
-
-    .brutalist-back:hover {
-        color: var(--color-text-muted);
+    .back-btn-brutalist:hover {
+        color: var(--color-accent);
     }
-
-    .brutalist-layout {
-        display: grid;
-        grid-template-columns: 1fr 340px;
-        gap: 60px;
-        align-items: start;
+    .job-title-giant {
+        font-size: 72px;
+        font-weight: 800;
+        letter-spacing: -4px;
+        line-height: 0.9;
+        color: var(--color-text);
+        margin-bottom: 24px;
     }
-
-    @media (max-width: 992px) {
-        .brutalist-layout {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    .brutalist-content-head {
-        margin-bottom: 32px;
-    }
-
-    .brutalist-detail-title {
-        font-size: 48px;
-        font-weight: 500;
-        color: var(--color-text-muted);
-        letter-spacing: -1.5px;
-        margin-bottom: 16px;
-        line-height: 1.1;
-    }
-
-    .brutalist-detail-company {
+    .company-badge-premium {
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 16px;
         font-size: 24px;
-        font-weight: 600;
+        font-weight: 700;
         color: var(--color-text);
-        letter-spacing: -0.5px;
+        margin-bottom: 40px;
     }
-
-    .brutalist-tags {
+    .company-icon-frame {
+        width: 48px;
+        height: 48px;
+        background: var(--color-text);
+        color: var(--color-surface);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 20px;
+        border: 2px solid black;
+        box-shadow: 4px 4px 0 var(--color-accent);
+    }
+    .job-meta-pills {
         display: flex;
         flex-wrap: wrap;
-        gap: 8px;
-        margin-bottom: 48px;
+        gap: 12px;
     }
-
-    .brutalist-tag {
-        padding: 6px 16px;
-        border: 1px solid var(--color-border);
-        font-size: 14px;
-        font-weight: 500;
-        color: var(--color-text);
+    .meta-pill {
+        background: var(--color-secondary);
+        border: 2px solid var(--color-border);
+        padding: 8px 16px;
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
     }
-
-    .brutalist-section {
-        margin-bottom: 48px;
+    .job-layout-premium {
+        display: grid;
+        grid-template-columns: 1fr 380px;
+        gap: 80px;
+        align-items: start;
     }
-
-    .brutalist-h3 {
-        font-size: 24px;
-        font-weight: 500;
-        color: var(--color-text);
-        margin-bottom: 16px;
-        letter-spacing: -0.5px;
+    .content-section-premium {
+        margin-bottom: 60px;
     }
-
-    .brutalist-text {
-        font-size: 16px;
+    .section-headline {
+        font-size: 32px;
+        font-weight: 800;
+        letter-spacing: -1px;
+        margin-bottom: 24px;
+        position: relative;
+    }
+    .section-headline::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 40px;
+        height: 6px;
+        background: var(--color-accent);
+    }
+    .rich-text-premium {
+        font-size: 18px;
         line-height: 1.6;
         color: var(--color-text-muted);
-    }
-
-    .brutalist-text ul {
-        list-style-type: disc;
-        padding-left: 20px;
-        margin-top: 12px;
-    }
-
-    .brutalist-text li {
-        margin-bottom: 8px;
-    }
-
-    .brutalist-sidebar {
-        background-color: #161616;
-        padding: 32px;
-        border: 1px solid var(--color-border);
-    }
-
-    .brutalist-sidebar-salary {
-        font-size: 32px;
-        font-weight: 600;
-        color: var(--color-accent);
-        margin-bottom: 24px;
-        letter-spacing: -1px;
-    }
-
-    .brutalist-sidebar-meta {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        font-size: 15px;
-        color: var(--color-text-muted);
-        margin-bottom: 32px;
-    }
-
-    .brutalist-sidebar-meta strong {
-        color: var(--color-text);
         font-weight: 500;
     }
-
-    .brutalist-btn {
+    .rich-text-premium ul {
+        list-style: none;
+        padding: 0;
+        margin-top: 24px;
+    }
+    .rich-text-premium li {
+        margin-bottom: 16px;
+        display: flex;
+        gap: 12px;
+    }
+    .rich-text-premium li::before {
+        content: '→';
+        color: var(--color-accent);
+        font-weight: 800;
+        flex-shrink: 0;
+    }
+    .sidebar-card-premium {
+        background: var(--color-surface-raised);
+        border: 2px solid var(--color-border);
+        padding: 40px;
+        position: sticky;
+        top: 120px;
+        box-shadow: var(--shadow-raised);
+    }
+    .sidebar-salary {
+        font-size: 40px;
+        font-weight: 800;
+        color: var(--color-accent);
+        letter-spacing: -2px;
+        margin-bottom: 32px;
+        line-height: 1;
+    }
+    .sidebar-stats {
+        margin-bottom: 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+    .stat-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+    }
+    .stat-row label {
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--color-text-muted);
+    }
+    .stat-row span {
+        font-weight: 700;
+        color: var(--color-text);
+    }
+    .apply-btn-giant {
         display: block;
         width: 100%;
-        background-color: var(--color-accent);
+        background: var(--color-accent);
         color: var(--color-surface);
         text-align: center;
-        padding: 16px;
-        font-size: 18px;
-        font-weight: 600;
+        padding: 24px;
+        font-size: 20px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        border: 2px solid black;
+        box-shadow: 6px 6px 0 black;
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
         text-decoration: none;
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.2s;
+        margin-bottom: 16px;
+    }
+    .apply-btn-giant:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 10px 10px 0 black;
+    }
+    .btn-secondary-shadow {
+        background: var(--color-surface);
+        color: var(--color-text);
+        box-shadow: 4px 4px 0 black;
+    }
+    .btn-secondary-shadow:hover {
+        box-shadow: 6px 6px 0 black;
     }
 
-    .brutalist-btn:hover {
-        background-color: var(--color-accent-hover);
-    }
-
-    .brutalist-btn-alt {
-        background-color: #222;
-        color: var(--color-text) !important;
-    }
-
-    .brutalist-btn-alt:hover {
-        background-color: #333;
+    @media (max-width: 1024px) {
+        .job-layout-premium { grid-template-columns: 1fr; gap: 40px; }
+        .job-title-giant { font-size: 48px; }
+        .sidebar-card-premium { position: static; }
     }
 </style>
 
-<div class="lowercase">
-    <a href="<?= BASE_URL ?>/jobs" class="brutalist-back">
-        <i class="bi bi-arrow-left mr-2"></i> back
+<div class="job-show-hero">
+    <a href="<?= BASE_URL ?>/jobs" class="back-btn-brutalist">
+        <i class="bi bi-arrow-left"></i> Back to Boards
     </a>
-
-    <div class="brutalist-layout">
-        <!-- Main Content -->
-        <div>
-            <div class="brutalist-content-head">
-                <h1 class="brutalist-detail-title"><?= e($job['title']) ?></h1>
-                <div class="brutalist-detail-company">
-                    <div
-                        class="brutalist-company-icon w-8 h-8 rounded-full bg-white text-black flex items-center justify-center text-sm font-bold">
-                        <?php if ($companyIndex === 3)
-                            echo '<i class="bi bi-netflix text-[#e50914] bg-transparent"></i>';
-                        else if ($companyIndex === 4)
-                            echo '<i class="bi bi-google text-[#4285F4] bg-transparent"></i>';
-                        else
-                            echo e($companyInitial);
-                        ?>
-                    </div>
-                    <?= e($companyName) ?>
-                </div>
-            </div>
-
-            <div class="brutalist-tags">
-                <span class="brutalist-tag">full-time</span>
-                <span class="brutalist-tag">remote possible</span>
-                <span class="brutalist-tag">english required</span>
-                <span class="brutalist-tag">senior level</span>
-            </div>
-
-            <div class="brutalist-section">
-                <h3 class="brutalist-h3">description</h3>
-                <div class="brutalist-text">
-                    <?= nl2br(e($job['description'])) ?>
-                </div>
-            </div>
-
-            <div class="brutalist-section">
-                <h3 class="brutalist-h3">responsibilities</h3>
-                <div class="brutalist-text">
-                    <ul>
-                        <li>own the design process from research to final handoff</li>
-                        <li>collaborate with product managers, engineers, and other designers</li>
-                        <li>create wireframes, user flows, and high-fidelity mockups</li>
-                        <li>conduct usability testing and apply insights to improve ux</li>
-                        <li>maintain and evolve our design system</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="brutalist-section">
-                <h3 class="brutalist-h3">requirements</h3>
-                <div class="brutalist-text">
-                    <ul>
-                        <li>6+ years of experience in product/ui/ux design</li>
-                        <li>strong portfolio demonstrating product thinking and craft</li>
-                        <li>proficiency in figma and prototyping tools</li>
-                        <li>understanding of html/css is a plus</li>
-                        <li>leadership or mentoring experience is a bonus</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Sidebar Actions -->
-        <div>
-            <div class="brutalist-sidebar">
-                <div class="brutalist-sidebar-salary"><?= e($job['salary_range'] ? $job['salary_range'] : '$1400') ?>
-                </div>
-
-                <div class="brutalist-sidebar-meta">
-                    <div>company: <strong><?= e($companyName) ?></strong></div>
-                    <div>location: <strong><?= e($job['location'] ?: 'london') ?></strong></div>
-                    <div>experience required: <strong>6+ years</strong></div>
-                    <div>job type: <strong>full-time</strong></div>
-                    <div>posted on: <strong>27 may 2026</strong></div>
-                </div>
-
-                <?php if (isLoggedIn() && currentRole() === 'user'): ?>
-                    <?php if ($alreadyApplied): ?>
-                        <div class="brutalist-btn brutalist-btn-alt cursor-not-allowed text-center">already applied</div>
-                    <?php elseif (!$hasRequiredDocs): ?>
-                        <button type="button" class="brutalist-btn"
-                            onclick="showMissingDocsToast(<?= htmlspecialchars(json_encode($missingDocs), ENT_QUOTES, 'UTF-8') ?>)">apply
-                            now</button>
-                    <?php else: ?>
-                        <form method="post" action="<?= BASE_URL ?>/index.php?url=jobs/apply">
-                            <?= csrf_field() ?>
-                            <input type="hidden" name="job_id" value="<?= (int) $job['id'] ?>">
-                            <button type="submit" class="brutalist-btn">apply now</button>
-                        </form>
-                    <?php endif; ?>
-                <?php else: ?>
-                    <a href="<?= BASE_URL ?>/auth/login" class="brutalist-btn brutalist-btn-alt">login to apply</a>
-                <?php endif; ?>
-            </div>
-
-            <?php if (isLoggedIn() && currentRole() === 'user'): ?>
-                <form method="post" action="<?= BASE_URL ?><?= $isSaved ? '/jobs/unsave' : '/jobs/save' ?>" class="mt-4">
-                    <?= csrf_field() ?>
-                    <input type="hidden" name="job_id" value="<?= $job['id'] ?>">
-                    <input type="hidden" name="redirect" value="<?= e('/jobs/show?id=' . $job['id']) ?>">
-                    <button type="submit" class="brutalist-btn brutalist-btn-alt">
-                        <?= $isSaved ? 'remove from saved' : 'save for later' ?>
-                    </button>
-                </form>
+    <h1 class="job-title-giant"><?= e($job['title']) ?></h1>
+    
+    <div class="company-badge-premium">
+        <div class="company-icon-frame">
+            <?php if ($companyIndex === 3): ?>
+                <i class="bi bi-netflix text-[#e50914]"></i>
+            <?php elseif ($companyIndex === 4): ?>
+                <i class="bi bi-google text-[#4285F4]"></i>
+            <?php else: ?>
+                <?= e($companyInitial) ?>
             <?php endif; ?>
         </div>
+        <span><?= e($companyName) ?></span>
+    </div>
+
+    <div class="job-meta-pills">
+        <span class="meta-pill"><?= e($job['job_type'] ?: 'Full-time') ?></span>
+        <span class="meta-pill"><?= e($job['location'] ?: 'Remote Allowed') ?></span>
+        <span class="meta-pill">Senior Tier</span>
+        <span class="meta-pill">Verified by AI</span>
     </div>
 </div>
 
-<div id="missing-docs-toast"
-    style="position: fixed; bottom: -100vh; right: 24px; background: var(--color-accent); border: 2px solid var(--color-border); padding: 16px 24px; color: var(--color-surface); font-weight: bold; font-size: 14px; text-transform: lowercase; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 9999; display: flex; align-items: flex-start; gap: 12px; max-width: 350px; box-shadow: 4px 4px 0 rgba(0,0,0,1);">
-    <i class="bi bi-x-circle" style="font-size: 20px; margin-top: -2px;"></i>
-    <div>
-        <div style="font-size: 16px; margin-bottom: 4px;">cannot apply yet</div>
-        <div style="font-weight: 500;">you are missing required documents: <span id="missing-docs-list"></span>. <a
-                href="<?= BASE_URL ?>/user/settings"
-                style="color: var(--color-surface); text-decoration: underline;">upload now</a>.</div>
+<div class="job-layout-premium">
+    <div class="main-content">
+        <div class="content-section-premium">
+            <h3 class="section-headline">Opportunity Overview</h3>
+            <div class="rich-text-premium">
+                <?= nl2br(e($job['description'])) ?>
+            </div>
+        </div>
+
+        <div class="content-section-premium">
+            <h3 class="section-headline">Core Responsibilities</h3>
+            <div class="rich-text-premium">
+                <ul>
+                    <li>Spearhead the design and development of innovative product features.</li>
+                    <li>Orchestrate cross-functional collaboration with elite engineering squads.</li>
+                    <li>Architect scalable solutions within a high-performance brutalist framework.</li>
+                    <li>Mentor junior associates and cultivate a culture of technical excellence.</li>
+                    <li>Push the boundaries of the Challora design system.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-section-premium">
+            <h3 class="section-headline">Candidate Requirements</h3>
+            <div class="rich-text-premium">
+                <ul>
+                    <li>8+ years of proven impact in technical or leadership roles.</li>
+                    <li>Mastery of modern architectural patterns and distributed systems.</li>
+                    <li>A portfolio reflecting sharp, high-contrast thinking and execution.</li>
+                    <li>Fluent in English with impeccable professional communication.</li>
+                    <li>Based or willing to work within GMT+7 - GMT+9 timezones.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <aside class="sidebar-area">
+        <div class="sidebar-card-premium">
+            <div class="sidebar-salary">
+                <?= e($job['salary_range'] ?: 'IDR 15,000,000+') ?>
+            </div>
+            
+            <div class="sidebar-stats">
+                <div class="stat-row">
+                    <label>Company</label>
+                    <span><?= e($companyName) ?></span>
+                </div>
+                <div class="stat-row">
+                    <label>Location</label>
+                    <span><?= e($job['location'] ?: 'London (Hybrid)') ?></span>
+                </div>
+                <div class="stat-row">
+                    <label>Experience</label>
+                    <span>8+ Years</span>
+                </div>
+                <div class="stat-row">
+                    <label>Sync Date</label>
+                    <span>27 May 2026</span>
+                </div>
+            </div>
+
+            <?php if (isLoggedIn() && currentRole() === 'user'): ?>
+                <?php if ($alreadyApplied): ?>
+                    <div class="apply-btn-giant btn-secondary-shadow text-center opacity-50 cursor-not-allowed">Application Sent</div>
+                <?php elseif (!$hasRequiredDocs): ?>
+                    <button type="button" class="apply-btn-giant" onclick="showMissingDocsToast(<?= htmlspecialchars(json_encode($missingDocs), ENT_QUOTES, 'UTF-8') ?>)">Apply for Position</button>
+                <?php else: ?>
+                    <form method="post" action="<?= BASE_URL ?>/index.php?url=jobs/apply">
+                        <?= csrf_field() ?>
+                        <input type="hidden" name="job_id" value="<?= (int) $job['id'] ?>">
+                        <button type="submit" class="apply-btn-giant">Apply for Position</button>
+                    </form>
+                <?php endif; ?>
+
+                <form method="post" action="<?= BASE_URL ?><?= $isSaved ? '/jobs/unsave' : '/jobs/save' ?>">
+                    <?= csrf_field() ?>
+                    <input type="hidden" name="job_id" value="<?= $job['id'] ?>">
+                    <input type="hidden" name="redirect" value="<?= e('/jobs/show?id=' . $job['id']) ?>">
+                    <button type="submit" class="apply-btn-giant btn-secondary-shadow">
+                        <?= $isSaved ? 'Remove from Saved' : 'Save for Later' ?>
+                    </button>
+                </form>
+            <?php else: ?>
+                <a href="<?= BASE_URL ?>/auth/login" class="apply-btn-giant">Sign in to Apply</a>
+            <?php endif; ?>
+        </div>
+    </aside>
+</div>
+
+<!-- Missing Docs Toast Style -->
+<style>
+    #missing-docs-toast {
+        position: fixed;
+        bottom: -200px;
+        right: 40px;
+        background: var(--color-accent);
+        color: white;
+        padding: 32px;
+        border: 3px solid black;
+        box-shadow: 12px 12px 0 black;
+        max-width: 400px;
+        z-index: 1000;
+        transition: bottom 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #missing-docs-toast.show {
+        bottom: 40px;
+    }
+</style>
+
+<div id="missing-docs-toast" class="lowercase">
+    <div class="flex gap-6">
+        <i class="bi bi-shield-lock-fill text-4xl"></i>
+        <div>
+            <h4 class="font-black text-xl mb-2">Access Denied</h4>
+            <p class="font-bold opacity-80 leading-snug">Verification documents missing: <span id="missing-docs-list" class="text-white"></span></p>
+            <a href="<?= BASE_URL ?>/user/settings" class="inline-block mt-4 text-white underline font-black">Sync Documents Now</a>
+        </div>
     </div>
 </div>
 
@@ -288,10 +343,16 @@ $companyInitial = mb_substr($companyName, 0, 1);
         const toast = document.getElementById('missing-docs-toast');
         const list = document.getElementById('missing-docs-list');
         list.textContent = docsArray.join(', ');
-        toast.style.bottom = '24px';
+        toast.classList.add('show');
         clearTimeout(toastTimeout);
         toastTimeout = setTimeout(() => {
-            toast.style.bottom = '-100vh';
+            toast.classList.remove('show');
         }, 5000);
     }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        gsap.from(".job-show-hero > *", { opacity: 0, y: 30, stagger: 0.1, duration: 1, ease: "power4.out" });
+        gsap.from(".main-content > *", { opacity: 0, y: 30, stagger: 0.15, duration: 1, ease: "power4.out", delay: 0.3 });
+        gsap.from(".sidebar-card-premium", { opacity: 0, scale: 0.95, duration: 0.8, ease: "back.out(1.7)", delay: 0.5 });
+    });
 </script>

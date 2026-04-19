@@ -1,178 +1,161 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - Challora</title>
-
+    <title>Registration — Challora</title>
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/design-tokens.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body { font-family: var(--font-sans); background: var(--color-surface); color: var(--color-text); }
-        .brutalist-card {
-            border: 2px solid var(--color-border);
-            box-shadow: 8px 8px 0 rgba(0,0,0,1);
-            background: #0a0a0a;
-            border-radius: 0;
-            overflow: hidden;
-        }
-        .brutalist-input {
-            background: #111;
-            border: 2px solid var(--color-border);
-            border-radius: 0;
-            color: var(--color-text);
-            padding: 14px 16px;
-            width: 100%;
-            transition: all 0.2s ease;
-            box-shadow: 2px 2px 0 rgba(0,0,0,0.5);
-            text-transform: lowercase;
-            font-size: 16px;
-        }
-        .brutalist-input:focus {
-            border-color: var(--color-accent);
-            box-shadow: 4px 4px 0 var(--color-accent);
-            outline: none;
-            transform: translate(-2px, -2px);
-        }
-        .brutalist-btn {
-            display: inline-block;
-            width: 100%;
-            background: var(--color-accent);
-            color: var(--color-surface);
-            padding: 16px 24px;
-            font-weight: 800;
-            font-size: 16px;
-            text-transform: lowercase;
-            text-decoration: none;
-            text-align: center;
-            border: 2px solid var(--color-border);
-            border-radius: 0;
-            cursor: pointer;
-            box-shadow: 4px 4px 0 rgba(0,0,0,1);
-            transition: all 0.2s ease;
-        }
-        .brutalist-btn:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0 rgba(0,0,0,1);
-        }
-        .brutalist-btn:active {
-            transform: translate(2px, 2px);
-            box-shadow: 0px 0px 0 rgba(0,0,0,1);
-        }
-        .brutalist-label {
-            text-transform: lowercase;
-            font-weight: 600;
-            font-size: 14px;
-            margin-bottom: 8px;
-            display: block;
-        }
-        .brutalist-title {
-            font-size: 56px;
-            font-weight: 600;
-            letter-spacing: -3px;
-            color: var(--color-text);
-            margin-bottom: 12px;
-            text-transform: lowercase;
-            line-height: 1.1;
-        }
-        .brutalist-alert {
-            background: var(--color-accent);
-            color: var(--color-surface);
-            padding: 16px;
-            border: 2px solid var(--color-border);
-            font-weight: bold;
-            font-size: 14px;
-            text-transform: lowercase;
-            margin-bottom: 24px;
-            box-shadow: 4px 4px 0 rgba(0,0,0,1);
-        }
-        .brutalist-hero {
-            background: var(--color-accent);
-            color: var(--color-surface);
-            border-left: 2px solid var(--color-border);
-            padding: 48px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        @media (max-width: 1024px) {
-            .brutalist-hero { border-left: none; border-top: 2px solid var(--color-border); }
-        }
-    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/login-register-style.css">
 </head>
-<body class="min-h-screen lowercase">
-    <div class="min-h-screen flex items-center justify-center p-4 md:p-8 relative">
-        <div class="w-full max-w-6xl brutalist-card grid grid-cols-1 lg:grid-cols-2 relative z-10">
-            <!-- Left Side / Form -->
-            <div class="p-8 md:p-12 lg:p-16">
-                <div class="flex items-center gap-4 mb-8">
-                    <div class="w-12 h-12 bg-accent text-surface flex items-center justify-center font-bold text-xl border-2 border-border" style="box-shadow: 4px 4px 0 rgba(0,0,0,1)">C</div>
-                    <div>
-                        <h2 class="text-xl font-bold" style="letter-spacing: -1px;">challora</h2>
-                        <p class="text-sm font-semibold opacity-70">candidate registration</p>
+
+<body>
+    <div class="split-card register-wide gsap-reveal">
+        <!-- FORM SIDE -->
+        <div class="form-side">
+            <div class="gsap-item">
+                <h1 class="auth-title">Register</h1>
+                <p class="auth-subtitle">Join the professional intelligence network.</p>
+            </div>
+
+            <?php if (!empty($error)): ?>
+                <div
+                    class="bg-red-900/50 text-red-100 p-4 mb-8 border border-red-500 font-bold uppercase text-[10px] tracking-widest gsap-item">
+                    <?= e($error) ?>
+                </div>
+            <?php endif; ?>
+
+            <form method="post" action="<?= BASE_URL ?>/index.php?url=auth/register" class="gsap-item">
+                <?= csrf_field() ?>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6">
+                    <div class="mb-2">
+                        <label class="premium-label">
+                            <span class="flex items-center gap-2 text-white text-[10px]">
+                                FULL NAME
+                                <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                </svg>
+                            </span>
+                            <span class="text-accent-600 label-req">*required</span>
+                        </label>
+                        <input type="text" name="name" placeholder="John Doe" required
+                            value="<?= e($old['name'] ?? '') ?>" class="premium-input">
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="premium-label">
+                            <span class="flex items-center gap-2 text-white text-[10px]">
+                                PHONE NUMBER
+                                <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
+                                    </path>
+                                </svg>
+                            </span>
+                        </label>
+                        <input type="text" name="phone" placeholder="0812...." value="<?= e($old['phone'] ?? '') ?>"
+                            class="premium-input">
                     </div>
                 </div>
 
-                <div class="max-w-md">
-                    <h1 class="brutalist-title">register</h1>
-                    <p class="text-base mb-8 font-semibold opacity-75">create your account & drop the aesthetics.</p>
+                <div class="mb-2">
+                    <label class="premium-label">
+                        <span class="flex items-center gap-2 text-white">
+                            EMAIL ADDRESS
+                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                        </span>
+                        <span class="text-accent-600 label-req">*required</span>
+                    </label>
+                    <input type="email" name="email" placeholder="example@gmail.com" required
+                        value="<?= e($old['email'] ?? '') ?>" class="premium-input">
+                </div>
 
-                    <?php if (!empty($error)): ?>
-                        <div class="brutalist-alert"><?= e($error) ?></div>
-                    <?php endif; ?>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6">
+                    <div class="mb-2">
+                        <label class="premium-label">
+                            <span class="flex items-center gap-2 text-white text-[10px]">
+                                PASSWORD
+                                <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                                    </path>
+                                </svg>
+                            </span>
+                            <span class="text-accent-600 label-req">*min 8</span>
+                        </label>
+                        <input type="password" name="password" placeholder="••••••••" required class="premium-input">
+                    </div>
 
-                    <form method="post" action="<?= BASE_URL ?>/index.php?url=auth/register" class="space-y-5">
-                        <?= csrf_field() ?>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                            <div>
-                                <label for="name" class="brutalist-label">full name</label>
-                                <input type="text" id="name" name="name" placeholder="john doe" required value="<?= e($old['name'] ?? '') ?>" class="brutalist-input">
-                            </div>
-                            <div>
-                                <label for="phone" class="brutalist-label">phone no.</label>
-                                <input type="text" id="phone" name="phone" placeholder="0812...." value="<?= e($old['phone'] ?? '') ?>" class="brutalist-input">
-                            </div>
-                        </div>
+                    <div class="mb-2">
+                        <label class="premium-label">
+                            <span class="flex items-center gap-2 text-white text-[10px]">
+                                CONFIRM
+                                <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                                    </path>
+                                </svg>
+                            </span>
+                        </label>
+                        <input type="password" name="password_confirm" placeholder="••••••••" required
+                            class="premium-input">
+                    </div>
+                </div>
 
-                        <div>
-                            <label for="email" class="brutalist-label">email address</label>
-                            <input type="email" id="email" name="email" placeholder="john.doe@gmail.com" required value="<?= e($old['email'] ?? '') ?>" class="brutalist-input">
-                        </div>
+                <button type="submit" class="btn-brutal">
+                    CREATE ACCOUNT
+                </button>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                            <div>
-                                <label for="password" class="brutalist-label">password (min 8 chars, mix case, num, spec)</label>
-                                <input type="password" id="password" name="password" placeholder="enter password" required minlength="6" class="brutalist-input">
-                            </div>
-                            <div>
-                                <label for="password_confirm" class="brutalist-label">confirm password</label>
-                                <input type="password" id="password_confirm" name="password_confirm" placeholder="confirm" required class="brutalist-input">
-                            </div>
-                        </div>
+                <div class="mt-12 text-center">
+                    <p class="text-[11px] font-bold text-gray-500 uppercase tracking-widest">
+                        Already Has An Account? <a href="<?= BASE_URL ?>/auth/login"
+                            class="text-accent-500 hover:text-white transition-colors duration-300">Log-In</a>
+                    </p>
+                </div>
+            </form>
+        </div>
 
-                        <button type="submit" class="brutalist-btn mt-4">create account</button>
-                        
-                        <div class="pt-4 text-center font-semibold text-sm">
-                            <p>already have an account? <a href="<?= BASE_URL ?>/auth/login" class="text-accent underline" style="text-underline-offset: 4px;">sign in</a></p>
-                        </div>
-                    </form>
+        <!-- BRAND SIDE -->
+        <div class="brand-side">
+            <div class="gsap-item">
+                <div class="brand-title">Challora</div>
+                <div class="brand-quote">
+                    Build your professional profile and unlock global career opportunities.
                 </div>
             </div>
 
-            <!-- Right Side / Hero Image Replacement -->
-            <div class="brutalist-hero">
-                <div>
-                    <h2 class="font-bold" style="font-size: 64px; line-height: 1; letter-spacing: -3px; margin-bottom: 24px;">build<br>your profile.</h2>
-                    <p class="font-bold" style="font-size: 20px; max-w: 400px; line-height: 1.4;">Stand out to HR dynamically. Provide data that counts. Leave the fluff behind.</p>
-                </div>
-                
-                <div style="background: var(--color-surface); color: var(--color-text); border: 2px solid var(--color-border); padding: 24px; box-shadow: 6px 6px 0 rgba(0,0,0,1); display: inline-block; max-width: 380px;">
-                    <h3 class="text-2xl font-bold mb-2 lowercase" style="letter-spacing:-1px;">straight to the point</h3>
-                    <p class="text-sm font-semibold opacity-80 lowercase">We enforce structure so hr can read your capability seamlessly. Focus on your skills, not the layout.</p>
-                </div>
+            <div class="brand-footer gsap-item">
+                AUTH PROTOCOL — V2.2.1
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.from(".gsap-reveal", {
+                opacity: 0,
+                scale: 0.98,
+                duration: 1.2,
+                ease: "power4.out"
+            });
+            gsap.from(".gsap-item", {
+                opacity: 0,
+                x: 20,
+                stagger: 0.1,
+                duration: 0.8,
+                ease: "power3.out",
+                delay: 0.3
+            });
+        });
+    </script>
 </body>
+
 </html>

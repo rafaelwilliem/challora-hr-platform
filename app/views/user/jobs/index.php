@@ -6,795 +6,356 @@ $searchQ = $searchParams['q'] ?? '';
 $searchLocation = $searchParams['location'] ?? '';
 ?>
 <style>
-    /* Brutalist Index Overrides V2 */
-    .brutalist-hero {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        margin-bottom: 40px;
-        position: relative;
-    }
-
-    .brutalist-accent-line {
-        width: 6px;
-        height: 64px;
-        background-color: var(--color-accent);
-    }
-
-    .brutalist-hero-search {
-        position: relative;
-        width: 100%;
-    }
-
-    .brutalist-hero-input {
-        background: transparent;
-        border: none;
-        border-bottom: 3px solid var(--color-border);
-        color: var(--color-text);
-        font-size: 56px;
-        font-weight: 600;
-        letter-spacing: -2.5px;
-        padding: 4px 0 8px 0;
-        width: 100%;
-        outline: none;
-        text-transform: lowercase;
-        position: relative;
-        z-index: 2;
-    }
-
-    .brutalist-hero-input:focus {
-        border-bottom-color: var(--color-accent);
-    }
-
-    .brutalist-hero-ghost {
-        position: absolute;
-        top: 5px;
-        left: 0;
-        font-size: 56px;
-        font-weight: 600;
-        letter-spacing: -2.5px;
-        color: var(--color-border);
-        /* muted text color */
-        pointer-events: none;
-        z-index: 1;
-        text-transform: lowercase;
-    }
-
-    .brutalist-filters {
-        display: flex;
-        align-items: center;
-        gap: 32px;
+    .jobs-hero {
         margin-bottom: 60px;
-        padding-bottom: 32px;
-        border-bottom: 1px solid var(--color-border);
-        flex-wrap: wrap;
+        border-left: 8px solid var(--color-accent);
+        padding-left: 32px;
     }
-
-    .brutalist-filter-group {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        flex: 1;
-        min-width: 180px;
-    }
-
-    .brutalist-filter-group-fixed {
-        flex: 0 0 auto;
-        min-width: 160px;
-    }
-
-    .brutalist-label {
-        font-size: 14px;
-        text-transform: lowercase;
-        color: var(--color-text-muted);
-    }
-
-    .brutalist-select-wrapper {
-        position: relative;
-        display: flex;
-        align-items: center;
-        background: #1a1a1a;
-        border: 1px solid var(--color-border);
+    .jobs-title-giant {
+        font-size: 80px;
+        font-weight: 800;
+        letter-spacing: -5px;
+        line-height: 0.8;
         color: var(--color-text);
-        padding: 12px 16px;
-        cursor: pointer;
-    }
-
-    .brutalist-select-wrapper:hover {
-        border-color: var(--color-text-muted);
-    }
-
-    .brutalist-select {
-        appearance: none;
-        background: transparent;
-        border: none;
-        color: var(--color-text);
-        font-size: 18px;
-        font-weight: 500;
-        width: 100%;
-        outline: none;
-        cursor: pointer;
-        text-transform: lowercase;
-    }
-
-    .brutalist-select option {
-        background-color: var(--color-primary);
-        color: var(--color-text);
-        font-size: 16px;
-    }
-
-    .brutalist-select-icon {
-        position: absolute;
-        right: 16px;
-        color: var(--color-accent);
-        pointer-events: none;
-        font-size: 14px;
-    }
-
-    .brutalist-input-flat {
-        background: #1a1a1a;
-        border: 1px solid var(--color-border);
-        color: var(--color-text);
-        font-size: 18px;
-        font-weight: 500;
-        padding: 12px 16px;
-        width: 100%;
-        outline: none;
-        text-transform: lowercase;
-    }
-
-    .brutalist-input-flat::placeholder {
-        color: var(--color-text-muted);
-        opacity: 0.5;
-    }
-
-    .brutalist-input-flat:focus {
-        border-color: var(--color-accent);
-    }
-
-    /* Remove arrows for number inputs */
-    .brutalist-input-flat[type="number"]::-webkit-outer-spin-button,
-    .brutalist-input-flat[type="number"]::-webkit-inner-spin-button {
-        -webkit-appearance: none;
         margin: 0;
     }
-    .brutalist-input-flat[type="number"] {
-        -moz-appearance: textfield;
-    }
-
-    .brutalist-job-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 32px 32px;
-        border-bottom: 1px solid var(--color-border);
-        transition: background-color 0.2s ease;
-    }
-
-    .brutalist-job-row:hover {
-        background-color: rgba(255, 255, 255, 0.02);
-    }
-
-    .brutalist-job-left {
-        display: flex;
-        align-items: center;
-        gap: 24px;
-    }
-
-    .brutalist-company-icon {
-        width: 48px;
-        height: 48px;
-        background-color: var(--color-text);
-        color: var(--color-surface);
-        border-radius: 0;
-        /* brutalist sharp */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-        font-weight: bold;
-    }
-
-    .brutalist-job-info {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-    }
-
-    .brutalist-job-name,
-    .brutalist-job-desc {
-        font-size: 28px;
-        font-weight: 400;
-        color: var(--color-text);
-        text-decoration: none;
-        letter-spacing: -1px;
-    }
-
-    .brutalist-job-desc {
-        opacity: 0.6;
-    }
-
-    .brutalist-job-row:hover .brutalist-job-name {
-        color: var(--color-accent);
-    }
-
-    .brutalist-job-right {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        gap: 8px;
-    }
-
-    .brutalist-salary {
-        font-size: 32px;
-        font-weight: 600;
-        color: var(--color-accent);
-        letter-spacing: -1px;
-    }
-
-    .brutalist-meta {
-        font-size: 14px;
+    .search-subtext {
+        font-size: 18px;
+        font-weight: 700;
         color: var(--color-text-muted);
-        font-weight: 500;
+        margin-top: 12px;
     }
-
-    @media (max-width: 768px) {
-
-        .brutalist-hero-input,
-        .brutalist-hero-ghost {
-            font-size: 32px;
-        }
-
-        .brutalist-job-row {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 20px;
-        }
-
-        .brutalist-job-right {
-            align-items: flex-start;
-        }
-    }
-
-    /* Custom Dropdown Overrides */
-    .custom-dropdown-container {
-        position: relative;
-        cursor: pointer;
-    }
-
-    .custom-dropdown-toggle {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-    }
-
-    .custom-dropdown-menu {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
+    .filter-bar-premium {
         background: var(--color-surface);
-        border: 1px solid var(--color-border);
-        border-radius: 0;
-        margin-top: 4px;
-        z-index: 50;
-        display: none;
+        border: 2px solid var(--color-border);
+        padding: 32px;
+        margin-bottom: 60px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr) auto;
+        gap: 24px;
+        align-items: end;
+        box-shadow: var(--shadow-flat);
     }
-
-    .custom-dropdown-menu.show {
+    .filter-group label {
         display: block;
-    }
-
-    .custom-dropdown-item {
-        padding: 12px 16px;
-        font-size: 14px;
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
         color: var(--color-text-muted);
-        transition: all 0.2s;
-        text-transform: lowercase;
+        margin-bottom: 8px;
     }
-
-    .custom-dropdown-item:hover,
-    .custom-dropdown-item.active {
-        background: #1a1a1a;
+    .brutalist-input-subtle {
+        background: var(--color-secondary);
+        border: 2px solid var(--color-border);
+        padding: 14px 16px;
+        width: 100%;
         color: var(--color-text);
+        font-weight: 700;
+        font-size: 16px;
+        transition: all 0.2s;
     }
-
-    /* Brutalist Pagination */
-    .brutalist-pagination-wrapper {
+    .brutalist-input-subtle:focus {
+        border-color: var(--color-accent);
+        outline: none;
+        box-shadow: 4px 4px 0 var(--color-accent-muted);
+    }
+    .job-card-premium {
+        background: var(--color-surface);
+        border: 2px solid var(--color-border);
+        padding: 40px;
+        margin-bottom: 24px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-top: 40px;
-        padding-top: 24px;
-        border-top: 1px solid var(--color-border);
-        flex-wrap: wrap;
-        gap: 20px;
-    }
-
-    .brutalist-pagination {
-        display: flex;
-        gap: 8px;
-        align-items: center;
-    }
-
-    .brutalist-page-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 48px;
-        height: 48px;
-        background: transparent;
-        border: 1px solid var(--color-border);
-        color: var(--color-text-muted);
-        font-size: 16px;
-        font-weight: 500;
-        text-decoration: none;
-        transition: all 0.2s;
-    }
-
-    .brutalist-page-btn:hover {
-        border-color: var(--color-text);
-        color: var(--color-text);
-    }
-
-    .brutalist-page-btn.active {
-        background: var(--color-text);
-        color: var(--color-surface);
-        border-color: var(--color-text);
-    }
-
-    .brutalist-page-dots {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 48px;
-        height: 48px;
-        color: var(--color-text-muted);
-        font-size: 16px;
-    }
-
-    .brutalist-per-page {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-    }
-
-    .brutalist-per-page span {
-        font-size: 14px;
-        color: var(--color-text-muted);
-        text-transform: lowercase;
-    }
-    /* Job Listing Layout with Sidebar */
-    .job-listing-container {
-        display: flex;
-        gap: 40px;
-        align-items: flex-start;
-        position: relative;
-    }
-
-    .job-listing-main {
-        flex: 1;
-        min-width: 0;
-    }
-
-    .chally-ai-sidebar {
-        width: 320px;
-        flex-shrink: 0;
-        position: sticky;
-        top: 40px;
-        animation: slideInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    /* Chally AI Card Styling */
-    .chally-ai-card {
-        background: #111111;
-        border: 1px solid var(--color-border);
-        padding: 32px;
-        color: var(--color-text);
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        cursor: pointer;
         position: relative;
         overflow: hidden;
     }
-
-    .chally-ai-title {
-        font-size: 24px;
-        font-weight: 700;
+    .job-card-premium:hover {
+        transform: translate(-4px, -4px);
+        box-shadow: 12px 12px 0 var(--color-border);
+        border-color: var(--color-text);
+    }
+    .job-card-premium::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; bottom: 0;
+        width: 0;
+        background: var(--color-accent);
+        transition: width 0.3s ease;
+        z-index: 0;
+    }
+    .job-card-premium:hover::before {
+        width: 6px;
+    }
+    .job-main-info {
+        position: relative;
+        z-index: 1;
+    }
+    .job-role-title {
+        font-size: 32px;
+        font-weight: 800;
+        letter-spacing: -1px;
         margin-bottom: 4px;
-        letter-spacing: -0.5px;
+        color: var(--color-text);
     }
-
-    .chally-ai-subtitle {
-        font-size: 14px;
+    .job-company-line {
+        font-size: 18px;
+        font-weight: 700;
         color: var(--color-text-muted);
-        margin-bottom: 32px;
     }
-
-    .chally-ai-prompt {
-        font-size: 16px;
-        font-weight: 500;
+    .job-meta-line {
+        display: flex;
+        gap: 20px;
+        margin-top: 16px;
+        font-size: 13px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .job-meta-line span {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .salary-tag-premium {
+        font-size: 28px;
+        font-weight: 800;
+        color: var(--color-accent);
+        letter-spacing: -1px;
+    }
+    .job-layout-grid {
+        display: grid;
+        grid-template-columns: 1fr 340px;
+        gap: 40px;
+    }
+    .chally-sidebar-premium {
+        position: sticky;
+        top: 120px;
+    }
+    .ai-card-premium {
+        background: var(--color-secondary);
+        border: 2px solid var(--color-border);
+        padding: 40px;
+        box-shadow: 8px 8px 0 var(--color-border);
+    }
+    .ai-voice-line {
+        font-size: 20px;
+        font-weight: 800;
         margin-bottom: 24px;
+        color: var(--color-text);
     }
-
-    .chally-ai-features {
+    .ai-suggestion-list {
         list-style: none;
         padding: 0;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
     }
-
-    .chally-ai-feature-item {
-        display: flex;
-        gap: 16px;
+    .ai-suggestion-item {
+        background: var(--color-surface);
+        border: 2px solid var(--color-border);
+        padding: 16px;
+        margin-bottom: 12px;
         font-size: 14px;
-        color: var(--color-text);
-        line-height: 1.5;
+        font-weight: 700;
+        display: flex;
+        gap: 12px;
+        cursor: pointer;
+        transition: all 0.2s;
     }
-
-    .chally-ai-dot {
-        width: 10px;
-        height: 10px;
+    .ai-suggestion-item:hover {
+        border-color: var(--color-accent);
+        color: var(--color-accent);
+    }
+    .ai-dot-pulse {
+        width: 8px; height: 8px;
         background: var(--color-accent);
         border-radius: 50%;
-        margin-top: 5px;
-        flex-shrink: 0;
         box-shadow: 0 0 10px var(--color-accent);
-        animation: pulseAccent 2s infinite;
+        animation: pulse 2s infinite;
+        flex-shrink: 0;
+        margin-top: 6px;
+    }
+    @keyframes pulse {
+        0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 69, 0, 0.7); }
+        70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(255, 69, 0, 0); }
+        100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 69, 0, 0); }
     }
 
-    /* Animations */
-    @keyframes slideInRight {
-        0% { opacity: 0; transform: translateX(40px); }
-        100% { opacity: 1; transform: translateX(0); }
-    }
-
-    @keyframes pulseAccent {
-        0% { box-shadow: 0 0 0 0 rgba(255, 69, 0, 0.7); }
-        70% { box-shadow: 0 0 0 10px rgba(255, 69, 0, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(255, 69, 0, 0); }
-    }
-
-    @media (max-width: 992px) {
-        .job-listing-container {
-            flex-direction: column;
-        }
-        .chally-ai-sidebar {
-            width: 100%;
-            position: static;
-            order: -1; 
-            margin-bottom: 40px;
-        }
+    @media (max-width: 1200px) {
+        .filter-bar-premium { grid-template-columns: 1fr 1fr; }
+        .job-layout-grid { grid-template-columns: 1fr; }
+        .chally-sidebar-premium { position: static; order: -1; }
     }
 </style>
 
+<div class="jobs-hero">
+    <h1 class="jobs-title-giant">Discover Openings</h1>
+    <p class="search-subtext">Precision recruitment, no compromises. Powered by Chally AI.</p>
+</div>
+
 <form method="get" action="<?= BASE_URL ?>/jobs" id="job-filters-form">
-    <div class="brutalist-hero lowercase">
-        <div class="brutalist-accent-line"></div>
-        <div class="brutalist-hero-search">
-            <input type="text" name="q" id="hero-search-input" value="<?= e($searchQ) ?>" class="brutalist-hero-input"
-                autocomplete="off" onchange="this.form.submit()">
+    <div class="filter-bar-premium">
+        <div class="filter-group relative">
+            <label class="flex items-center gap-1">
+                <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                Search Keyword
+            </label>
+            <input type="text" name="q" value="<?= e($searchQ) ?>" placeholder="e.g. Lead Designer" class="brutalist-input-subtle" onchange="this.form.submit()">
         </div>
-    </div>
-
-    <div class="brutalist-filters lowercase">
-        <div class="brutalist-filter-group">
-            <span class="brutalist-label">location</span>
-            <input type="text" name="location" value="<?= e($searchLocation) ?>" placeholder="e.g. jakarta"
-                class="brutalist-input-flat" onchange="this.form.submit()">
+        <div class="filter-group relative">
+            <label class="flex items-center gap-1">
+                <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0zM15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                Location
+            </label>
+            <input type="text" name="location" value="<?= e($searchLocation) ?>" placeholder="Global" class="brutalist-input-subtle" onchange="this.form.submit()">
         </div>
-
-        <div class="brutalist-filter-group brutalist-filter-group-fixed custom-dropdown-container">
-            <span class="brutalist-label">job type</span>
-            <?php
-            $jtValue = $selectedTypes[0] ?? '';
-            $jtLabels = ['' => 'any type', 'full_time' => 'full time', 'part_time' => 'part time', 'contract' => 'contract', 'freelance' => 'freelance', 'voluntary' => 'voluntary', 'remote' => 'remote'];
-            $jtLabel = $jtLabels[$jtValue] ?? 'any type';
-            ?>
-            <input type="hidden" name="job_type" value="<?= e($jtValue) ?>">
-            <div class="brutalist-select-wrapper custom-dropdown-toggle">
-                <span class="brutalist-select"
-                    style="border:none; padding:0; height:auto; display:flex; align-items:center; outline:none;"><?= e($jtLabel) ?></span>
-                <i class="bi bi-chevron-down brutalist-select-icon"></i>
-            </div>
-            <div class="custom-dropdown-menu">
-                <?php foreach ($jtLabels as $val => $lbl): ?>
-                    <div class="custom-dropdown-item <?= $jtValue === $val ? 'active' : '' ?>" data-value="<?= e($val) ?>">
-                        <?= e($lbl) ?>
-                    </div>
-                <?php endforeach; ?>
-            </div>
+        <div class="filter-group relative">
+            <label class="flex items-center gap-1">
+                <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                Contract Type
+            </label>
+            <select name="job_type" class="brutalist-input-subtle" onchange="this.form.submit()">
+                <option value="">Any Schedule</option>
+                <option value="full_time" <?= $selectedTypeRaw === 'full_time' ? 'selected' : '' ?>>Full-time</option>
+                <option value="part_time" <?= $selectedTypeRaw === 'part_time' ? 'selected' : '' ?>>Part-time</option>
+                <option value="contract" <?= $selectedTypeRaw === 'contract' ? 'selected' : '' ?>>Contract</option>
+                <option value="remote" <?= $selectedTypeRaw === 'remote' ? 'selected' : '' ?>>Remote</option>
+            </select>
         </div>
-
-        <div class="brutalist-filter-group brutalist-filter-group-fixed custom-dropdown-container">
-            <span class="brutalist-label">work type</span>
-            <?php
-            $wtValue = is_array($searchParams['work_type'] ?? '') ? ($searchParams['work_type'][0] ?? '') : ($searchParams['work_type'] ?? '');
-            $wtLabels = ['' => 'any setting', 'remote' => 'remote', 'onsite' => 'on site', 'hybrid' => 'hybrid'];
-            $wtLabel = $wtLabels[$wtValue] ?? 'any setting';
-            ?>
-            <input type="hidden" name="work_type" value="<?= e($wtValue) ?>">
-            <div class="brutalist-select-wrapper custom-dropdown-toggle">
-                <span class="brutalist-select"
-                    style="border:none; padding:0; height:auto; display:flex; align-items:center; outline:none;"><?= e($wtLabel) ?></span>
-                <i class="bi bi-chevron-down brutalist-select-icon"></i>
-            </div>
-            <div class="custom-dropdown-menu">
-                <?php foreach ($wtLabels as $val => $lbl): ?>
-                    <div class="custom-dropdown-item <?= $wtValue === $val ? 'active' : '' ?>" data-value="<?= e($val) ?>">
-                        <?= e($lbl) ?>
-                    </div>
-                <?php endforeach; ?>
-            </div>
+        <div class="filter-group relative">
+            <label class="flex items-center gap-1">
+                <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"></path></svg>
+                Experience
+            </label>
+            <select name="experience_level" class="brutalist-input-subtle" onchange="this.form.submit()">
+                <option value="">Any Level</option>
+                <option value="entry" <?= ($searchParams['experience_level'] ?? '') === 'entry' ? 'selected' : '' ?>>0-2 Years</option>
+                <option value="mid" <?= ($searchParams['experience_level'] ?? '') === 'mid' ? 'selected' : '' ?>>3-5 Years</option>
+                <option value="senior" <?= ($searchParams['experience_level'] ?? '') === 'senior' ? 'selected' : '' ?>>6+ Years</option>
+            </select>
         </div>
-
-        <div class="brutalist-filter-group brutalist-filter-group-fixed custom-dropdown-container">
-            <span class="brutalist-label">experience</span>
-            <?php
-            $expValue = is_array($searchParams['experience_level'] ?? '') ? ($searchParams['experience_level'][0] ?? '') : ($searchParams['experience_level'] ?? '');
-            $expLabels = ['' => 'any exp', 'entry' => '0-2 years', 'mid' => '3-5 years', 'senior' => '6+ years'];
-            $expLabel = $expLabels[$expValue] ?? 'any exp';
-            ?>
-            <input type="hidden" name="experience_level" value="<?= e($expValue) ?>">
-            <div class="brutalist-select-wrapper custom-dropdown-toggle">
-                <span class="brutalist-select"
-                    style="border:none; padding:0; height:auto; display:flex; align-items:center; outline:none;"><?= e($expLabel) ?></span>
-                <i class="bi bi-chevron-down brutalist-select-icon"></i>
-            </div>
-            <div class="custom-dropdown-menu">
-                <?php foreach ($expLabels as $val => $lbl): ?>
-                    <div class="custom-dropdown-item <?= $expValue === $val ? 'active' : '' ?>" data-value="<?= e($val) ?>">
-                        <?= e($lbl) ?>
-                    </div>
-                <?php endforeach; ?>
-            </div>
+        <div class="filter-group relative">
+            <label class="flex items-center gap-1">
+                <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                Min Salary
+            </label>
+            <input type="number" name="min_salary" value="<?= e($searchParams['min_salary'] ?? '') ?>" placeholder="Min IDR" class="brutalist-input-subtle" onchange="this.form.submit()">
         </div>
-
-        <div class="brutalist-filter-group brutalist-filter-group-fixed custom-dropdown-container">
-            <span class="brutalist-label">min education</span>
-            <?php
-            // $searchParams['min_education'] can be array (from csv) or string if we use select
-            $eduValue = is_array($searchParams['min_education']) ? ($searchParams['min_education'][0] ?? '') : ($searchParams['min_education'] ?? '');
-            $eduLabels = ['' => 'any degrees', 'high school' => 'high school', 'd1' => 'diploma 1', 's1' => 'bachelor (s1)', 's2' => 'master (s2)', 's3' => 'doctorate (s3)'];
-            $eduLabel = $eduLabels[$eduValue] ?? 'any degrees';
-            ?>
-            <input type="hidden" name="min_education" value="<?= e($eduValue) ?>">
-            <div class="brutalist-select-wrapper custom-dropdown-toggle">
-                <span class="brutalist-select"
-                    style="border:none; padding:0; height:auto; display:flex; align-items:center; outline:none;"><?= e($eduLabel) ?></span>
-                <i class="bi bi-chevron-down brutalist-select-icon"></i>
-            </div>
-            <div class="custom-dropdown-menu">
-                <?php foreach ($eduLabels as $val => $lbl): ?>
-                    <div class="custom-dropdown-item <?= $eduValue === $val ? 'active' : '' ?>" data-value="<?= e($val) ?>">
-                        <?= e($lbl) ?>
-                    </div>
-                <?php endforeach; ?>
-            </div>
+        <div class="filter-group relative">
+            <label class="flex items-center gap-1">
+                <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                Max Salary
+            </label>
+            <input type="number" name="max_salary" value="<?= e($searchParams['max_salary'] ?? '') ?>" placeholder="Max IDR" class="brutalist-input-subtle" onchange="this.form.submit()">
         </div>
-
-        <div class="brutalist-filter-group brutalist-filter-group-fixed" style="flex: 0 0 auto; min-width: 240px;">
-            <span class="brutalist-label">salary range (idr)</span>
-            <div style="display: flex; gap: 8px;">
-                <input type="number" name="min_salary" value="<?= e($searchParams['min_salary'] ?? '') ?>" placeholder="min" class="brutalist-input-flat" style="width: 50%; padding: 12px 10px;" onchange="this.form.submit()">
-                <input type="number" name="max_salary" value="<?= e($searchParams['max_salary'] ?? '') ?>" placeholder="max" class="brutalist-input-flat" style="width: 50%; padding: 12px 10px;" onchange="this.form.submit()">
-            </div>
+        <div class="filter-group" style="grid-column: 1 / -1; display: flex; justify-content: flex-end;">
+            <button type="submit" class="flex gap-2 items-center bg-accent text-surface px-8 py-4 font-black uppercase tracking-widest border-4 border-black shadow-[6px_6px_0_0_black] hover:translate-y-[2px] transition-all group">
+                <svg width="16" height="16" class="group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
+                </svg> 
+                Filter Analytics
+            </button>
         </div>
     </div>
     <input type="hidden" name="job_view" value="<?= e($jobView) ?>">
 </form>
 
-<div class="job-listing-container">
-    <div class="job-listing-main">
-
-<?php if (isset($isProfileComplete) && !$isProfileComplete): ?>
-<div style="background: var(--color-accent); color: var(--color-surface); padding: 16px 24px; border: 2px solid var(--color-border); margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;" class="lowercase font-bold">
-    <div style="display: flex; align-items: center; gap: 12px; font-size: 16px;">
-        <i class="bi bi-exclamation-triangle-fill" style="font-size: 20px;"></i>
-        <span>your profile is incomplete, complete your profile to stand out to HR</span>
-    </div>
-    <a href="<?= BASE_URL ?>/user/settings" style="background: var(--color-surface); color: var(--color-text); padding: 8px 16px; border: 2px solid var(--color-border); text-decoration: none; display: inline-block; transition: all 0.2s;" onmouseover="this.style.background='var(--color-text)'; this.style.color='var(--color-surface)';" onmouseout="this.style.background='var(--color-surface)'; this.style.color='var(--color-text)';">complete profile</a>
-</div>
-<?php endif; ?>
-
-<div class="brutalist-job-list lowercase">
-    <?php if (empty($jobs)): ?>
-        <div class="py-10 text-xl text-gray-500 font-medium">
-            no jobs found matching your criteria.
-        </div>
-    <?php else: ?>
-        <?php foreach ($jobs as $j): ?>
-            <?php
-            // ONLY FOR DEMO
-            $companies = ['qclay studio', 'malvah', 'motto', 'netflix', 'google'];
-            $companyIndex = ((int) $j['id']) % count($companies);
-            $companyName = $companies[$companyIndex];
-            ?>
-            <?php
-            // Format salary
-            $salaryDisplay = '';
-            $curr = $j['currency'] ?? 'IDR';
-            if (!empty($j['min_salary']) && !empty($j['max_salary'])) {
-                $salaryDisplay = $curr . ' ' . number_format($j['min_salary'], 0, '.', ',') . ' - ' . number_format($j['max_salary'], 0, '.', ',');
-            } else {
-                $salaryDisplay = e($j['salary_range'] ? $j['salary_range'] : 'IDR 10,000,000');
-            }
-            ?>
-            <div class="brutalist-job-row" style="cursor: pointer;"
-                onclick="window.location.href='<?= BASE_URL ?>/jobs/show?id=<?= $j['id'] ?>'">
-                <div class="brutalist-job-left">
-                    <div class="brutalist-job-info">
-                        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
-                            <a href="<?= BASE_URL ?>/jobs/show?id=<?= $j['id'] ?>"
-                                class="brutalist-job-name"><?= e($j['title']) ?></a>
-                            <?php if (in_array((int)$j['id'], $appliedJobIds, true)): ?>
-                                <span style="display:inline-block; border: 1px solid var(--color-accent); padding: 2px 8px; border-radius: 4px; font-size:12px; font-weight:600; color:var(--color-accent); background: transparent; text-transform: lowercase;">applied</span>
+<div class="job-layout-grid">
+    <div class="job-list-area">
+        <?php if (empty($jobs)): ?>
+            <div class="bg-secondary p-12 text-center border-2 border-dashed border-border">
+                <h3 class="font-black text-2xl mb-2">No matches found</h3>
+                <p class="text-text-muted font-bold">Try adjusting your filters or expanding your search.</p>
+            </div>
+        <?php else: ?>
+            <div id="jobs-container">
+            <?php foreach ($jobs as $j): ?>
+                <?php
+                $companies = ['Qclay Studio', 'Malvah', 'Motto', 'Netflix', 'Google'];
+                $companyName = $companies[$j['id'] % count($companies)];
+                $salaryDisplay = !empty($j['min_salary']) ? 'IDR ' . number_format($j['min_salary']/1000000, 1) . 'M+' : ($j['salary_range'] ?: 'Competitive');
+                ?>
+                <div class="job-card-premium" onclick="window.location.href='<?= BASE_URL ?>/jobs/show?id=<?= $j['id'] ?>'">
+                    <div class="job-main-info">
+                        <h2 class="job-role-title"><?= e($j['title']) ?></h2>
+                        <div class="job-company-line"><?= e($companyName) ?></div>
+                        <div class="job-meta-line">
+                            <span>
+                                <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg> 
+                                <?= e($j['location'] ?: 'Remote') ?>
+                            </span>
+                            <span>
+                                <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path></svg> 
+                                <?= e($j['job_type'] ?: 'Full-time') ?>
+                            </span>
+                            <?php if (in_array((int) $j['id'], $appliedJobIds, true)): ?>
+                                <span class="text-accent">
+                                    <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg> 
+                                    Applied
+                                </span>
                             <?php endif; ?>
                         </div>
-                        <span class="brutalist-job-desc"
-                            style="font-size: 20px; margin-top: 4px; display: block;"><?= e($j['short_description'] ?? 'No description available.') ?></span>
                     </div>
-                </div>
-                <div class="brutalist-job-right">
-                    <div class="brutalist-salary" style="font-size: 24px;"><?= $salaryDisplay ?></div>
-                    <div style="display: flex; align-items: center; justify-content: flex-end; gap: 16px;">
-                        <div class="brutalist-meta">
-                            <?= e($companyName) ?> / <?= e($j['location'] ?: 'remote') ?> / <?= e($j['job_type'] ?: 'full-time') ?>
-                        </div>
-                        <?php $isSaved = in_array((int)$j['id'], $savedJobIds, true); ?>
-                        <form method="post" action="<?= BASE_URL ?>/jobs/<?= $isSaved ? 'unsave' : 'save' ?>" class="d-inline">
-                            <input type="hidden" name="job_id" value="<?= (int)$j['id'] ?>">
-                            <input type="hidden" name="redirect" value="/jobs">
-                            <button type="submit" style="background:none; border:none; padding:0; cursor:pointer;" title="<?= $isSaved ? 'Remove from saved' : 'Save job' ?>" onclick="event.stopPropagation()">
-                                <i class="bi <?= $isSaved ? 'bi-bookmark-fill' : 'bi-bookmark' ?>" style="font-size: 20px; color: <?= $isSaved ? 'var(--color-accent)' : 'var(--color-text-muted)' ?>; transition: all 0.2s;" onmouseover="this.style.color='var(--color-accent)'" onmouseout="this.style.color='<?= $isSaved ? 'var(--color-accent)' : 'var(--color-text-muted)' ?>'"></i>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        <?php endforeach; ?>
-
-        <?php if ($totalPages > 1): ?>
-            <div class="brutalist-pagination-wrapper">
-                <div class="brutalist-pagination">
-                    <?php
-                    $window = 4;
-                    $start = $page;
-                    $end = $start + $window - 1;
-                    if ($end > $totalPages) {
-                        $end = $totalPages;
-                        $start = max(1, $end - $window + 1);
-                    }
-
-                    $qs = $_GET;
-                    unset($qs['url']);
-
-                    if ($start > 1) {
-                        $qs['page'] = $start - 1;
-                        $link = BASE_URL . '/jobs?' . http_build_query($qs);
-                        echo '<a href="' . $link . '" class="brutalist-page-dots">...</a>';
-                    }
-
-                    for ($i = $start; $i <= $end; $i++) {
-                        $qs['page'] = $i;
-                        $link = BASE_URL . '/jobs?' . http_build_query($qs);
-                        $activeClass = ($i === $page) ? 'active' : '';
-                        echo '<a href="' . $link . '" class="brutalist-page-btn ' . $activeClass . '">' . $i . '</a>';
-                    }
-
-                    if ($end < $totalPages) {
-                        $qs['page'] = $end + 1;
-                        $link = BASE_URL . '/jobs?' . http_build_query($qs);
-                        echo '<a href="' . $link . '" class="brutalist-page-dots">...</a>';
-                    }
-                    ?>
-                </div>
-
-                <div class="brutalist-per-page">
-                    <span>show</span>
-                    <div class="brutalist-filter-group custom-dropdown-container" style="min-width: 80px; margin-bottom: 0;">
-                        <input type="hidden" name="limit" form="job-filters-form" value="<?= e($perPage) ?>">
-                        <div class="brutalist-select-wrapper custom-dropdown-toggle" style="padding: 8px 12px; height: 48px;">
-                            <span class="brutalist-select"
-                                style="border:none; padding:0; height:auto; display:flex; align-items:center; outline:none;"><?= e($perPage) ?></span>
-                            <i class="bi bi-chevron-down brutalist-select-icon"></i>
-                        </div>
-                        <div class="custom-dropdown-menu" style="bottom: 100%; top: auto; margin-bottom: 4px; margin-top: 0;">
-                            <?php foreach ([5, 10, 20, 50] as $l): ?>
-                                <div class="custom-dropdown-item <?= $perPage === $l ? 'active' : '' ?>" data-value="<?= $l ?>">
-                                    <?= $l ?></div>
-                            <?php endforeach; ?>
+                    <div class="text-right flex flex-col items-end gap-3 relative z-10">
+                        <div class="salary-tag-premium"><?= $salaryDisplay ?></div>
+                        <div class="flex gap-4">
+                            <?php $isSaved = in_array((int) $j['id'], $savedJobIds, true); ?>
+                            <form method="post" action="<?= BASE_URL ?>/jobs/<?= $isSaved ? 'unsave' : 'save' ?>" onclick="event.stopPropagation()">
+                                <?= csrf_field() ?>
+                                <input type="hidden" name="job_id" value="<?= (int) $j['id'] ?>">
+                                <input type="hidden" name="redirect" value="/jobs">
+                                <button type="submit" class="hover:text-accent transition-colors">
+                                    <?php if ($isSaved): ?>
+                                        <svg width="24" height="24" class="text-accent" fill="currentColor" viewBox="0 0 20 20"><path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"></path></svg>
+                                    <?php else: ?>
+                                        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path></svg>
+                                    <?php endif; ?>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
+            <?php endforeach; ?>
             </div>
         <?php endif; ?>
+    </div>
 
-    <?php endif; ?>
-    </div> <!-- Close .brutalist-job-list -->
-    </div> <!-- Close .job-listing-main -->
+    <aside class="chally-sidebar-premium">
+        <div class="ai-card-premium">
+            <h2 class="font-black text-xs uppercase tracking-[0.2em] text-accent mb-4">Internal Intelligence</h2>
+            <div class="ai-voice-line">How can Chally AI optimize your search today?</div>
+            
+            <div class="ai-suggestion-list">
+                <div class="ai-suggestion-item">
+                    <div class="ai-dot-pulse"></div>
+                    <span>Find high-priority matches for my skill set.</span>
+                </div>
+                <div class="ai-suggestion-item">
+                    <div class="ai-dot-pulse"></div>
+                    <span>Enhance my CV for creative director roles.</span>
+                </div>
+                <div class="ai-suggestion-item">
+                    <div class="ai-dot-pulse"></div>
+                    <span>Generate interview prep for Netflix.</span>
+                </div>
+            </div>
 
-    <!-- Chally AI Sidebar -->
-    <aside class="chally-ai-sidebar">
-        <div class="chally-ai-card lowercase">
-            <h2 class="chally-ai-title">chally ai</h2>
-            <p class="chally-ai-subtitle">your personal assistant.</p>
-            
-            <p class="chally-ai-prompt">What can I help you today?</p>
-            
-            <ul class="chally-ai-features">
-                <li class="chally-ai-feature-item">
-                    <span class="chally-ai-dot"></span>
-                    <span>Help me find the most fit job for me.</span>
-                </li>
-                <li class="chally-ai-feature-item">
-                    <span class="chally-ai-dot"></span>
-                    <span>Help me to evaluate my CV and introductions.</span>
-                </li>
-            </ul>
+            <div class="mt-8 pt-8 border-t-2 border-border">
+                <div class="flex items-center gap-3 text-sm font-bold opacity-60">
+                    <svg width="16" height="16" class="text-accent" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.381z" clip-rule="evenodd"></path></svg>
+                    <span>Profiles synchronized with V2 engine.</span>
+                </div>
+            </div>
         </div>
     </aside>
 </div>
 
-<script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // Typed JS
-        const searchInput = document.getElementById('hero-search-input');
-        if (searchInput && !searchInput.value) {
-            new Typed('#hero-search-input', {
-                strings: [
-                    'Software Engineer',
-                    'Software Analyst',
-                    'Frontend',
-                    'Frontend Developer',
-                    'Product Manager',
-                    'UI/UX Designer',
-                    'Business Analyst',
-                    'Data Scientist'
-                ],
-                typeSpeed: 50,
-                backSpeed: 30,
-                backDelay: 1500,
-                startDelay: 500,
-                attr: 'placeholder',
-                bindInputFocusEvents: true,
-                loop: true
-            });
-        }
-
-        // Custom UI Dropdown Logic
-        document.addEventListener('click', (e) => {
-            const toggle = e.target.closest('.custom-dropdown-toggle');
-            if (toggle) {
-                const container = toggle.closest('.custom-dropdown-container');
-                const menu = container.querySelector('.custom-dropdown-menu');
-
-                document.querySelectorAll('.custom-dropdown-menu').forEach(m => {
-                    if (m !== menu) m.classList.remove('show');
-                });
-
-                menu.classList.toggle('show');
-                return;
-            }
-
-            const item = e.target.closest('.custom-dropdown-item');
-            if (item) {
-                const container = item.closest('.custom-dropdown-container');
-                const input = container.querySelector('input[type="hidden"]');
-                input.value = item.dataset.value;
-                const formId = input.getAttribute('form');
-                if (formId) {
-                    document.getElementById(formId).submit();
-                } else {
-                    container.closest('form').submit();
-                }
-                return;
-            }
-
-            document.querySelectorAll('.custom-dropdown-menu').forEach(m => {
-                m.classList.remove('show');
-            });
-        });
+        gsap.from(".jobs-hero > *", { opacity: 0, x: -40, stagger: 0.2, duration: 1, ease: "power4.out" });
+        gsap.from(".filter-bar-premium", { opacity: 0, y: 20, duration: 1, ease: "power4.out", delay: 0.3 });
+        gsap.from(".job-card-premium", { opacity: 0, y: 30, stagger: 0.1, duration: 1, ease: "power4.out", delay: 0.5 });
+        gsap.from(".ai-card-premium", { opacity: 0, x: 40, duration: 1, ease: "power4.out", delay: 0.7 });
     });
 </script>

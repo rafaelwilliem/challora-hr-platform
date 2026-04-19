@@ -206,6 +206,7 @@ class JobController {
 
         $jobs = $this->savedJobModel->getByUserId(currentUserId());
 
+        $appliedJobIds = [];
         $appModel = new Application();
         if (!empty($jobs)) {
             $jobIds = array_map(fn($j) => (int)$j['id'], $jobs);

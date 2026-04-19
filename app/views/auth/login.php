@@ -3,168 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Challora</title>
-
+    <title>Log-In — Challora</title>
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/design-tokens.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body { font-family: var(--font-sans); background: var(--color-surface); color: var(--color-text); }
-        .brutalist-card {
-            border: 2px solid var(--color-border);
-            box-shadow: 8px 8px 0 rgba(0,0,0,1);
-            background: #0a0a0a;
-            border-radius: 0;
-            overflow: hidden;
-        }
-        .brutalist-input {
-            background: #111;
-            border: 2px solid var(--color-border);
-            border-radius: 0;
-            color: var(--color-text);
-            padding: 14px 16px;
-            width: 100%;
-            transition: all 0.2s ease;
-            box-shadow: 2px 2px 0 rgba(0,0,0,0.5);
-            text-transform: lowercase;
-            font-size: 16px;
-        }
-        .brutalist-input:focus {
-            border-color: var(--color-accent);
-            box-shadow: 4px 4px 0 var(--color-accent);
-            outline: none;
-            transform: translate(-2px, -2px);
-        }
-        .brutalist-btn {
-            display: inline-block;
-            width: 100%;
-            background: var(--color-accent);
-            color: var(--color-surface);
-            padding: 16px 24px;
-            font-weight: 800;
-            font-size: 16px;
-            text-transform: lowercase;
-            text-decoration: none;
-            text-align: center;
-            border: 2px solid var(--color-border);
-            border-radius: 0;
-            cursor: pointer;
-            box-shadow: 4px 4px 0 rgba(0,0,0,1);
-            transition: all 0.2s ease;
-        }
-        .brutalist-btn:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0 rgba(0,0,0,1);
-        }
-        .brutalist-btn:active {
-            transform: translate(2px, 2px);
-            box-shadow: 0px 0px 0 rgba(0,0,0,1);
-        }
-        .brutalist-label {
-            text-transform: lowercase;
-            font-weight: 600;
-            font-size: 14px;
-            margin-bottom: 8px;
-            display: block;
-        }
-        .brutalist-title {
-            font-size: 56px;
-            font-weight: 600;
-            letter-spacing: -3px;
-            color: var(--color-text);
-            margin-bottom: 12px;
-            text-transform: lowercase;
-            line-height: 1.1;
-        }
-        .brutalist-alert {
-            background: var(--color-accent);
-            color: var(--color-surface);
-            padding: 16px;
-            border: 2px solid var(--color-border);
-            font-weight: bold;
-            font-size: 14px;
-            text-transform: lowercase;
-            margin-bottom: 24px;
-            box-shadow: 4px 4px 0 rgba(0,0,0,1);
-        }
-        .brutalist-hero {
-            background: var(--color-accent);
-            color: var(--color-surface);
-            border-left: 2px solid var(--color-border);
-            padding: 48px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        @media (max-width: 1024px) {
-            .brutalist-hero { border-left: none; border-top: 2px solid var(--color-border); }
-        }
-    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/login-register-style.css">
 </head>
-<body class="min-h-screen lowercase">
-    <div class="min-h-screen flex items-center justify-center p-4 md:p-8">
-        <div class="w-full max-w-6xl brutalist-card grid grid-cols-1 lg:grid-cols-2">
-            <!-- Left Side / Form -->
-            <div class="p-8 md:p-12 lg:p-16">
-                <div class="flex items-center gap-4 mb-10">
-                    <div class="w-12 h-12 bg-accent text-surface flex items-center justify-center font-bold text-xl border-2 border-border" style="box-shadow: 4px 4px 0 rgba(0,0,0,1)">C</div>
-                    <div>
-                        <h2 class="text-xl font-bold" style="letter-spacing: -1px;">challora</h2>
-                        <p class="text-sm font-semibold opacity-70">portal login</p>
-                    </div>
+<body>
+    <div class="split-card gsap-reveal">
+        <!-- FORM SIDE -->
+        <div class="form-side">
+            <div class="gsap-item">
+                <h1 class="auth-title">Log-In</h1>
+                <p class="auth-subtitle">Access your intelligence dashboard.</p>
+            </div>
+
+            <?php if (!empty($error)): ?>
+                <div class="bg-red-900/50 text-red-100 p-4 mb-8 border border-red-500 font-bold uppercase text-[10px] tracking-widest gsap-item">
+                    <?= e($error) ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if (!empty($_SESSION['flash'])): ?>
+                <div class="bg-orange-900/50 text-accent-100 p-4 mb-8 border border-orange-500 font-bold uppercase text-[10px] tracking-widest gsap-item">
+                    <?= e($_SESSION['flash']) ?>
+                </div>
+                <?php unset($_SESSION['flash'], $_SESSION['flash_type']); ?>
+            <?php endif; ?>
+
+            <form method="post" action="<?= BASE_URL ?>/index.php?url=auth/login" class="gsap-item">
+                <?= csrf_field() ?>
+                
+                <div class="mb-2">
+                    <label class="premium-label">
+                        <span class="flex items-center gap-2 text-white">
+                            EMAIL ADDRESS
+                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </span>
+                        <span class="label-req">*required</span>
+                    </label>
+                    <input type="email" name="email" placeholder="example@gmail.com" required 
+                        class="premium-input" value="<?= e($_POST['email'] ?? '') ?>">
                 </div>
 
-                <div class="max-w-md">
-                    <h1 class="brutalist-title">sign in</h1>
-                    <p class="text-base mb-8 font-semibold opacity-75">access the brutal recruitment platform.</p>
+                <div class="mb-2">
+                    <label class="premium-label">
+                        <span class="flex items-center gap-2 text-white">
+                            PASSWORD
+                            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                        </span>
+                        <span class="text-accent-600 label-req">*required</span>
+                    </label>
+                    <input type="password" name="password" placeholder="••••••••" required class="premium-input">
+                </div>
 
-                    <?php if (!empty($error)): ?>
-                        <div class="brutalist-alert"><?= e($error) ?></div>
-                    <?php endif; ?>
+                <a href="<?= BASE_URL ?>/auth/forgot" class="text-accent-500 hover:text-accent-400 font-black text-xs uppercase tracking-widest inline-block mb-8">Forgot Password?</a>
 
-                    <?php if (!empty($_SESSION['flash'])): ?>
-                        <?php
-                        $flashType = (string) ($_SESSION['flash_type'] ?? 'success');
-                        ?>
-                        <div class="brutalist-alert" style="<?= $flashType === 'error' ? 'background:var(--color-text); color:var(--color-surface);' : '' ?>"><?= e($_SESSION['flash']) ?></div>
-                        <?php unset($_SESSION['flash']); ?>
-                        <?php unset($_SESSION['flash_type']); ?>
-                    <?php endif; ?>
+                <button type="submit" class="btn-brutal">
+                    LOG-IN
+                </button>
 
-                    <form method="post" action="<?= BASE_URL ?>/index.php?url=auth/login" class="space-y-6">
-                        <?= csrf_field() ?>
-                        <div>
-                            <label for="email" class="brutalist-label">email address</label>
-                            <input type="email" id="email" name="email" placeholder="john.doe@gmail.com" required autocomplete="email" value="<?= e($_POST['email'] ?? '') ?>" class="brutalist-input">
-                        </div>
-                        <div>
-                            <label for="password" class="brutalist-label">password</label>
-                            <input type="password" id="password" name="password" placeholder="enter password" required autocomplete="current-password" class="brutalist-input">
-                        </div>
-                        <div class="flex items-center justify-end">
-                            <a href="<?= BASE_URL ?>/auth/forgot" class="font-bold hover:text-accent transition" style="text-decoration: underline; text-underline-offset: 4px;">forgot password?</a>
-                        </div>
-                        <button type="submit" class="brutalist-btn mt-2">sign in</button>
-                        <div class="pt-4 text-center font-semibold text-sm">
-                            <p>don't have an account? <a href="<?= BASE_URL ?>/auth/register" class="text-accent underline" style="text-underline-offset: 4px;">register</a></p>
-                        </div>
-                    </form>
+                <div class="mt-12 text-center">
+                    <p class="text-[11px] font-bold text-gray-500 uppercase tracking-widest">
+                        New Here? <a href="<?= BASE_URL ?>/auth/register" class="text-accent-500 hover:text-white transition-colors duration-300">Sign-Up</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+
+        <!-- BRAND SIDE -->
+        <div class="brand-side">
+            <div class="gsap-item">
+                <div class="brand-title">Challora</div>
+                <div class="brand-quote">
+                    Intelligence is not just about what you know, but how you connect the dots.
                 </div>
             </div>
 
-            <!-- Right Side / Hero Image Replacement -->
-            <div class="brutalist-hero">
-                <div>
-                    <h2 class="font-bold" style="font-size: 64px; line-height: 1; letter-spacing: -3px; margin-bottom: 24px;">destroy<br>the average.</h2>
-                    <p class="font-bold" style="font-size: 20px; max-w: 400px; line-height: 1.4;">Challora cuts through the corporate noise. Sign in, complete your strictly formatted profile, and stand out.</p>
-                </div>
-                
-                <div style="background: var(--color-surface); color: var(--color-text); border: 2px solid var(--color-border); padding: 24px; box-shadow: 6px 6px 0 rgba(0,0,0,1); display: inline-block; max-width: 350px;">
-                    <h3 class="text-2xl font-bold mb-2 lowercase" style="letter-spacing:-1px;">for candidates & hr</h3>
-                    <p class="text-sm font-semibold opacity-80 lowercase">We separate the signal from the noise with raw, uncompromising data focus.</p>
-                </div>
+            <div class="brand-footer gsap-item">
+                AUTH PROTOCOL — V2.2.1
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.from(".gsap-reveal", { 
+                opacity: 0, 
+                scale: 0.98,
+                duration: 1.2, 
+                ease: "power4.out" 
+            });
+            gsap.from(".gsap-item", { 
+                opacity: 0, 
+                x: -20, 
+                stagger: 0.1, 
+                duration: 0.8, 
+                ease: "power3.out", 
+                delay: 0.3 
+            });
+        });
+    </script>
 </body>
 </html>
