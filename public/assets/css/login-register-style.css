@@ -18,7 +18,7 @@ body {
     background-image: radial-gradient(var(--color-border) 1px, transparent 1px);
     background-size: 24px 24px;
     overflow-x: hidden;
-    overflow-y: hidden;
+    overflow-y: auto;
 }
 
 .split-card {
@@ -106,21 +106,18 @@ body {
     font-size: 14px;
     font-weight: 900;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
     color: #ccc;
     margin-bottom: 12px;
 }
 
 .split-card.register-wide .premium-label {
     font-size: 14px;
-    letter-spacing: 2px;
     margin-bottom: 10px;
 }
 
 .label-req {
     text-transform: lowercase;
     font-size: 14px;
-    opacity: 0.7;
 }
 
 .premium-input {
@@ -229,4 +226,18 @@ body {
     .form-side {
         padding: 40px;
     }
+}
+
+.error-msg {
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+    padding: 16px;
+    margin-bottom: 24px;
+    border: 2px solid var(--color-primary);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    transition: all 0.1s;
+    cursor: pointer;
+    margin-top: 24px;
 }

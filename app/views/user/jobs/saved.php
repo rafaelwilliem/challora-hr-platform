@@ -1,85 +1,4 @@
-<style>
-    .saved-hero {
-        margin-bottom: 60px;
-        border-left: 8px solid var(--color-accent);
-        padding-left: 32px;
-    }
-    .saved-title-giant {
-        font-size: 80px;
-        font-weight: 800;
-        letter-spacing: -5px;
-        line-height: 0.8;
-        color: var(--color-text);
-        margin: 0;
-    }
-    .saved-subtext {
-        font-size: 18px;
-        font-weight: 700;
-        color: var(--color-text-muted);
-        margin-top: 12px;
-    }
-    .job-card-premium {
-        background: var(--color-surface);
-        border: 2px solid var(--color-border);
-        padding: 40px;
-        margin-bottom: 24px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        cursor: pointer;
-        position: relative;
-        overflow: hidden;
-    }
-    .job-card-premium:hover {
-        transform: translate(-4px, -4px);
-        box-shadow: 12px 12px 0 var(--color-border);
-        border-color: var(--color-text);
-    }
-    .job-card-premium::before {
-        content: '';
-        position: absolute;
-        top: 0; left: 0; bottom: 0;
-        width: 0;
-        background: var(--color-accent);
-        transition: width 0.3s ease;
-        z-index: 0;
-    }
-    .job-card-premium:hover::before {
-        width: 6px;
-    }
-    .job-main-info {
-        position: relative;
-        z-index: 1;
-    }
-    .job-role-title {
-        font-size: 32px;
-        font-weight: 800;
-        letter-spacing: -1px;
-        margin-bottom: 4px;
-        color: var(--color-text);
-    }
-    .job-company-line {
-        font-size: 18px;
-        font-weight: 700;
-        color: var(--color-text-muted);
-    }
-    .job-meta-line {
-        display: flex;
-        gap: 20px;
-        margin-top: 16px;
-        font-size: 13px;
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
-    .salary-tag-premium {
-        font-size: 28px;
-        font-weight: 800;
-        color: var(--color-accent);
-        letter-spacing: -1px;
-    }
-</style>
+<link rel="stylesheet" href="<?= BASE_URL ?>/public/assets/css/jobs-style.css">
 
 <div class="saved-hero gsap-reveal">
     <h1 class="saved-title-giant">Saved Assets</h1>
@@ -106,18 +25,32 @@
                     <h2 class="job-role-title"><?= e($j['title']) ?></h2>
                     <div class="job-company-line"><?= e($companyName) ?></div>
                     <div class="job-meta-line">
-                        <span><i class="bi bi-geo-alt-fill"></i> <?= e($j['location'] ?: 'Remote') ?></span>
-                        <span><i class="bi bi-clock-fill"></i> <?= e($j['job_type'] ?: 'Full-time') ?></span>
+                        <span>
+                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" stroke-linejoin="miter">
+                                <path d="M12 21l-7-7V3h14v11l-7 7z"></path>
+                                <circle cx="12" cy="9" r="2" fill="currentColor"></circle>
+                            </svg>
+                            <?= e($j['location'] ?: 'Remote') ?>
+                        </span>
+                        <span>
+                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" stroke-linejoin="miter">
+                                <rect x="3" y="3" width="18" height="18"></rect>
+                                <path d="M12 8v4h4"></path>
+                            </svg>
+                            <?= e($j['job_type'] ?: 'Full-time') ?>
+                        </span>
                     </div>
                 </div>
                 <div class="text-right flex flex-col items-end gap-3 relative z-10">
                     <div class="salary-tag-premium"><?= $salaryDisplay ?></div>
-                    <form method="post" action="<?= BASE_URL ?>/jobs/unsave" onclick="event.stopPropagation()">
+                    <form method="post" action="<?= BASE_URL ?>/jobs/unsave" onclick="event.stopPropagation()" class="flex items-end">
                         <?= csrf_field() ?>
                         <input type="hidden" name="job_id" value="<?= (int) $j['id'] ?>">
                         <input type="hidden" name="redirect" value="/jobs/saved">
-                        <button type="submit" class="text-2xl text-accent hover:scale-110 transition-transform">
-                            <i class="bi bi-bookmark-fill"></i>
+                        <button type="submit" class="hover:text-accent transition-colors save-btn">
+                            <svg width="24" height="24" fill="var(--color-accent)" stroke="var(--color-accent)" stroke-width="2.5" viewBox="0 0 24 24" stroke-linejoin="miter">
+                                <path d="M5 2h14v20l-7-6-7 6V2z"></path>
+                            </svg>
                         </button>
                     </form>
                 </div>

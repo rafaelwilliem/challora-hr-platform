@@ -87,7 +87,7 @@
     --input-border: var(--color-border);
     --danger-bg: var(--color-danger-bg);
     --danger-text: var(--color-danger-text);
-    --success-bg: var(--color-success-bg);
+    --success-bg: var(--color-success-bg);3
     --success-text: var(--color-success-text);
     --shadow: var(--shadow-lg);
 
@@ -245,14 +245,6 @@ body {
 
 .text-on-primary {
     color: var(--color-on-primary) !important;
-}
-
-.text-on-secondary {
-    color: var(--color-on-secondary) !important;
-}
-
-.text-on-accent {
-    color: var(--color-on-accent) !important;
 }
 
 .bg-danger-soft {
