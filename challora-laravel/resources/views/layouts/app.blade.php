@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $pageTitle ?? config('app.name', 'Challora') }}</title>
-    
+
     <!-- Token tema (warna, font, radius) -->
     <link rel="stylesheet" href="{{ asset('css/design-tokens.css') }}">
-    
+
     <!-- TailwinCSS & GSAP -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    
+
     <script>
         tailwind.config = {
             theme: {
@@ -54,13 +54,14 @@
             },
         };
     </script>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
     @stack('styles')
-    
+
     <style>
         .user-nav {
             background: var(--color-surface);
@@ -227,26 +228,30 @@
                                 @endif
                             </div>
                             <span class="font-bold text-sm hidden md:block">{{ auth()->user()->name }}</span>
-                            <svg width="12" height="12" class="text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            <svg width="12" height="12" class="text-text-muted" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                                </path>
                             </svg>
                         </button>
 
                         <div id="user-menu-dropdown"
                             class="absolute right-0 mt-4 w-60 bg-surface border-4 border-black shadow-[8px_8px_0_0_black] hidden z-50 overflow-hidden rounded-none transition-all">
                             <div class="px-5 py-4 border-b-4 border-black bg-secondary">
-                                <p class="text-[10px] font-black text-text-muted uppercase tracking-[0.2em] mb-1">Signed in as</p>
+                                <p class="text-[10px] font-black text-text-muted uppercase tracking-[0.2em] mb-1">Signed in
+                                    as</p>
                                 <p class="text-sm font-black truncate text-accent">{{ auth()->user()->email }}</p>
                             </div>
                             <a href="{{ route('user.settings.edit') }}"
                                 class="flex items-center gap-3 px-5 py-4 text-sm font-bold border-b-4 border-black hover:bg-black hover:text-surface transition-colors group">
-                                <svg width="16" height="16" class="group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg width="16" height="16" class="group-hover:rotate-90 transition-transform duration-300"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
                                     </path>
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                </svg> 
+                                </svg>
                                 <span>Account Settings</span>
                             </a>
                             @if(auth()->user()->isAdmin())
@@ -256,7 +261,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
                                         </path>
-                                    </svg> 
+                                    </svg>
                                     <span>Switch to HR Panel</span>
                                 </a>
                             @endif
@@ -268,7 +273,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
                                         </path>
-                                    </svg> 
+                                    </svg>
                                     <span class="uppercase tracking-widest">Terminate Session</span>
                                 </button>
                             </form>
@@ -286,27 +291,31 @@
             <div class="mx-10 mt-8 flex items-center justify-between p-4 border-4 border-black shadow-[6px_6px_0_0_black] bg-success-bg text-success-text font-bold"
                 id="flash-alert">
                 <div class="flex items-center gap-3">
-                    <svg width="24" height="24" class="text-success-text" fill="none"
-                        stroke="currentColor" viewBox="0 0 24 24">
+                    <svg width="24" height="24" class="text-success-text" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                     <span class="tracking-tight uppercase">{{ session('flash_toast')['message'] }}</span>
                 </div>
-                <button onclick="this.parentElement.remove()" class="opacity-50 hover:opacity-100 transition-opacity bg-black text-white p-1 rounded-sm">
+                <button onclick="this.parentElement.remove()"
+                    class="opacity-50 hover:opacity-100 transition-opacity bg-black text-white p-1 rounded-sm">
                     <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
                     </svg>
                 </button>
             </div>
         @endif
 
         @if($errors->any())
-            <div class="mx-10 mt-8 flex flex-col p-4 border-4 border-black shadow-[6px_6px_0_0_black] bg-red-100 text-red-700 font-bold">
+            <div
+                class="mx-10 mt-8 flex flex-col p-4 border-4 border-black shadow-[6px_6px_0_0_black] bg-red-100 text-red-700 font-bold">
                 @foreach ($errors->all() as $error)
                     <div class="flex items-center gap-3">
                         <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
                         <span class="tracking-tight uppercase">{{ $error }}</span>
                     </div>

@@ -168,7 +168,7 @@
         <div class="flex-1">
             <h3 class="font-black text-lg uppercase tracking-widest mb-2">Foto Profil</h3>
             <p class="text-sm font-bold text-text-muted mb-4">Unggah foto formal untuk meningkatkan kredibilitas lamaran Anda (Maks. 1MB).</p>
-            <form action="{{ route('user.settings.upload-avatar') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('user.settings.avatar') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="flex gap-4">
                     <input type="file" name="avatar" class="form-input text-xs" required accept="image/*">
@@ -181,7 +181,6 @@
     <!-- Main Profile Form -->
     <form method="post" action="{{ route('user.settings.update') }}">
         @csrf
-        @method('PUT')
 
         <div class="edit-section" id="personal">
             <h2 class="edit-section-title">
@@ -296,12 +295,12 @@
                         <h4 class="font-black text-xs uppercase tracking-widest mb-1">{{ $label }}</h4>
                         @php $field = $key . '_path'; @endphp
                         @if($user->$field)
-                            <p class="text-[10px] font-bold text-success-text mb-4 uppercase">Terunggah &bull; <a href="{{ route('user.documents.download', $key) }}" target="_blank" class="underline">Lihat</a></p>
+                            <p class="text-[10px] font-bold text-success-text mb-4 uppercase">Terunggah &bull; <a href="{{ route('preview.user_file', ['type' => $key]) }}" target="_blank" class="underline">Lihat</a></p>
                         @else
                             <p class="text-[10px] font-bold text-red-600 mb-4 uppercase">Belum Diunggah</p>
                         @endif
                     </div>
-                    <form action="{{ route('user.settings.upload-document', $key) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('user.settings.upload', $key) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <input type="file" name="{{ $key }}" class="hidden" id="file-{{ $key }}" onchange="this.form.submit()">
                         <label for="file-{{ $key }}" class="btn-cancel py-2 px-4 text-[10px] block text-center cursor-pointer">UNGGAH BARU</label>

@@ -155,8 +155,8 @@ $activeUserPath = currentRoutePath('jobs');
 
         <div class="user-actions">
             <?php if (isLoggedIn() && currentRole() === 'user'): ?>
-                <div class="relative group" id="user-menu-root">
-                    <button type="button" id="user-menu-toggle" class="profile-trigger">
+                <div style="position: relative; display: inline-block;" id="user-menu-root">
+                    <button type="button" id="user-menu-toggle" class="profile-trigger" style="display: flex; align-items: center; gap: 8px; background: none; border: none; cursor: pointer; color: inherit; padding: 0;">
                         <div class="avatar-pill">
                             <?= e(substr($_SESSION['user_name'] ?? 'U', 0, 1)) ?>
                         </div>
@@ -168,43 +168,52 @@ $activeUserPath = currentRoutePath('jobs');
 
                     <!-- Ultra Premium Brutalist Dropdown -->
                     <div id="user-menu-dropdown"
-                        class="absolute right-0 mt-4 w-60 bg-surface border-4 border-black shadow-[8px_8px_0_0_black] hidden z-50 overflow-hidden rounded-none transition-all">
+                        class="absolute z-50 overflow-hidden rounded-none transition-all"
+                        style="display: none; position: absolute; top: 100%; right: 0; margin-top: 12px; width: 260px; border: 4px solid black; background: #111111; box-shadow: 8px 8px 0 0 black;">
                         <div class="px-5 py-4 border-b-4 border-black bg-secondary">
                             <p class="text-[10px] font-black text-text-muted uppercase tracking-[0.2em] mb-1">Signed in as</p>
                             <p class="text-sm font-black truncate text-accent"><?= e($_SESSION['user_email'] ?? '') ?></p>
                         </div>
-                        <a href="<?= BASE_URL ?>/user/settings"
-                            class="flex items-center gap-3 px-5 py-4 text-sm font-bold border-b-4 border-black hover:bg-black hover:text-surface transition-colors group">
-                            <svg width="16" height="16" class="group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
-                                </path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            </svg> 
-                            <span>Account Settings</span>
-                        </a>
+                        <!-- Navigation Links -->
+                        <div class="menu-items-group" style="display: flex; flex-direction: column;">
+                            <a href="<?= BASE_URL ?>/user/settings"
+                                class="flex items-center gap-3 px-5 py-4 text-sm font-black border-b-4 border-black hover:bg-black hover:text-white transition-all group"
+                                style="text-decoration: none !important; color: #ffffff !important; display: flex; align-items: center; border-bottom: 4px solid black; background: transparent;">
+                                <svg width="18" height="18" class="group-hover:rotate-90 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="flex-shrink: 0;">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
+                                    </path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg> 
+                                <span style="letter-spacing: 0.5px;">Account Settings</span>
+                            </a>
+                        </div>
                         <?php if (currentRole() === 'hr' || (isset($_SESSION['user_roles']) && in_array('hr', $_SESSION['user_roles']))): ?>
                             <a href="<?= BASE_URL ?>/hr/jobs"
-                                class="flex items-center gap-3 px-5 py-4 text-sm font-bold border-b-4 border-black hover:bg-black hover:text-surface transition-colors">
-                                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                class="flex items-center gap-3 px-5 py-4 text-sm font-black border-b-4 border-black hover:bg-black hover:text-white transition-all group"
+                                style="text-decoration: none !important; color: #ffffff !important; display: flex; align-items: center; border-bottom: 4px solid black; background: transparent;">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="flex-shrink: 0;">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                                         d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
                                     </path>
                                 </svg> 
-                                <span>Switch to HR Panel</span>
+                                <span style="letter-spacing: 0.5px;">Switch to HR Panel</span>
                             </a>
                         <?php endif; ?>
                         <div>
-                            <a href="<?= BASE_URL ?>/auth/logout"
-                                class="flex items-center gap-3 px-5 py-4 text-sm font-black text-danger-text hover:bg-danger-text hover:text-white transition-colors bg-surface">
-                                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
-                                    </path>
-                                </svg> 
-                                <span class="uppercase tracking-widest">Terminate Session</span>
-                            </a>
+                            <form method="POST" action="<?= BASE_URL ?>/auth/logout">
+                                <button type="submit"
+                                    class="w-full flex items-center justify-between px-5 py-4 text-xs font-black uppercase tracking-[0.2em] bg-accent text-primary hover:bg-black hover:text-accent transition-all group/logout"
+                                    style="border: none; cursor: pointer;">
+                                    <span>Terminate Session</span>
+                                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                            d="M17 16l4-4m0 0l-4-4m4 4H7">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -254,20 +263,33 @@ $activeUserPath = currentRoutePath('jobs');
     document.addEventListener('DOMContentLoaded', () => {
         const toggle = document.getElementById('user-menu-toggle');
         const dropdown = document.getElementById('user-menu-dropdown');
+        let isOpen = false;
 
         if (toggle && dropdown) {
             toggle.addEventListener('click', (e) => {
                 e.stopPropagation();
-                if (dropdown.classList.contains('hidden')) {
-                    dropdown.classList.remove('hidden');
-                    gsap.fromTo(dropdown, { y: -10, opacity: 0 }, { y: 0, opacity: 1, duration: 0.2, ease: "power2.out" });
+                if (!isOpen) {
+                    dropdown.style.display = 'block';
+                    isOpen = true;
+                    gsap.fromTo(dropdown, 
+                        { y: -10, opacity: 0, scale: 0.9, transformOrigin: 'top right' }, 
+                        { y: 0, opacity: 1, scale: 1, duration: 0.25, ease: 'back.out(1.7)' }
+                    );
                 } else {
-                    dropdown.classList.add('hidden');
+                    gsap.to(dropdown, {
+                        y: -5, opacity: 0, scale: 0.95, duration: 0.15, ease: 'power2.in',
+                        onComplete: () => { dropdown.style.display = 'none'; isOpen = false; }
+                    });
                 }
             });
 
-            document.addEventListener('click', () => {
-                dropdown.classList.add('hidden');
+            document.addEventListener('click', (e) => {
+                if (isOpen && !dropdown.contains(e.target) && !toggle.contains(e.target)) {
+                    gsap.to(dropdown, {
+                        y: -5, opacity: 0, scale: 0.95, duration: 0.15, ease: 'power2.in',
+                        onComplete: () => { dropdown.style.display = 'none'; isOpen = false; }
+                    });
+                }
             });
         }
 
