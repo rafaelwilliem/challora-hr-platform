@@ -30,7 +30,7 @@ class ApplicationController extends Controller
         return view('hr.applications.index', [
             'applications' => $applications,
             'jobs' => $jobs,
-            'pageTitle' => 'Kelola Lamaran',
+            'pageTitle' => 'Manage Applications',
         ]);
     }
 
@@ -43,7 +43,7 @@ class ApplicationController extends Controller
         return view('hr.applications.berkas', [
             'application' => $application,
             'user' => $application->user,
-            'pageTitle' => 'Berkas Pelamar: ' . $application->user->name,
+            'pageTitle' => 'Applicant Files: ' . $application->user->name,
         ]);
     }
 
@@ -58,7 +58,7 @@ class ApplicationController extends Controller
         $this->applicationService->updateStatus($application, $request->status);
 
         return back()->with('flash_toast', [
-            'message' => 'Status lamaran berhasil diperbarui menjadi ' . $request->status,
+            'message' => 'Application status successfully updated to ' . $request->status,
         ]);
     }
 

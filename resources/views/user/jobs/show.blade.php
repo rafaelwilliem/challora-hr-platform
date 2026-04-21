@@ -58,13 +58,13 @@
         gap: 12px;
     }
     .meta-pill {
-        background: var(--color-secondary);
-        border: 2px solid var(--color-border);
+        background: var(--color-accent);
+        border: 2px solid black;
         padding: 8px 16px;
-        font-size: 12px;
-        font-weight: 800;
+        font-size: 11px;
+        font-weight: 900;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        color: black;
     }
     .job-layout-premium {
         display: grid;
@@ -115,11 +115,12 @@
     }
     .sidebar-card-premium {
         background: var(--color-surface);
-        border: 2px solid var(--color-border);
+        border: 4px solid black;
         padding: 40px;
         position: sticky;
         top: 120px;
-        box-shadow: 8px 8px 0 var(--color-border);
+        box-shadow: 12px 12px 0 black;
+        border-radius: 0;
     }
     .sidebar-salary {
         font-size: 40px;

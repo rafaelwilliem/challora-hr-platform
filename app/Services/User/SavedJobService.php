@@ -3,13 +3,13 @@
 namespace App\Services\User;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class SavedJobService
 {
-    public function getSavedJobs(int $userId): Collection
+    public function getSavedJobs(int $userId): LengthAwarePaginator
     {
-        return User::findOrFail($userId)->savedJobs()->latest('saved_jobs.created_at')->get();
+        return User::findOrFail($userId)->savedJobs()->latest('saved_jobs.created_at')->paginate(10);
     }
 
     public function getAppliedJobIds(int $userId): array

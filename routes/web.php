@@ -12,8 +12,12 @@ use App\Http\Controllers\Hr\JobController as HrJobController;
 use App\Http\Controllers\Hr\ApplicationController as HrApplicationController;
 
 Route::get('/', function () {
-    return redirect()->route('jobs.index');
-});
+    $latestJobs = \App\Models\JobPosting::with('creator')->latest()->take(3)->get();
+    return view('landing', [
+        'pageTitle' => 'Rekrutmen Cerdas (Powered by Chally)',
+        'latestJobs' => $latestJobs
+    ]);
+})->name('landing');
 
 // Guest Routes
 Route::middleware('guest')->group(function () {
@@ -28,13 +32,13 @@ Route::middleware('guest')->group(function () {
     Route::post('/reset-password', [ForgotPasswordController::class, 'reset'])->name('password.update');
 });
 
+// Public / Guest accessible Job Listing and Detail
+Route::get('/jobs', [JobController::class, 'index'])->name('jobs.index');
+Route::get('/jobs/{job}', [JobController::class, 'show'])->name('jobs.show');
+
 // Authenticated Routes
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
-    // Job Listing and Detail
-    Route::get('/jobs', [JobController::class, 'index'])->name('jobs.index');
-    Route::get('/jobs/{job}', [JobController::class, 'show'])->name('jobs.show');
 
     // Download / Preview File
     Route::get('/download/{type}/{id}', [DownloadController::class, 'download'])->name('download.file');
@@ -60,7 +64,7 @@ Route::middleware('auth')->group(function () {
     Route::middleware('role:hr')->prefix('hr')->name('hr.')->group(function () {
         Route::get('/dashboard', \App\Http\Controllers\Hr\DashboardController::class)->name('dashboard');
         
-        Route::resource('jobs', HrJobController::class)->except(['index']);
+        Route::resource('jobs', HrJobController::class);
         
         Route::get('/applications', [HrApplicationController::class, 'index'])->name('applications.index');
         Route::get('/applications/{application}/berkas', [HrApplicationController::class, 'berkas'])->name('applications.berkas');

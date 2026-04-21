@@ -9,8 +9,8 @@
         background-color: #1a1a1a;
         padding: 24px 32px;
         margin-bottom: 24px;
-        border-radius: 8px;
-        border: 1px solid #2d2d2d;
+        border: 4px solid black;
+        box-shadow: 8px 8px 0 black;
     }
     .hr-header-text {
         font-size: 15px;
@@ -201,40 +201,39 @@
 @section('content')
 <div class="hr-header-bar">
     <div class="hr-header-text">
-        Ada <b class="text-white">{{ $stats->pending }}</b> pelamar yang belum diproses &nbsp;·&nbsp; <b class="text-white">{{ $totalJobs }}</b> lowongan aktif
+        <b class="text-white">{{ $stats->pending }}</b> applicants awaiting review &nbsp;·&nbsp; <b class="text-white">{{ $totalJobs }}</b> active listings
     </div>
     <div class="flex gap-3 items-center">
-        <a href="{{ route('hr.applications.index') }}" class="btn-orange">
-            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-            Review Pelamar
+        <a href="{{ route('hr.applications.index') }}" class="btn-orange border-2 border-black font-black uppercase text-[11px] tracking-widest bg-accent">
+            Review Applicants
         </a>
-        <a href="{{ route('hr.jobs.create') }}" class="btn-dark">
-            + Buat Lowongan
+        <a href="{{ route('hr.jobs.create') }}" class="btn-dark border-2 border-white font-black uppercase text-[11px] tracking-widest bg-primary">
+            + Create Listing
         </a>
     </div>
 </div>
 
 <div class="kpi-row">
-    <div class="kpi-card" style="border-top: 3px solid #f97316;">
-        <div class="kpi-title">TOTAL PELAMAR</div>
+    <div class="kpi-card" style="border-top: 6px solid var(--color-accent); border: 4px solid black; box-shadow: 6px 6px 0 black;">
+        <div class="kpi-title">TOTAL APPLICANTS</div>
         <div class="kpi-val">{{ $stats->total }}</div>
-        <div class="kpi-sub">{{ $totalJobs }} lowongan diposting</div>
+        <div class="kpi-sub">{{ $totalJobs }} listings posted</div>
         <div class="live-badge"><span class="dot green"></span> Live</div>
     </div>
-    <div class="kpi-card" style="border-top: 3px solid #22c55e;">
-        <div class="kpi-title">DITERIMA</div>
+    <div class="kpi-card" style="border-top: 6px solid #22c55e; border: 4px solid black; box-shadow: 6px 6px 0 black;">
+        <div class="kpi-title">ACCEPTED</div>
         <div class="kpi-val">{{ $stats->accepted }}</div>
         <div class="kpi-sub">Hiring Rate: {{ $stats->total > 0 ? round(($stats->accepted / $stats->total) * 100) : 0 }}%</div>
         <div class="live-badge"><span class="dot green"></span> Live</div>
     </div>
-    <div class="kpi-card" style="border-top: 3px solid #eab308;">
-        <div class="kpi-title">DALAM PROSES</div>
+    <div class="kpi-card" style="border-top: 6px solid #eab308; border: 4px solid black; box-shadow: 6px 6px 0 black;">
+        <div class="kpi-title">UNDER REVIEW</div>
         <div class="kpi-val">{{ $stats->pending }}</div>
         <div class="kpi-sub">Review Pipeline</div>
         <div class="live-badge"><span class="dot yellow"></span> Live</div>
     </div>
-    <div class="kpi-card" style="border-top: 3px solid #ef4444;">
-        <div class="kpi-title">DITOLAK</div>
+    <div class="kpi-card" style="border-top: 6px solid #ef4444; border: 4px solid black; box-shadow: 6px 6px 0 black;">
+        <div class="kpi-title">REJECTED</div>
         <div class="kpi-val">{{ $stats->rejected }}</div>
         <div class="kpi-sub">Selection Efficiency</div>
         <div class="live-badge"><span class="dot red"></span> Live</div>
@@ -242,29 +241,29 @@
 </div>
 
 <div class="chart-row">
-    <div class="panel-card">
-        <div class="panel-header">TREN PELAMAR (6 BULAN)</div>
+    <div class="panel-card" style="border: 4px solid black; box-shadow: 8px 8px 0 rgba(0,0,0,0.2);">
+        <div class="panel-header">APPLICANT TREND (6 MONTHS)</div>
         <div style="height: 220px; width: 100%;">
             <canvas id="trendChart"></canvas>
         </div>
     </div>
-    <div class="panel-card">
-        <div class="panel-header">STATUS PELAMAR</div>
+    <div class="panel-card" style="border: 4px solid black; box-shadow: 8px 8px 0 rgba(0,0,0,0.2);">
+        <div class="panel-header">APPLICANT STATUS</div>
         <div style="display: flex; align-items: center; justify-content: center; height: 220px;">
             <div style="position: relative; width: 140px; height: 140px;">
                 <canvas id="donutChart"></canvas>
             </div>
             <div style="margin-left: 40px; display: flex; flex-direction: column; gap: 12px; font-size: 12px; flex: 1;">
                 <div class="flex justify-between items-center text-gray-300">
-                    <span class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-yellow-500"></div> Dalam Proses</span>
+                    <span class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-yellow-500"></div> Under Review</span>
                     <span class="font-bold text-white">{{ $stats->pending }}</span>
                 </div>
                 <div class="flex justify-between items-center text-gray-300">
-                    <span class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-green-500"></div> Diterima</span>
+                    <span class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-green-500"></div> Accepted</span>
                     <span class="font-bold text-white">{{ $stats->accepted }}</span>
                 </div>
                 <div class="flex justify-between items-center text-gray-300">
-                    <span class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-red-500"></div> Ditolak</span>
+                    <span class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-red-500"></div> Rejected</span>
                     <span class="font-bold text-white">{{ $stats->rejected }}</span>
                 </div>
             </div>
@@ -273,7 +272,7 @@
 </div>
 
 <div class="funnel-row">
-    <div class="panel-card">
+    <div class="panel-card" style="border: 4px solid black;">
         <div class="panel-header">RECRUITING FUNNEL</div>
         <div class="funnel-stats">
             <div class="funnel-item">
@@ -293,10 +292,10 @@
             </div>
         </div>
     </div>
-    <div class="panel-card">
+    <div class="panel-card" style="border: 4px solid black;">
         <div class="flex justify-between items-center mb-6">
-            <div class="panel-header" style="margin: 0;">TOP DAERAH PELAMAR</div>
-            <a href="{{ route('hr.applications.index') }}" class="text-xs text-gray-400 hover:text-white">Lihat semua ></a>
+            <div class="panel-header" style="margin: 0;">TOP APPLICANT REGIONS</div>
+            <a href="{{ route('hr.applications.index') }}" class="text-xs text-gray-400 hover:text-white">View all ></a>
         </div>
         <div class="flex flex-col gap-3">
             @foreach ($topRegions as $r)
@@ -313,12 +312,12 @@
     </div>
 </div>
 
-<div class="panel-card">
+<div class="panel-card" style="border: 4px solid black; box-shadow: 10px 10px 0 black;">
     <div class="flex justify-between items-center mb-6">
-        <div class="panel-header" style="margin: 0;">LOWONGAN BERDASARKAN PELAMAR</div>
+        <div class="panel-header" style="margin: 0;">LISTINGS BY APPLICANTS</div>
         <div class="text-xs text-accent-500 font-bold flex items-center gap-1">
             <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"></path></svg>
-            TERTINGGI
+            TOP RANKED
         </div>
     </div>
     <div class="overflow-x-auto">
@@ -326,11 +325,11 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>POSISI</th>
-                    <th>TIPE</th>
+                    <th>POSITION</th>
+                    <th>TYPE</th>
                     <th>DEADLINE</th>
-                    <th class="text-right">PELAMAR</th>
-                    <th class="text-right">DITERIMA</th>
+                    <th class="text-right">APPLICANTS</th>
+                    <th class="text-right">ACCEPTED</th>
                 </tr>
             </thead>
             <tbody>
@@ -363,8 +362,8 @@
             data: {
                 labels: {!! json_encode($monthlyTrend->pluck('month_label')) !!},
                 datasets: [
-                    { label: 'Total Pelamar', data: {!! json_encode($monthlyTrend->pluck('total')) !!}, borderColor: '#f97316', backgroundColor: '#f97316', tension: 0.4, borderWidth: 3, pointRadius: 4, pointBackgroundColor: '#f97316' },
-                    { label: 'Diterima', data: {!! json_encode($monthlyTrend->pluck('accepted')) !!}, borderColor: '#22c55e', backgroundColor: '#22c55e', tension: 0.4, borderWidth: 3, pointRadius: 4, pointBackgroundColor: '#22c55e' }
+                    { label: 'Total Applicants', data: {!! json_encode($monthlyTrend->pluck('total')) !!}, borderColor: '#f97316', backgroundColor: '#f97316', tension: 0.4, borderWidth: 3, pointRadius: 4, pointBackgroundColor: '#f97316' },
+                    { label: 'Accepted', data: {!! json_encode($monthlyTrend->pluck('accepted')) !!}, borderColor: '#22c55e', backgroundColor: '#22c55e', tension: 0.4, borderWidth: 3, pointRadius: 4, pointBackgroundColor: '#22c55e' }
                 ]
             },
             options: {

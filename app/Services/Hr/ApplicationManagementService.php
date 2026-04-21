@@ -3,11 +3,11 @@
 namespace App\Services\Hr;
 
 use App\Models\Application;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class ApplicationManagementService
 {
-    public function getApplications(int $hrId, ?string $status, ?int $jobId): Collection
+    public function getApplications(int $hrId, ?string $status, ?int $jobId): LengthAwarePaginator
     {
         $query = Application::whereHas('job', function($q) use ($hrId) {
             $q->where('created_by', $hrId);
@@ -21,7 +21,7 @@ class ApplicationManagementService
             $query->where('job_id', $jobId);
         }
 
-        return $query->latest()->get();
+        return $query->latest()->paginate(10);
     }
 
     public function updateStatus(Application $application, string $status): bool

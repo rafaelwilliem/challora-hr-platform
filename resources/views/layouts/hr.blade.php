@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $pageTitle ?? 'HR Panel — Challora' }}</title>
-    
+
     <link rel="stylesheet" href="{{ asset('css/design-tokens.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    
+
     <script>
         tailwind.config = {
             theme: {
@@ -47,16 +47,17 @@
             },
         };
     </script>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
     @stack('styles')
-    
+
     <style>
         :root {
-            --hr-sidebar-width: 280px;
+            --nav-height: 80px;
         }
 
         body {
@@ -66,251 +67,201 @@
             font-family: var(--font-sans);
         }
 
-        /* --- Sidebar Premium --- */
-        .hr-sidebar {
-            width: var(--hr-sidebar-width);
-            background: var(--color-primary);
-            border-right: 2px solid var(--color-border);
-            height: 100vh;
-            position: fixed;
-            left: 0;
-            top: 0;
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .hr-brand {
-            padding: 32px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-
-        .hr-brand-logo {
-            background: var(--color-accent);
-            color: var(--color-surface);
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            border: 2px solid black;
-            box-shadow: 4px 4px 0 black;
-        }
-
-        .hr-brand-text {
-            font-weight: 800;
-            font-size: 22px;
-            color: var(--color-text);
-            letter-spacing: -1px;
-            text-transform: lowercase;
-        }
-
-        .hr-nav {
-            flex: 1;
-            padding: 0 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .hr-nav-label {
-            font-size: 10px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--color-text-muted);
-            padding: 24px 16px 8px;
-        }
-
-        .hr-nav-link {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            padding: 14px 16px;
-            color: var(--color-text-muted);
-            font-weight: 600;
-            font-size: 14px;
-            text-decoration: none;
-            border-radius: var(--radius-sm);
-            transition: all 0.2s;
-        }
-
-        .hr-nav-link i {
-            font-size: 18px;
-            transition: transform 0.2s;
-        }
-
-        .hr-nav-link:hover {
-            background: var(--color-secondary);
-            color: var(--color-text);
-        }
-
-        .hr-nav-link:hover i {
-            transform: scale(1.1);
-        }
-
-        .hr-nav-link.active {
-            background: var(--color-accent-muted);
-            color: var(--color-accent);
-            border: 1px solid var(--color-accent);
-        }
-
-        .hr-topbar {
-            height: 80px;
-            background: var(--color-surface);
-            border-bottom: 2px solid var(--color-border);
+        /* --- Image-Matched Horizontal Navbar (HR) --- */
+        .brutal-header {
             position: sticky;
             top: 0;
-            left: var(--hr-sidebar-width);
-            width: calc(100% - var(--hr-sidebar-width));
-            z-index: 900;
-            padding: 0 40px;
+            left: 0;
+            width: 100%;
+            height: var(--nav-height);
+            background: #000000;
+            border-bottom: 2px solid #1a1a1a;
+            z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            padding: 0 40px; /* Added internal padding to header */
+        }
+
+        .brand-accent-box {
+            height: 100%;
+            background: var(--color-accent);
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            border-right: 2px solid black;
+            text-decoration: none;
+            gap: 12px;
+        }
+
+        .brand-logo-c {
+            background: black;
+            color: var(--color-accent);
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 18px;
+            border: 2px solid white;
+        }
+
+        .brand-name-text {
+            color: white;
+            font-weight: 800;
+            font-size: 24px;
+            letter-spacing: -1.5px;
+            text-transform: lowercase;
+        }
+
+        .nav-link-image {
+            color: #999;
+            font-weight: 700;
+            font-size: 13px;
+            text-decoration: none;
+            text-transform: capitalize;
+            transition: color 0.2s;
+        }
+
+        .nav-link-image:hover, .nav-link-image.active {
+            color: white;
         }
 
         .hr-main-content {
-            margin-left: var(--hr-sidebar-width);
-            padding: 40px;
-            min-height: calc(100vh - 80px);
+            padding: 60px 80px; /* Fixed horizontal padding matching main app */
+            min-height: calc(100vh - var(--nav-height));
+            max-width: 1600px;
+            margin: 0 auto;
         }
 
-        .hr-user-menu {
+        /* --- User Profile Trigger --- */
+        .user-nav-trigger {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
             cursor: pointer;
             padding: 8px 16px;
-            background: var(--color-secondary);
-            border: 2px solid var(--color-border);
-            transition: all 0.2s;
+            background: #111;
+            border: 1px solid #333;
         }
 
-        .hr-user-menu:hover {
-            border-color: var(--color-accent);
-        }
-
-        .hr-avatar {
-            width: 32px;
-            height: 32px;
+        .nav-avatar-inner {
+            width: 28px;
+            height: 28px;
             background: var(--color-accent);
-            color: var(--color-surface);
+            color: white;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 800;
-            border: 1px solid black;
+            font-size: 13px;
         }
 
-        @media (max-width: 1024px) {
-            .hr-sidebar { transform: translateX(-100%); }
-            .hr-sidebar.open { transform: translateX(0); }
-            .hr-topbar { left: 0; width: 100%; padding: 0 20px; }
-            .hr-main-content { margin-left: 0; padding: 20px; }
+        .dropdown-menu-image {
+            position: absolute;
+            top: 70px;
+            right: 24px;
+            background: #111;
+            border: 1px solid #333;
+            width: 200px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            z-index: 1100;
         }
+
+        .dropdown-link-image {
+            display: block;
+            padding: 12px 20px;
+            color: #aaa;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 13px;
+            border-bottom: 1px solid #222;
+        }
+
+        .dropdown-link-image:hover { background: #222; color: white; }
     </style>
 </head>
 
 <body class="antialiased">
-    <div class="hr-shell">
-        <aside class="hr-sidebar" id="hrSidebar">
-            <a href="{{ route('hr.dashboard') }}" class="hr-brand">
-                <div class="hr-brand-logo">C</div>
-                <span class="hr-brand-text">challora</span>
-            </a>
-
-            <nav class="hr-nav">
-                <span class="hr-nav-label">Management</span>
-                <a href="{{ route('hr.dashboard') }}" class="hr-nav-link {{ request()->routeIs('hr.dashboard') ? 'active' : '' }}">
-                    <i class="bi bi-grid-fill"></i> Analytics
-                </a>
-                <a href="{{ route('hr.jobs.index') }}" class="hr-nav-link {{ request()->routeIs('hr.jobs.*') ? 'active' : '' }}">
-                    <i class="bi bi-briefcase-fill"></i> Position Listings
-                </a>
-                <a href="{{ route('hr.applications.index') }}" class="hr-nav-link {{ request()->routeIs('hr.applications.*') ? 'active' : '' }}">
-                    <i class="bi bi-people-fill"></i> Talent Pipeline
+    <div class="min-h-screen bg-surface flex flex-col">
+        <!-- Image Matched Navbar (HR) -->
+        <header class="brutal-header">
+            <div class="flex h-full items-center">
+                <a href="{{ route('hr.dashboard') }}" class="brand-accent-box">
+                    <div class="brand-logo-c">C</div>
+                    <span class="brand-name-text">challora</span>
                 </a>
 
-                <span class="hr-nav-label">Strategy</span>
-                <a href="#" class="hr-nav-link">
-                    <i class="bi bi-lightning-charge-fill"></i> Intelligence
-                </a>
-                
-                <span class="hr-nav-label">System</span>
-                <a href="{{ route('user.settings.edit') }}" class="hr-nav-link">
-                    <i class="bi bi-gear-fill"></i> Account Settings
-                </a>
-                <a href="{{ route('jobs.index') }}" class="hr-nav-link">
-                    <i class="bi bi-arrow-left-right"></i> Switch to Candidate
-                </a>
-            </nav>
-        </aside>
+                <nav class="ml-12 hidden md:flex items-center gap-8">
+                    <a href="{{ route('hr.dashboard') }}" class="nav-link-image {{ request()->routeIs('hr.dashboard') ? 'active' : '' }}">
+                        Analytics
+                    </a>
+                    <a href="{{ route('hr.jobs.index') }}" class="nav-link-image {{ request()->routeIs('hr.jobs.*') ? 'active' : '' }}">
+                        Positions
+                    </a>
+                    <a href="{{ route('hr.applications.index') }}" class="nav-link-image {{ request()->routeIs('hr.applications.*') ? 'active' : '' }}">
+                        Pipelines
+                    </a>
+                    <a href="#" class="nav-link-image opacity-50">
+                        Intelligence
+                    </a>
+                </nav>
+            </div>
 
-        <div class="hr-content-wrap">
-            <header class="hr-topbar">
-                <div class="flex items-center gap-4">
-                    <button id="sidebarToggle" class="lg:hidden p-2 text-2xl"><i class="bi bi-list"></i></button>
-                    <h1 class="text-xl font-bold tracking-tight">{{ $pageTitle ?? 'HR Intelligence' }}</h1>
+            <div class="nav-right-actions">
+                <div class="relative">
+                    <div class="user-nav-trigger" id="hrUserMenuToggle">
+                        <div class="nav-avatar-inner">{{ substr(auth()->user()->name, 0, 1) }}</div>
+                        <span class="text-xs font-bold text-white uppercase hidden sm:block">{{ auth()->user()->name }}</span>
+                        <svg width="10" height="10" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="opacity-50">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+
+                    <div id="hrUserDropdown" class="dropdown-menu-image hidden">
+                        <a href="{{ route('user.settings.edit') }}" class="dropdown-link-image">System Settings</a>
+                        <a href="{{ route('jobs.index') }}" class="dropdown-link-image">Switch to Candidate</a>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="dropdown-link-image w-full text-left font-bold text-red-500">Sign Out</button>
+                        </form>
+                    </div>
                 </div>
+            </div>
+        </header>
 
-                <div class="flex items-center gap-6">
-                    <button class="relative p-2 text-text-muted hover:text-accent transition-colors">
-                        <i class="bi bi-bell text-xl"></i>
-                        <span class="absolute top-1 right-1 w-2 h-2 bg-accent rounded-full border-2 border-surface"></span>
+        <main class="hr-main-content flex-1">
+            @if(session('flash_toast'))
+                <div class="mb-10 flex items-center justify-between p-4 border-4 border-black shadow-[6px_6px_0_0_black] bg-green-100 text-green-700 font-bold"
+                    id="flash-alert">
+                    <div class="flex items-center gap-3">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span class="tracking-tight uppercase">{{ session('flash_toast')['message'] }}</span>
+                    </div>
+                    <button onclick="this.parentElement.remove()" class="opacity-50 hover:opacity-100 transition-opacity bg-black text-white p-1 rounded-sm">
+                        <i class="bi bi-x-lg"></i>
                     </button>
-
-                    <div class="relative group">
-                        <div class="hr-user-menu" id="hrUserMenuToggle">
-                            <div class="hr-avatar">{{ substr(auth()->user()->name, 0, 1) }}</div>
-                            <span class="text-sm font-bold hidden md:block">{{ auth()->user()->name }}</span>
-                            <i class="bi bi-chevron-down text-xs opacity-50"></i>
-                        </div>
-                        
-                        <div id="hrUserDropdown" class="absolute right-0 mt-3 w-48 bg-surface border-2 border-border shadow-lg hidden z-50">
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button type="submit" class="w-full text-left px-4 py-3 text-sm font-bold text-red-600 hover:bg-red-50 transition-colors">
-                                    <i class="bi bi-box-arrow-right mr-2"></i> Log Out
-                                </button>
-                            </form>
-                        </div>
-                    </div>
                 </div>
-            </header>
+            @endif
 
-            <main class="hr-main-content">
-                @if(session('flash_toast'))
-                    <div class="mb-8 p-4 border-2 bg-green-50 text-green-700 border-green-200 font-bold flex items-center justify-between">
+            @if($errors->any())
+                <div class="mb-10 flex flex-col p-4 border-4 border-black shadow-[6px_6px_0_0_black] bg-red-100 text-red-700 font-bold">
+                    @foreach ($errors->all() as $error)
                         <div class="flex items-center gap-3">
-                            <i class="bi bi-check-circle-fill text-lg"></i>
-                            {{ session('flash_toast')['message'] }}
+                            <i class="bi bi-exclamation-circle-fill text-lg"></i>
+                            <span class="tracking-tight uppercase">{{ $error }}</span>
                         </div>
-                        <button onclick="this.parentElement.remove()" class="opacity-50 hover:opacity-100"><i class="bi bi-x-lg"></i></button>
-                    </div>
-                @endif
-
-                @if($errors->any())
-                    <div class="mb-8 p-4 border-2 bg-red-50 text-red-700 border-red-200 font-bold">
-                        @foreach ($errors->all() as $error)
-                            <div class="flex items-center gap-3">
-                                <i class="bi bi-exclamation-circle-fill text-lg"></i>
-                                {{ $error }}
-                            </div>
-                        @endforeach
-                    </div>
-                @endif
-
-                <div id="hr-view-content">
-                    @yield('content')
+                    @endforeach
                 </div>
-            </main>
-        </div>
+            @endif
+
+            <div id="hr-view-content">
+                @yield('content')
+            </div>
+        </main>
     </div>
 
     <script>

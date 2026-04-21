@@ -5,17 +5,17 @@ namespace App\Services\User;
 use App\Models\JobPosting;
 use App\Models\User;
 use App\Enums\ApplicationStatus;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Exception;
 
 class JobApplicationService
 {
-    public function getUserApplications(int $userId): Collection
+    public function getUserApplications(int $userId): LengthAwarePaginator
     {
         return User::findOrFail($userId)->applications()
             ->with('job')
             ->latest()
-            ->get();
+            ->paginate(10);
     }
 
     /**

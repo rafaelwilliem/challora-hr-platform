@@ -50,6 +50,12 @@ class DashboardService
             ->limit(5)
             ->get();
 
-        return compact('totalJobs', 'stats', 'topRegions', 'monthlyTrend', 'jobsWithStats');
+        return [
+            'totalJobs' => $totalJobs,
+            'stats' => $stats,
+            'topRegions' => $topRegions,
+            'monthlyTrend' => $monthlyTrend,
+            'jobsByApplicants' => $jobsWithStats,
+        ];
     }
 }

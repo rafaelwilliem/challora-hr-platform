@@ -57,238 +57,200 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700;800&display=swap"
         rel="stylesheet">
 
     @stack('styles')
 
     <style>
-        .user-nav {
-            background: var(--color-surface);
-            border-bottom: 2px solid var(--color-border);
+        :root {
+            --nav-height: 80px;
+        }
+
+        /* --- Image-Matched Horizontal Navbar --- */
+        .brutal-header {
             position: sticky;
             top: 0;
-            z-index: 100;
-            padding: 0 40px;
-            height: 80px;
+            left: 0;
+            width: 100%;
+            height: var(--nav-height);
+            background: #000000;
+            border-bottom: 2px solid #1a1a1a;
+            z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            padding: 0 40px; /* Internal padding for header content */
         }
 
-        .nav-brand {
+        .brand-accent-box {
+            height: 100%;
+            background: var(--color-accent);
             display: flex;
             align-items: center;
-            gap: 12px;
+            padding: 0 24px;
+            border-right: 2px solid black;
             text-decoration: none;
-            color: var(--color-text);
-            transition: transform 0.2s ease;
+            gap: 12px;
         }
 
-        .nav-brand:hover {
-            transform: scale(1.02);
-        }
-
-        .nav-brand-logo {
-            background: var(--color-accent);
-            color: var(--color-surface);
-            width: 40px;
-            height: 40px;
+        .brand-logo-c {
+            background: black;
+            color: var(--color-accent);
+            width: 28px;
+            height: 28px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 800;
-            font-size: 20px;
-            border: 2px solid black;
-            box-shadow: 4px 4px 0 black;
+            font-weight: 900;
+            font-size: 18px;
+            border: 2px solid white;
         }
 
-        .nav-brand-text {
+        .brand-name-text {
+            color: white;
             font-weight: 800;
-            letter-spacing: -1px;
             font-size: 24px;
+            letter-spacing: -1.5px;
             text-transform: lowercase;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 32px;
-            align-items: center;
-        }
-
-        .nav-link {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--color-text-muted);
+        .nav-link-image {
+            color: #999;
+            font-weight: 700;
+            font-size: 13px;
             text-decoration: none;
-            position: relative;
-            padding: 8px 0;
+            text-transform: capitalize;
             transition: color 0.2s;
         }
 
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--color-text);
+        .nav-link-image:hover, .nav-link-image.active {
+            color: white;
         }
 
-        .nav-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
+        .signin-btn-image {
             background: var(--color-accent);
-            box-shadow: 0 0 10px var(--color-accent-muted);
+            color: white;
+            padding: 10px 24px;
+            font-weight: 900;
+            font-size: 12px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: none;
         }
 
-        .user-actions {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .profile-trigger {
+        /* --- User Profile Trigger --- */
+        .user-nav-trigger {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 6px 12px;
-            border: 2px solid transparent;
-            transition: all 0.2s;
             cursor: pointer;
+            padding: 8px 16px;
+            background: #111;
+            border: 1px solid #333;
         }
 
-        .profile-trigger:hover {
-            background: var(--color-secondary);
-            border-color: var(--color-border);
-        }
-
-        .avatar-pill {
-            width: 32px;
-            height: 32px;
-            background: var(--color-accent-muted);
-            color: var(--color-accent);
-            border-radius: 50%;
+        .nav-avatar-inner {
+            width: 28px;
+            height: 28px;
+            background: var(--color-accent);
+            color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 14px;
-            border: 1px solid var(--color-accent);
-            overflow: hidden;
+            font-weight: 800;
+            font-size: 13px;
         }
+
+        .dropdown-menu-image {
+            position: absolute;
+            top: 70px;
+            right: 24px;
+            background: #111;
+            border: 1px solid #333;
+            width: 200px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            z-index: 1100;
+        }
+
+        .dropdown-link-image {
+            display: block;
+            padding: 12px 20px;
+            color: #aaa;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 13px;
+            border-bottom: 1px solid #222;
+        }
+
+        .dropdown-link-image:hover { background: #222; color: white; }
 
         .main-container {
-            min-height: 100vh;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 40px;
             width: 100%;
-        }
-
-        @media (max-width: 768px) {
-            .user-nav {
-                padding: 0 20px;
-            }
-
-            .nav-links {
-                display: none;
-            }
+            min-height: calc(100vh - var(--nav-height));
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 60px 80px; /* Desired horizontal padding */
         }
     </style>
 </head>
 
-<body class="antialiased bg-primary text-text font-sans" style="min-height: 100vh;">
+<body class="antialiased bg-primary text-text font-sans">
     <div class="min-h-screen bg-surface flex flex-col">
-        <header class="user-nav">
-            <a href="{{ route('jobs.index') }}" class="nav-brand">
-                <div class="nav-brand-logo">C</div>
-                <span class="nav-brand-text">challora</span>
-            </a>
+        <!-- Image Matched Navbar -->
+        <header class="brutal-header">
+            <div class="flex h-full items-center">
+                <a href="{{ route('landing') }}" class="brand-accent-box">
+                    <div class="brand-logo-c">C</div>
+                    <span class="brand-name-text">challora</span>
+                </a>
 
-            <nav class="nav-links">
-                <a href="{{ route('jobs.index') }}"
-                    class="nav-link {{ request()->routeIs('jobs.*') && !request()->routeIs('user.jobs.saved') ? 'active' : '' }}">Job
-                    Listings</a>
-                <a href="{{ route('user.applications.index') }}"
-                    class="nav-link {{ request()->routeIs('user.applications.*') ? 'active' : '' }}">Applied Jobs</a>
-                <a href="{{ route('user.jobs.saved') }}"
-                    class="nav-link {{ request()->routeIs('user.jobs.saved') ? 'active' : '' }}">Saved Board</a>
-            </nav>
+                <nav class="ml-12 hidden md:flex items-center gap-8">
+                    <a href="{{ route('jobs.index') }}" class="nav-link-image {{ request()->routeIs('jobs.*') && !request()->routeIs('user.jobs.saved') ? 'active' : '' }}">
+                        Job Listings
+                    </a>
+                    <a href="{{ route('user.applications.index') }}" class="nav-link-image {{ request()->routeIs('user.applications.*') ? 'active' : '' }}">
+                        Applied Jobs
+                    </a>
+                    <a href="{{ route('user.jobs.saved') }}" class="nav-link-image {{ request()->routeIs('user.jobs.saved') ? 'active' : '' }}">
+                        Saved Board
+                    </a>
+                </nav>
+            </div>
 
-            <div class="user-actions">
+            <div class="flex items-center gap-6 pr-4">
                 @auth
-                    <div class="relative group" id="user-menu-root">
-                        <button type="button" id="user-menu-toggle" class="profile-trigger">
-                            <div class="avatar-pill">
-                                @if(auth()->user()->avatar_path)
-                                    <img src="{{ route('avatar') }}" alt="Avatar" class="w-full h-full object-cover">
-                                @else
-                                    {{ substr(auth()->user()->name, 0, 1) }}
-                                @endif
-                            </div>
-                            <span class="font-bold text-sm hidden md:block">{{ auth()->user()->name }}</span>
-                            <svg width="12" height="12" class="text-text-muted" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                                </path>
+                    <div class="relative">
+                        <div class="user-nav-trigger" id="user-menu-toggle">
+                            <div class="nav-avatar-inner">{{ substr(auth()->user()->name, 0, 1) }}</div>
+                            <span class="text-xs font-bold text-white uppercase hidden sm:block">{{ auth()->user()->name }}</span>
+                            <svg width="10" height="10" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="opacity-50">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
                             </svg>
-                        </button>
+                        </div>
 
-                        <div id="user-menu-dropdown"
-                            class="absolute right-0 mt-4 w-60 bg-surface border-4 border-black shadow-[8px_8px_0_0_black] hidden z-50 overflow-hidden rounded-none transition-all">
-                            <div class="px-5 py-4 border-b-4 border-black bg-secondary">
-                                <p class="text-[10px] font-black text-text-muted uppercase tracking-[0.2em] mb-1">Signed in
-                                    as</p>
-                                <p class="text-sm font-black truncate text-accent">{{ auth()->user()->email }}</p>
-                            </div>
-                            <a href="{{ route('user.settings.edit') }}"
-                                class="flex items-center gap-3 px-5 py-4 text-sm font-bold border-b-4 border-black hover:bg-black hover:text-surface transition-colors group">
-                                <svg width="16" height="16" class="group-hover:rotate-90 transition-transform duration-300"
-                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
-                                    </path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                </svg>
-                                <span>Account Settings</span>
-                            </a>
+                        <div id="user-menu-dropdown" class="dropdown-menu-image hidden">
                             @if(auth()->user()->isAdmin())
-                                <a href="{{ route('hr.dashboard') }}"
-                                    class="flex items-center gap-3 px-5 py-4 text-sm font-bold border-b-4 border-black hover:bg-black hover:text-surface transition-colors">
-                                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
-                                        </path>
-                                    </svg>
-                                    <span>Switch to HR Panel</span>
-                                </a>
+                                <a href="{{ route('hr.dashboard') }}" class="dropdown-link-image">Switch to HR</a>
                             @endif
+                            <a href="{{ route('user.settings.edit') }}" class="dropdown-link-image">Settings</a>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit"
-                                    class="w-full flex items-center gap-3 px-5 py-4 text-sm font-black text-red-600 hover:bg-red-600 hover:text-white transition-colors bg-surface">
-                                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
-                                        </path>
-                                    </svg>
-                                    <span class="uppercase tracking-widest">Terminate Session</span>
-                                </button>
+                                <button type="submit" class="dropdown-link-image w-full text-left font-bold text-red-500">Sign Out</button>
                             </form>
                         </div>
                     </div>
                 @else
-                    <a href="{{ route('login') }}"
-                        class="bg-accent text-surface px-6 py-2 font-black uppercase tracking-tighter border-2 border-black shadow-[4px_4px_0_0_black] hover:shadow-[2px_2px_0_0_black] hover:translate-x-[2px] hover:translate-y-[2px] transition-all">Sign
-                        In</a>
+                    <a href="{{ route('login') }}" class="signin-btn-image">
+                        SIGN IN
+                    </a>
                 @endauth
             </div>
         </header>
 
         @if(session('flash_toast'))
-            <div class="mx-10 mt-8 flex items-center justify-between p-4 border-4 border-black shadow-[6px_6px_0_0_black] bg-success-bg text-success-text font-bold"
+            <div class="mx-[80px] mt-8 flex items-center justify-between p-4 border-4 border-black shadow-[6px_6px_0_0_black] bg-success-bg text-success-text font-bold"
                 id="flash-alert">
                 <div class="flex items-center gap-3">
                     <svg width="24" height="24" class="text-success-text" fill="none" stroke="currentColor"
@@ -310,7 +272,7 @@
 
         @if($errors->any())
             <div
-                class="mx-10 mt-8 flex flex-col p-4 border-4 border-black shadow-[6px_6px_0_0_black] bg-red-100 text-red-700 font-bold">
+                class="mx-[80px] mt-8 flex flex-col p-4 border-4 border-black shadow-[6px_6px_0_0_black] bg-red-100 text-red-700 font-bold">
                 @foreach ($errors->all() as $error)
                     <div class="flex items-center gap-3">
                         <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">

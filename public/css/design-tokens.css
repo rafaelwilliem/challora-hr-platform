@@ -87,8 +87,8 @@
     --input-border: var(--color-border);
     --danger-bg: var(--color-danger-bg);
     --danger-text: var(--color-danger-text);
-    --success-bg: var(--color-success-bg);3
-    --success-text: var(--color-success-text);
+    --success-bg: var(--color-success-bg);
+    3 --success-text: var(--color-success-text);
     --shadow: var(--shadow-lg);
 
     /* Sinkron Bootstrap ke token */
@@ -98,6 +98,44 @@
     --bs-border-color: var(--gray-200);
     --bs-body-color: var(--color-text);
     --bs-body-bg: var(--color-surface);
+
+    /* --- Terminal Theme --- */
+    --color-terminal-bg: #0d0d0d;
+    --color-terminal-text: #00ff41;
+    /* Matrix/Terminal Green */
+    --color-terminal-accent: #ffcc00;
+    /* Amber/Orange */
+    --color-terminal-dim: #008f11;
+}
+
+/* Global Scrollbar Refined (No Arrows, Boxy) */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-accent);
+    border: 2px solid var(--color-primary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-accent-hover);
+}
+
+::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-accent) var(--color-secondary);
 }
 
 /* Base */
@@ -105,6 +143,15 @@ html,
 body {
     color: var(--color-text);
     background: var(--color-surface);
+    overflow-x: hidden;
+    /* Custom square styling */
+    border-radius: 0 !important;
+}
+
+*,
+*::before,
+*::after {
+    border-radius: 0 !important;
 }
 
 /* Semantic utilities (pakai langsung di view jika mau lepas dari Tailwind color map) */
@@ -369,6 +416,41 @@ body {
     border-color: transparent !important;
     box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary) 40%, transparent) !important;
 }
+
+/* Terminal & Retro Utilities */
+.terminal-window {
+    background: var(--color-terminal-bg) !important;
+    color: var(--color-terminal-text) !important;
+    font-family: 'JetBrains Mono', 'Courier New', Courier, monospace !important;
+    border: 2px solid var(--color-border) !important;
+}
+
+.terminal-text {
+    color: var(--color-terminal-text) !important;
+    text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+}
+
+.terminal-accent {
+    color: var(--color-terminal-accent) !important;
+    text-shadow: 0 0 5px rgba(255, 204, 0, 0.5);
+}
+
+.font-mono {
+    font-family: 'JetBrains Mono', 'Courier New', Courier, monospace !important;
+}
+
+.glow-accent {
+    text-shadow: 0 0 15px var(--color-accent);
+}
+
+.brutalist-shadow-deep {
+    box-shadow: 12px 12px 0px 0px black !important;
+}
+
+.brutalist-shadow-accent {
+    box-shadow: 8px 8px 0px 0px var(--color-accent) !important;
+}
+
 
 /* Compatibility map: kelas Tailwind hardcoded -> token */
 .bg-white {

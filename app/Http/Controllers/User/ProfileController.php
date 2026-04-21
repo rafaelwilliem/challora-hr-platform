@@ -26,7 +26,7 @@ class ProfileController extends Controller
             'user' => $user,
             'workExperiences' => $user->workExperiences,
             'achievements' => $user->achievements,
-            'pageTitle' => 'Pengaturan Profil',
+            'pageTitle' => 'Profile Settings',
         ]);
     }
 
@@ -70,7 +70,7 @@ class ProfileController extends Controller
             $request->only(['ach_title', 'ach_type', 'ach_description', 'ach_organizer', 'ach_year', 'ach_rank', 'ach_level', 'ach_certificate_link'])
         );
 
-        return back()->with('flash_toast', ['message' => 'Profil berhasil diperbarui.']);
+        return back()->with('flash_toast', ['message' => 'Profile updated successfully.']);
     }
 
     public function uploadAvatar(Request $request)
@@ -86,7 +86,7 @@ class ProfileController extends Controller
         
         $user->update(['avatar_path' => $path]);
 
-        return back()->with('flash_toast', ['message' => 'Foto profil berhasil diperbarui.']);
+        return back()->with('flash_toast', ['message' => 'Profile photo updated successfully.']);
     }
 
     public function uploadDocument(Request $request, string $field)
@@ -109,6 +109,6 @@ class ProfileController extends Controller
         
         $user->update([$dbField => $path]);
 
-        return back()->with('flash_toast', ['message' => ucfirst($field) . ' berhasil diperbarui.']);
+        return back()->with('flash_toast', ['message' => ucfirst($field) . ' updated successfully.']);
     }
 }

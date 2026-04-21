@@ -22,14 +22,14 @@ class JobController extends Controller
             
         return view('hr.jobs.index', [
             'jobs' => $jobs,
-            'pageTitle' => 'Kelola Lowongan',
+            'pageTitle' => 'Manage Listings',
         ]);
     }
 
     public function create()
     {
         return view('hr.jobs.create', [
-            'pageTitle' => 'Buat Lowongan Baru',
+            'pageTitle' => 'Create New Listing',
         ]);
     }
 
@@ -40,7 +40,7 @@ class JobController extends Controller
         $this->jobService->createJob(auth()->id(), $validated);
 
         return redirect()->route('hr.dashboard')
-            ->with('flash_toast', ['message' => 'Lowongan berhasil dipublikasikan.']);
+            ->with('flash_toast', ['message' => 'Listing published successfully.']);
     }
 
     public function edit(JobPosting $job)
@@ -49,7 +49,7 @@ class JobController extends Controller
         
         return view('hr.jobs.edit', [
             'job' => $job,
-            'pageTitle' => 'Edit Lowongan',
+            'pageTitle' => 'Edit Listing',
         ]);
     }
 
@@ -62,7 +62,7 @@ class JobController extends Controller
         $this->jobService->updateJob($job, $validated);
 
         return redirect()->route('hr.dashboard')
-            ->with('flash_toast', ['message' => 'Lowongan berhasil diperbarui.']);
+            ->with('flash_toast', ['message' => 'Listing updated successfully.']);
     }
 
     public function destroy(JobPosting $job)
@@ -71,7 +71,7 @@ class JobController extends Controller
         
         $this->jobService->deleteJob($job);
 
-        return back()->with('flash_toast', ['message' => 'Lowongan berhasil dihapus.']);
+        return back()->with('flash_toast', ['message' => 'Listing deleted successfully.']);
     }
 
     protected function validateJob(Request $request): array

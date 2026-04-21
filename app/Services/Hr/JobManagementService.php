@@ -3,16 +3,16 @@
 namespace App\Services\Hr;
 
 use App\Models\JobPosting;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class JobManagementService
 {
-    public function getHrJobs(int $hrId): Collection
+    public function getHrJobs(int $hrId): LengthAwarePaginator
     {
         return JobPosting::where('created_by', $hrId)
             ->withCount('applications')
             ->latest()
-            ->get();
+            ->paginate(10);
     }
 
     public function createJob(int $hrId, array $data): JobPosting

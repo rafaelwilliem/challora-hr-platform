@@ -25,9 +25,10 @@
     }
     .hr-card-table {
         background: var(--color-surface);
-        border: 2px solid var(--color-border);
-        box-shadow: 6px 6px 0 var(--color-border);
+        border: 4px solid black;
+        box-shadow: 10px 10px 0 black;
         overflow: hidden;
+        border-radius: 0;
     }
     .ax-premium-table {
         width: 100%;
@@ -77,29 +78,30 @@
     
     .action-select-premium {
         background: var(--color-surface);
-        border: 2px solid var(--color-border);
+        border: 4px solid black;
         padding: 12px 16px;
         font-weight: 800;
         text-transform: uppercase;
-        font-size: 12px;
+        font-size: 11px;
         cursor: pointer;
+        box-shadow: 4px 4px 0 black;
     }
     .action-select-premium:focus {
         border-color: var(--color-accent);
         outline: none;
     }
     .premium-btn-icon {
-        background: var(--color-text);
-        color: var(--color-surface);
-        width: 40px;
-        height: 40px;
+        background: black;
+        color: white;
+        width: 44px;
+        height: 44px;
         display: flex;
         align-items: center;
         justify-content: center;
-        border: 2px solid black;
+        border: 2px solid white;
         box-shadow: 4px 4px 0 var(--color-accent);
         text-decoration: none;
-        transition: all 0.2s;
+        transition: all 0.1s;
     }
     .premium-btn-icon:hover {
         transform: translate(-2px, -2px);

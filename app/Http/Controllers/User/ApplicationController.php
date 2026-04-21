@@ -22,7 +22,7 @@ class ApplicationController extends Controller
             
         return view('user.applications.index', [
             'applications' => $applications,
-            'pageTitle' => 'Status Lamaran',
+            'pageTitle' => 'Application Status',
         ]);
     }
 
@@ -32,14 +32,14 @@ class ApplicationController extends Controller
             $this->applicationService->applyForJob(auth()->user(), $job);
             
             return redirect()->route('jobs.show', $job->id)
-                ->with('flash_toast', ['message' => 'Lamaran berhasil dikirim.']);
+                ->with('flash_toast', ['message' => 'Application sent successfully.']);
         } catch (\Exception $e) {
             $message = $e->getMessage();
             
             if (str_starts_with($message, 'MISSING_DOCS:')) {
                 $docs = substr($message, 13);
                 return redirect()->route('user.settings.edit')
-                    ->withErrors(['message' => 'Lengkapi dokumen berikut: ' . $docs]);
+                    ->withErrors(['message' => 'Please complete the following documents: ' . $docs]);
             }
             
             return back()->withErrors(['message' => $message]);

@@ -18,13 +18,13 @@ class SavedJobController extends Controller
     public function index()
     {
         $userId = auth()->id();
-        $jobs = $this->savedJobService->getSavedJobs($userId);
+        $savedJobs = $this->savedJobService->getSavedJobs($userId);
         $appliedJobIds = $this->savedJobService->getAppliedJobIds($userId);
 
         return view('user.jobs.saved', [
-            'jobs' => $jobs,
+            'savedJobs' => $savedJobs,
             'appliedJobIds' => $appliedJobIds,
-            'pageTitle' => 'Lowongan Tersimpan',
+            'pageTitle' => 'Saved Jobs',
         ]);
     }
 
@@ -33,7 +33,7 @@ class SavedJobController extends Controller
         $this->savedJobService->saveJob(auth()->user(), $job->id);
 
         return back()->with('flash_toast', [
-            'message' => 'Lowongan berhasil disimpan.',
+            'message' => 'Job saved successfully.',
         ]);
     }
 
@@ -42,7 +42,7 @@ class SavedJobController extends Controller
         $this->savedJobService->unsaveJob(auth()->user(), $job->id);
 
         return back()->with('flash_toast', [
-            'message' => 'Lowongan dihapus dari daftar tersimpan.',
+            'message' => 'Job removed from saved list.',
         ]);
     }
 }

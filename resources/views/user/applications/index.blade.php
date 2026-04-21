@@ -3,13 +3,14 @@
 @push('styles')
 <style>
     .brutalist-title {
-        font-size: 56px;
-        font-weight: 600;
-        letter-spacing: -2px;
-        color: var(--color-text-muted);
+        font-size: 64px;
+        font-weight: 900;
+        letter-spacing: -4px;
+        color: var(--color-text);
         margin-bottom: 60px;
         padding-bottom: 24px;
-        border-bottom: 1px solid var(--color-border);
+        border-bottom: 8px solid black;
+        text-transform: uppercase;
     }
 
     .brutalist-job-row {
@@ -17,17 +18,24 @@
         justify-content: space-between;
         align-items: center;
         padding: 32px 32px;
-        border-bottom: 1px solid var(--color-border);
-        transition: background-color 0.2s ease;
+        border: 4px solid black;
+        box-shadow: 8px 8px 0 black;
+        margin-bottom: 24px;
+        background-color: var(--color-surface);
+        transition: all 0.1s;
+    }
+    .brutalist-job-row:hover {
+        transform: translate(-4px, -4px);
+        box-shadow: 12px 12px 0 var(--color-accent);
     }
 
-    .brutalist-job-name,
-    .brutalist-job-desc {
+    .brutalist-job-name {
         font-size: 28px;
-        font-weight: 400;
+        font-weight: 900;
         color: var(--color-text);
         text-decoration: none;
-        letter-spacing: -1px;
+        letter-spacing: -1.5px;
+        text-transform: uppercase;
     }
 
     .brutalist-job-desc {
@@ -62,10 +70,14 @@
     }
 
     .brutalist-status {
-        font-size: 24px;
-        font-weight: 600;
-        color: var(--color-accent);
-        letter-spacing: -1px;
+        font-size: 14px;
+        font-weight: 900;
+        color: black;
+        background: var(--color-accent);
+        border: 2px solid black;
+        padding: 4px 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
     }
 
     .brutalist-meta {
@@ -76,11 +88,12 @@
 
     .brutalist-pill {
         padding: 6px 12px;
-        border: 1px solid var(--color-accent);
-        color: var(--color-accent);
-        font-size: 12px;
-        font-weight: 600;
-        text-transform: lowercase;
+        border: 2px solid black;
+        background: black;
+        color: white;
+        font-size: 11px;
+        font-weight: 900;
+        text-transform: uppercase;
     }
 
     @media (max-width: 768px) {
