@@ -1,85 +1,126 @@
 <?php
-/**
- * App config
- */
-define('BASE_PATH', dirname(__DIR__));
-define('APP_PATH', BASE_PATH . '/app');
 
-// 1. Load Env and initialization
-require_once BASE_PATH . '/core/Env.php';
-Env::load(BASE_PATH . '/.env');
+return [
 
-// 2. Global Logging & Error Handling
-require_once BASE_PATH . '/core/Logger.php';
-set_exception_handler(function ($e) {
-    Logger::error('Uncaught Exception: ' . $e->getMessage(), [
-        'file' => $e->getFile(),
-        'line' => $e->getLine(),
-        'trace' => $e->getTraceAsString()
-    ]);
-    if (Env::get('APP_DEBUG', false)) {
-        die('Uncaught Exception: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine());
-    } else {
-        http_response_code(500);
-        die('A server error occurred. Please try again later.');
-    }
-});
+    /*
+    |--------------------------------------------------------------------------
+    | Application Name
+    |--------------------------------------------------------------------------
+    |
+    | This value is the name of your application, which will be used when the
+    | framework needs to place the application's name in a notification or
+    | other UI elements where an application name needs to be displayed.
+    |
+    */
 
-set_error_handler(function ($errno, $errstr, $errfile, $errline) {
-    if (!(error_reporting() & $errno)) return false;
-    Logger::error("PHP Error [$errno]: $errstr", ['file' => $errfile, 'line' => $errline]);
-    if (Env::get('APP_DEBUG', false)) {
-        die("PHP Error [$errno]: $errstr in $errfile on line $errline");
-    }
-    return true;
-});
+    'name' => env('APP_NAME', 'Laravel'),
 
-define('BASE_URL', Env::get('APP_URL_PATH', '/challorav2/public'));
-define('STORAGE_CV', BASE_PATH . '/storage/cv');
-define('STORAGE_DIPLOMA', BASE_PATH . '/storage/diplomas');
-define('STORAGE_PHOTO', BASE_PATH . '/storage/photos');
+    /*
+    |--------------------------------------------------------------------------
+    | Application Environment
+    |--------------------------------------------------------------------------
+    |
+    | This value determines the "environment" your application is currently
+    | running in. This may determine how you prefer to configure various
+    | services the application utilizes. Set this in your ".env" file.
+    |
+    */
 
-// 2. Secure Session Configuration
-if (session_status() === PHP_SESSION_NONE) {
-    ini_set('session.use_strict_mode', 1);
-    $isSecure = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443);
-    session_set_cookie_params([
-        'lifetime' => 0,
-        'path' => '/',
-        'domain' => '',
-        'secure' => $isSecure,
-        'httponly' => true,
-        'samesite' => 'Lax'
-    ]);
-    session_start();
-}
+    'env' => env('APP_ENV', 'production'),
 
-// 3. Security Headers
-header('X-Frame-Options: SAMEORIGIN');
-header('X-Content-Type-Options: nosniff');
-header('X-XSS-Protection: 1; mode=block');
-header('Referrer-Policy: strict-origin-when-cross-origin');
-header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:;");
+    /*
+    |--------------------------------------------------------------------------
+    | Application Debug Mode
+    |--------------------------------------------------------------------------
+    |
+    | When your application is in debug mode, detailed error messages with
+    | stack traces will be shown on every error that occurs within your
+    | application. If disabled, a simple generic error page is shown.
+    |
+    */
 
-$autoloadPath = BASE_PATH . '/vendor/autoload.php';
-if (file_exists($autoloadPath)) {
-    require $autoloadPath;
-}
+    'debug' => (bool) env('APP_DEBUG', false),
 
-spl_autoload_register(function ($class) {
-    $paths = [
-        BASE_PATH . '/core/',
-        APP_PATH . '/controllers/',
-        APP_PATH . '/models/',
-    ];
-    foreach ($paths as $path) {
-        $file = $path . $class . '.php';
-        if (file_exists($file)) {
-            require $file;
-            return;
-        }
-    }
-});
+    /*
+    |--------------------------------------------------------------------------
+    | Application URL
+    |--------------------------------------------------------------------------
+    |
+    | This URL is used by the console to properly generate URLs when using
+    | the Artisan command line tool. You should set this to the root of
+    | the application so that it's available within Artisan commands.
+    |
+    */
 
-require BASE_PATH . '/config/database.php';
-require BASE_PATH . '/core/helpers.php';
+    'url' => env('APP_URL', 'http://localhost'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application Timezone
+    |--------------------------------------------------------------------------
+    |
+    | Here you may specify the default timezone for your application, which
+    | will be used by the PHP date and date-time functions. The timezone
+    | is set to "UTC" by default as it is suitable for most use cases.
+    |
+    */
+
+    'timezone' => 'UTC',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application Locale Configuration
+    |--------------------------------------------------------------------------
+    |
+    | The application locale determines the default locale that will be used
+    | by Laravel's translation / localization methods. This option can be
+    | set to any locale for which you plan to have translation strings.
+    |
+    */
+
+    'locale' => env('APP_LOCALE', 'en'),
+
+    'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
+
+    'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Encryption Key
+    |--------------------------------------------------------------------------
+    |
+    | This key is utilized by Laravel's encryption services and should be set
+    | to a random, 32 character string to ensure that all encrypted values
+    | are secure. You should do this prior to deploying the application.
+    |
+    */
+
+    'cipher' => 'AES-256-CBC',
+
+    'key' => env('APP_KEY'),
+
+    'previous_keys' => [
+        ...array_filter(
+            explode(',', (string) env('APP_PREVIOUS_KEYS', ''))
+        ),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Maintenance Mode Driver
+    |--------------------------------------------------------------------------
+    |
+    | These configuration options determine the driver used to determine and
+    | manage Laravel's "maintenance mode" status. The "cache" driver will
+    | allow maintenance mode to be controlled across multiple machines.
+    |
+    | Supported drivers: "file", "cache"
+    |
+    */
+
+    'maintenance' => [
+        'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
+        'store' => env('APP_MAINTENANCE_STORE', 'database'),
+    ],
+
+];

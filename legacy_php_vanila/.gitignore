@@ -1,0 +1,11 @@
+# Local update bundles / staging (not tracked)
+update_files/
+.superpowers/
+database/
+.env
+.env.local
+storage/
+.vscode/
+docs/superpowers/specs/
+.superpowers/brainstorm/
+scratch/

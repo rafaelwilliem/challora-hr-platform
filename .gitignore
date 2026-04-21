@@ -1,11 +1,17 @@
-# Local update bundles / staging (not tracked)
-update_files/
-.superpowers/
-database/
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
 .env
-.env.local
-storage/
-.vscode/
-docs/superpowers/specs/
-.superpowers/brainstorm/
-scratch/
+.env.backup
+.env.production
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+/.idea
+/.vscode
+/.fleet
+/.phpunit.cache
