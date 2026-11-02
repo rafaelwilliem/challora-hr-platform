@@ -30,6 +30,8 @@ services:
         sync: false
       - key: DB_PASSWORD
         sync: false
+      - key: MYSQL_ATTR_SSL_CA
+        value: "/etc/ssl/certs/ca-certificates.crt"
       - key: MYSQL_ATTR_SSL_VERIFY_SERVER_CERT
         value: "false"
       - key: SESSION_DRIVER

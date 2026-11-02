@@ -4,9 +4,10 @@ set -e
 # Default port to 8080 or use Render's dynamic PORT
 PORT="${PORT:-8080}"
 
-# Configure Apache port dynamically
+# Configure Apache port dynamically across all config files
 sed -i "s/Listen 80/Listen ${PORT}/g" /etc/apache2/ports.conf
-sed -i "s/<VirtualHost \*:80>/<VirtualHost \*:${PORT}>/g" /etc/apache2/sites-available/000-default.conf
+sed -i -E "s/<VirtualHost \*:[0-9]+>/<VirtualHost \*:${PORT}>/g" /etc/apache2/sites-available/*.conf
+sed -i -E "s/<VirtualHost \*:[0-9]+>/<VirtualHost \*:${PORT}>/g" /etc/apache2/sites-enabled/*.conf
 
 # Ensure required storage and cache directories exist
 mkdir -p /var/www/html/storage/framework/views \

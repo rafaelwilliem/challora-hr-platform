@@ -19,18 +19,16 @@ RUN npm run build
 # ==========================================
 FROM php:8.2-apache
 
-# Install required system packages and PHP extensions
+# Use high-speed precompiled extension installer to drastically reduce build time
+COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     curl \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    libzip-dev \
     zip \
     unzip \
     ca-certificates \
-    && docker-php-ext-install -j$(nproc) \
+    && install-php-extensions \
         pdo_mysql \
         mbstring \
         exif \
@@ -44,14 +42,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Enable Apache rewrite module
-RUN a2enmod rewrite
+# Enable Apache rewrite module & silence ServerName warning
+RUN a2enmod rewrite \
+    && echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
-# Configure Apache DocumentRoot to point to Laravel's public directory
-RUN sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf \
-    && sed -ri -e 's!/var/www/!/var/www/html/public!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+# Point Apache DocumentRoot to Laravel's public directory
+ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf \
+    && sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-enabled/*.conf \
+    && sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
-# Allow .htaccess rewrites
 RUN printf "<Directory /var/www/html/public>\n    Options Indexes FollowSymLinks\n    AllowOverride All\n    Require all granted\n</Directory>\n" >> /etc/apache2/apache2.conf
 
 WORKDIR /var/www/html
