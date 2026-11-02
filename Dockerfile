@@ -59,6 +59,9 @@ WORKDIR /var/www/html
 # Copy application source
 COPY . .
 
+# Ensure .env and .env.example always exist
+RUN touch /var/www/html/.env /var/www/html/.env.example
+
 # Copy built frontend assets from Stage 1
 COPY --from=frontend /app/public/build /var/www/html/public/build
 
