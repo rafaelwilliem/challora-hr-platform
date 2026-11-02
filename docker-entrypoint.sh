@@ -20,6 +20,15 @@ mkdir -p /var/www/html/storage/framework/views \
 chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
+# Ensure .env exists
+[ -f .env ] || cp .env.example .env
+
+# Generate key if not provided
+if [ -z "$APP_KEY" ]; then
+    echo "Generating application encryption key..."
+    php artisan key:generate --force || true
+fi
+
 # Clear stale caches
 php artisan optimize:clear
 

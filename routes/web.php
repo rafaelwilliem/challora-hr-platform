@@ -45,26 +45,33 @@ Route::get('/mail-test-to/{email}', function (string $email) {
 });
 
 Route::get('/dbcheck', function () {
-    return response()->json([
-        'host' => env('DB_HOST'),
-        'port' => env('DB_PORT'),
-        'database' => env('DB_DATABASE'),
-        'username' => env('DB_USERNAME'),
-        'connection' => env('DB_CONNECTION'),
-        'db' => function_exists('DB') ? 'loaded' : 'missing',
-        'ping' => (function() {
-            try {
-                \DB::connection()->getPdo();
-                return 'connected';
-            } catch (\Exception $e) {
-                return $e->getMessage();
-            }
-        })(),
-    ]);
+    try {
+        $pdo = \Illuminate\Support\Facades\DB::connection()->getPdo();
+        $tables = \Illuminate\Support\Facades\DB::select('SHOW TABLES');
+        return response()->json([
+            'status' => 'connected',
+            'host' => config('database.connections.mysql.host'),
+            'port' => config('database.connections.mysql.port'),
+            'database' => config('database.connections.mysql.database'),
+            'tables_count' => count($tables),
+            'tables' => array_map(fn($t) => array_values((array)$t)[0] ?? '', $tables),
+        ]);
+    } catch (\Throwable $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => $e->getMessage(),
+            'file' => $e->getFile() . ':' . $e->getLine(),
+        ], 200);
+    }
 });
 
 Route::get('/', function () {
-    $latestJobs = \App\Models\JobPosting::with('creator')->latest()->take(3)->get();
+    try {
+        $latestJobs = \App\Models\JobPosting::with('creator')->latest()->take(3)->get();
+    } catch (\Throwable $e) {
+        $latestJobs = collect();
+    }
+
     return view('landing', [
         'pageTitle' => 'Rekrutmen Cerdas (Powered by Chally)',
         'latestJobs' => $latestJobs

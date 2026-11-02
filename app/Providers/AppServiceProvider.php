@@ -32,14 +32,7 @@ class AppServiceProvider extends ServiceProvider
             );
         });
 
-        $version = env('APP_VERSION');
-
-        // If APP_VERSION not set (e.g. local dev), try to read from git tag
-        if (!$version) {
-            $tag = trim(shell_exec('git describe --tags --abbrev=0 2>nul') ?? '');
-            $version = $tag ?: '4.8.6';
-        }
-
+        $version = env('APP_VERSION', '5.0.0');
         View::share('appVersion', $version);
     }
 }
