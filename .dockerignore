@@ -12,4 +12,5 @@ tests
 *.md
 .env
 .env.*
+!.env.example
 database/database.sqlite
