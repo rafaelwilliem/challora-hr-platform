@@ -8,13 +8,13 @@
 @endphp
 
 @if ($paginator->hasPages() || $paginator->total() > 0)
-    <nav class="flex justify-between items-center w-full mt-8 border-t-2 border-border pt-4 flex-wrap gap-4" style="font-family: var(--font-mono);">
+    <nav class="flex justify-between items-center w-full mt-8 border-t border-[#1d1d1d] pt-5 flex-wrap gap-4" style="font-family: var(--font-mono);">
 
         {{-- Left: Showing X rows info + per-page selector --}}
         <div class="flex items-center gap-4">
-            <div class="text-xs font-bold uppercase tracking-wider text-accent">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-[#888]">
                 @if($paginator->total() > 0)
-                    Showing {{ $paginator->firstItem() }} to {{ $paginator->lastItem() }} of {{ $paginator->total() }} rows
+                    Showing <span class="text-white">{{ $paginator->firstItem() }}</span> to <span class="text-white">{{ $paginator->lastItem() }}</span> of <span class="text-white">{{ $paginator->total() }}</span> rows
                 @else
                     No rows
                 @endif
@@ -29,9 +29,8 @@
                 @endforeach
                 <select
                     name="per_page"
-                    class="action-select-premium text-accent font-black text-xs uppercase"
+                    class="bg-[#090909] border border-[#262626] text-[#E5E5DF] font-bold text-[11px] uppercase px-3 py-1.5 cursor-pointer hover:border-[#FF4D30]"
                     onchange="this.form.submit()"
-                    style="padding: 6px 12px; box-shadow: 3px 3px 0 black;"
                 >
                     @foreach([10, 25, 50, 100] as $option)
                         <option value="{{ $option }}" {{ (int)$perPage === $option ? 'selected' : '' }}>
@@ -44,16 +43,16 @@
 
         @if ($paginator->hasPages())
         {{-- Right: Page number buttons --}}
-        <ul class="flex gap-2 items-center">
+        <ul class="flex gap-1.5 items-center">
             {{-- Previous --}}
             @if ($paginator->onFirstPage())
                 <li aria-disabled="true">
-                    <span class="action-select-premium opacity-40 cursor-not-allowed px-4 py-2 text-accent font-black" aria-hidden="true">&lsaquo;</span>
+                    <span class="border border-[#1d1d1d] bg-[#090909] opacity-40 cursor-not-allowed px-3.5 py-1.5 text-gray-500 font-bold text-xs" aria-hidden="true">&lsaquo;</span>
                 </li>
             @else
                 <li>
                     <a href="{{ $pageUrl($paginator->currentPage() - 1) }}" rel="prev"
-                       class="action-select-premium hover:text-accent px-4 py-2 transition-colors text-accent font-black">&lsaquo;</a>
+                       class="border border-[#262626] bg-[#090909] hover:border-[#FF4D30] hover:text-white px-3.5 py-1.5 transition-colors text-gray-300 font-bold text-xs">&lsaquo;</a>
                 </li>
             @endif
 
@@ -97,16 +96,16 @@
             @foreach ($pages as $page)
                 @if ($page === '...')
                     <li aria-disabled="true">
-                        <span class="px-3 py-2 text-accent font-black cursor-default select-none">…</span>
+                        <span class="px-2 py-1.5 text-gray-500 font-bold text-xs cursor-default select-none">…</span>
                     </li>
                 @elseif ((int)$page === $currentPage)
                     <li aria-current="page">
-                        <span class="action-select-premium bg-accent text-white px-4 py-2 border-accent shadow-[4px_4px_0_var(--color-accent)] cursor-default font-black">{{ $page }}</span>
+                        <span class="bg-[#FF4D30] text-white px-3.5 py-1.5 border border-[#FF4D30] cursor-default font-bold text-xs">{{ $page }}</span>
                     </li>
                 @else
                     <li>
                         <a href="{{ $pageUrl((int)$page) }}"
-                           class="action-select-premium text-accent hover:bg-accent hover:text-white px-4 py-2 transition-colors font-black">{{ $page }}</a>
+                           class="border border-[#262626] bg-[#090909] text-gray-300 hover:border-[#FF4D30] hover:text-white px-3.5 py-1.5 transition-colors font-bold text-xs">{{ $page }}</a>
                     </li>
                 @endif
             @endforeach
@@ -115,11 +114,11 @@
             @if ($paginator->hasMorePages())
                 <li>
                     <a href="{{ $pageUrl($paginator->currentPage() + 1) }}" rel="next"
-                       class="action-select-premium hover:text-accent px-4 py-2 transition-colors text-accent font-black">&rsaquo;</a>
+                       class="border border-[#262626] bg-[#090909] hover:border-[#FF4D30] hover:text-white px-3.5 py-1.5 transition-colors text-gray-300 font-bold text-xs">&rsaquo;</a>
                 </li>
             @else
                 <li aria-disabled="true">
-                    <span class="action-select-premium opacity-40 cursor-not-allowed px-4 py-2 text-accent font-black" aria-hidden="true">&rsaquo;</span>
+                    <span class="border border-[#1d1d1d] bg-[#090909] opacity-40 cursor-not-allowed px-3.5 py-1.5 text-gray-500 font-bold text-xs" aria-hidden="true">&rsaquo;</span>
                 </li>
             @endif
         </ul>

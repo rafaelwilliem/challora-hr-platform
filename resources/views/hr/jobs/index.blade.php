@@ -3,10 +3,9 @@
 @push('styles')
 <style>
     .panel-card {
-        background-color: #1a1a1a;
-        border: 4px solid black;
-        box-shadow: 8px 8px 0 rgba(0,0,0,1);
-        padding: 24px;
+        background-color: #090909;
+        border: 1px solid #1d1d1d;
+        padding: 28px;
         margin-bottom: 24px;
         border-radius: 0;
     }
@@ -20,25 +19,25 @@
         margin-bottom: 20px;
     }
     .btn-orange {
-        background-color: var(--color-accent);
+        background-color: #ECECE7;
         color: #000;
         padding: 12px 24px;
         font-family: var(--font-mono);
         font-weight: 800;
         text-transform: uppercase;
-        letter-spacing: 0.06em;
-        font-size: 12px;
+        letter-spacing: 0.1em;
+        font-size: 11px;
         display: inline-flex;
         align-items: center;
         gap: 8px;
         text-decoration: none;
-        border: 4px solid black;
-        box-shadow: 4px 4px 0 black;
-        transition: all 0.1s;
+        border: 1px solid #ECECE7;
+        transition: all 0.18s ease;
     }
     .btn-orange:hover {
-        transform: translate(2px, 2px);
-        box-shadow: 2px 2px 0 black;
+        background-color: #FF4D30;
+        border-color: #FF4D30;
+        color: #fff;
     }
     .table-container {
         width: 100%;
@@ -47,18 +46,18 @@
     }
     .table-container th {
         text-align: left;
-        color: #9ca3af;
+        color: #888888;
         font-family: var(--font-mono);
-        font-size: 11px;
+        font-size: 10px;
         font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 0.08em;
-        padding: 12px 16px;
-        border-bottom: 1px solid #374151;
+        letter-spacing: 0.12em;
+        padding: 14px 16px;
+        border-bottom: 1px solid #1d1d1d;
     }
     .table-container td {
-        padding: 16px;
-        border-bottom: 1px solid #2d2d2d;
+        padding: 18px 16px;
+        border-bottom: 1px solid #181818;
         color: #e5e7eb;
         vertical-align: middle;
     }
@@ -66,29 +65,31 @@
         border-bottom: none;
     }
     .tag-orange {
-        background-color: rgba(249, 115, 22, 0.1);
-        color: #f97316;
+        background-color: rgba(255, 77, 48, 0.08);
+        border: 1px solid rgba(255, 77, 48, 0.35);
+        color: #FF4D30;
         padding: 4px 10px;
         border-radius: 0;
         font-family: var(--font-mono);
         font-size: 10px;
         font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 0.06em;
+        letter-spacing: 0.08em;
     }
     .action-btn {
-        padding: 6px 12px;
+        padding: 7px 12px;
         border-radius: 0;
         font-family: var(--font-mono);
         font-size: 12px;
         font-weight: 600;
-        background-color: transparent;
+        background-color: #070707;
         color: #d1d5db;
-        border: 1px solid #4b5563;
+        border: 1px solid #262626;
         transition: all 0.2s;
     }
     .action-btn:hover {
-        background-color: #374151;
+        background-color: #141414;
+        border-color: #777777;
         color: #fff;
     }
     .action-btn.delete:hover {
@@ -100,15 +101,23 @@
 @endpush
 
 @section('content')
-<div class="flex justify-between items-center mb-8">
-    <div>
-        <h1 class="text-3xl font-extrabold text-white mb-2 uppercase tracking-tight" style="font-family: var(--font-display);">Manage Listings</h1>
-        <p class="text-gray-400 text-base italic opacity-80" style="font-family: var(--font-body);">Overview of your published positions</p>
+<div class="border-b border-[#1d1d1d] pb-8 mb-8">
+    <div class="flex flex-wrap items-center justify-between gap-4 border-b border-[#171717] pb-3 mb-6">
+        <div class="c-release-tag mb-0">
+            <span class="w-2 h-2 bg-[#FF4D30]"></span>
+            <span>CHALLORA // REQUISITION MANAGEMENT</span>
+        </div>
+        <div class="c-mono text-[11px] text-[#777]">RECRUITER WORKSPACE</div>
     </div>
-    <a href="{{ route('hr.jobs.create') }}" class="btn-orange">
-        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"></path></svg>
-        Create New Listing
-    </a>
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+        <div>
+            <h1 class="c-title-section text-4xl text-white uppercase">Manage Listings</h1>
+            <p class="c-motto text-lg mt-2">Overview of your published positions</p>
+        </div>
+        <a href="{{ route('hr.jobs.create') }}" class="btn-orange">
+            + Create New Listing
+        </a>
+    </div>
 </div>
 
 <div class="panel-card mt-6">
@@ -141,9 +150,9 @@
                         </td>
                         <td>
                             @if($job->deadline && $job->deadline->isPast())
-                                <span class="bg-red-600 text-black px-2 py-1 text-[10px] font-black uppercase border-2 border-black">Closed</span>
+                                <span class="c-mono bg-red-500/10 text-red-400 px-2.5 py-1 text-[10px] font-bold uppercase border border-red-500/40">Closed</span>
                             @else
-                                <span class="bg-green-500 text-black px-2 py-1 text-[10px] font-black uppercase border-2 border-black">Active</span>
+                                <span class="c-mono bg-green-500/10 text-green-400 px-2.5 py-1 text-[10px] font-bold uppercase border border-green-500/40">Active</span>
                             @endif
                         </td>
                         <td class="text-right">

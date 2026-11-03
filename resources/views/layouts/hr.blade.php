@@ -8,9 +8,9 @@
     <title>{{ $pageTitle ?? 'HR Panel — Challora' }}</title>
     <link rel="icon" type="image/png" href="{{ asset('web-icon.png') }}">
 
-    <link rel="stylesheet" href="{{ asset('css/design-tokens.css') }}">
     <!-- Vite Assets (Tailwind & JS) -->
     @vite(['resources/css/app.css', 'resources/js/app.jsx'])
+    <link rel="stylesheet" href="{{ asset('css/design-tokens.css') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

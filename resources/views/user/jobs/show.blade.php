@@ -3,7 +3,9 @@
 @push('styles')
 <style>
     .job-show-hero {
-        margin-bottom: 60px;
+        margin-bottom: 48px;
+        padding-bottom: 36px;
+        border-bottom: 1px solid #1d1d1d;
         position: relative;
     }
     .back-btn-brutalist {
@@ -14,81 +16,87 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.12em;
-        font-size: 12px;
-        color: var(--color-text-muted);
+        font-size: 11px;
+        color: #888888;
         text-decoration: none;
-        margin-bottom: 32px;
+        margin-bottom: 28px;
         transition: color 0.2s;
     }
     .back-btn-brutalist:hover {
-        color: var(--color-accent);
+        color: #FF4D30;
     }
     .job-title-giant {
         font-family: var(--font-display);
-        font-size: 68px;
+        font-size: clamp(2.5rem, 5vw, 4.25rem);
         font-weight: 800;
-        letter-spacing: -3.5px;
-        line-height: 0.92;
-        color: var(--color-text);
-        margin-bottom: 24px;
+        letter-spacing: -0.04em;
+        line-height: 0.95;
+        color: #ffffff;
+        margin-bottom: 20px;
     }
     .company-badge-premium {
         font-family: var(--font-body);
         font-style: italic;
         display: flex;
         align-items: center;
-        gap: 16px;
-        font-size: 22px;
-        font-weight: 500;
-        color: var(--color-text);
-        margin-bottom: 40px;
+        gap: 14px;
+        font-size: 20px;
+        font-weight: 400;
+        color: #9c9c9c;
+        margin-bottom: 28px;
     }
     .company-icon-frame {
         font-family: var(--font-display);
         font-style: normal;
-        width: 48px;
-        height: 48px;
-        background: var(--color-text);
-        color: var(--color-surface);
+        width: 40px;
+        height: 40px;
+        background: #090909;
+        color: #FF4D30;
         display: flex;
         align-items: center;
         justify-content: center;
         font-weight: 800;
-        font-size: 20px;
-        border: 2px solid black;
-        box-shadow: 4px 4px 0 var(--color-accent);
+        font-size: 16px;
+        border: 1px solid #262626;
     }
     .job-meta-pills {
         display: flex;
         flex-wrap: wrap;
-        gap: 12px;
+        gap: 8px;
     }
     .meta-pill {
         font-family: var(--font-mono);
-        background: var(--color-accent);
-        border: 2px solid black;
-        padding: 8px 16px;
-        font-size: 11px;
+        background: #090909;
+        border: 1px solid #262626;
+        padding: 6px 14px;
+        font-size: 10px;
         font-weight: 700;
-        letter-spacing: 0.08em;
+        letter-spacing: 0.1em;
         text-transform: uppercase;
-        color: black;
+        color: #b8b8b8;
     }
     .job-layout-premium {
         display: grid;
         grid-template-columns: 1fr 380px;
-        gap: 80px;
+        gap: 64px;
         align-items: start;
     }
     .content-section-premium {
-        margin-bottom: 60px;
+        margin-bottom: 48px;
+        padding-bottom: 40px;
+        border-bottom: 1px solid #181818;
+    }
+    .content-section-premium:last-child {
+        border-bottom: none;
     }
     .section-headline {
         font-family: var(--font-display);
-        font-size: 30px;
+        font-size: 24px;
         font-weight: 800;
-        letter-spacing: -1px;
-        margin-bottom: 24px;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+        color: #ffffff;
+        margin-bottom: 20px;
         position: relative;
     }
     .section-headline::after {
@@ -96,107 +104,113 @@
         position: absolute;
         bottom: -8px;
         left: 0;
-        width: 40px;
-        height: 4px;
-        background: var(--color-accent);
+        width: 32px;
+        height: 2px;
+        background: #FF4D30;
     }
     .rich-text-premium {
         font-family: var(--font-body);
-        font-size: 19px;
+        font-size: 18px;
         line-height: 1.75;
-        color: #c8c8c8;
+        color: #b8b8b8;
         font-weight: 400;
     }
     .rich-text-premium ul {
         list-style: none;
         padding: 0;
-        margin-top: 24px;
+        margin-top: 20px;
     }
     .rich-text-premium li {
-        margin-bottom: 16px;
+        margin-bottom: 14px;
         display: flex;
         gap: 12px;
     }
     .rich-text-premium li::before {
         font-family: var(--font-mono);
         content: '→';
-        color: var(--color-accent);
+        color: #FF4D30;
         font-weight: 700;
         flex-shrink: 0;
     }
     .sidebar-card-premium {
-        background: var(--color-surface);
-        border: 4px solid black;
-        padding: 40px;
+        background: #090909;
+        border: 1px solid #1d1d1d;
+        padding: 36px;
         position: sticky;
-        top: 120px;
-        box-shadow: 12px 12px 0 black;
+        top: 110px;
         border-radius: 0;
     }
     .sidebar-salary {
         font-family: var(--font-display);
-        font-size: 38px;
+        font-size: 32px;
         font-weight: 800;
-        color: var(--color-accent);
-        letter-spacing: -1.5px;
-        margin-bottom: 32px;
+        color: #ffffff;
+        letter-spacing: -0.03em;
+        margin-bottom: 28px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #181818;
         line-height: 1;
     }
     .sidebar-stats {
-        margin-bottom: 40px;
+        margin-bottom: 32px;
         display: flex;
         flex-direction: column;
-        gap: 16px;
+        gap: 14px;
     }
     .stat-row {
         display: flex;
         justify-content: space-between;
         font-size: 14px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #141414;
     }
     .stat-row label {
         font-family: var(--font-mono);
-        font-size: 11px;
+        font-size: 10px;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        color: var(--color-text-muted);
+        color: #777777;
     }
     .stat-row span {
-        font-family: var(--font-sans);
-        font-weight: 700;
-        color: var(--color-text);
+        font-family: var(--font-mono);
+        font-size: 12px;
+        font-weight: 600;
+        color: #E5E5DF;
     }
     .apply-btn-giant {
         font-family: var(--font-mono);
         display: block;
         width: 100%;
-        background: var(--color-accent);
-        color: var(--color-surface);
+        background: #ECECE7;
+        color: #000000;
         text-align: center;
-        padding: 20px 24px;
-        font-size: 14px;
+        padding: 16px 24px;
+        font-size: 12px;
         font-weight: 800;
         text-transform: uppercase;
-        letter-spacing: 0.14em;
-        border: 2px solid black;
+        letter-spacing: 0.12em;
+        border: 1px solid #ECECE7;
         border-radius: 0 !important;
-        box-shadow: 6px 6px 0 black;
-        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: all 0.18s ease;
         text-decoration: none;
-        margin-bottom: 16px;
+        margin-bottom: 12px;
         cursor: pointer;
     }
     .apply-btn-giant:hover {
-        transform: translate(-2px, -2px);
-        box-shadow: 10px 10px 0 black;
+        background: #FF4D30;
+        border-color: #FF4D30;
+        color: #ffffff;
     }
     .btn-secondary-shadow {
-        background: var(--color-surface);
-        color: var(--color-text);
-        box-shadow: 4px 4px 0 black;
+        background: transparent;
+        color: #ECECE7;
+        border: 1px solid #333333;
     }
     .btn-secondary-shadow:hover {
-        box-shadow: 6px 6px 0 black;
+        background: #171717;
+        border-color: #777777;
+        color: #ffffff;
     }
 
     @media (max-width: 1024px) {

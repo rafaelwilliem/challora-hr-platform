@@ -4,13 +4,13 @@
  */
 
 :root {
-    --color-safety-orange: #ff4500;
+    --color-safety-orange: #FF4D30;
 }
 
 body.auth-dotgrid-page {
     font-family: var(--font-body);
-    background: var(--color-primary);
-    color: var(--color-text);
+    background: #070707;
+    color: #E5E5DF;
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -26,7 +26,7 @@ body.auth-dotgrid-page {
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    background: var(--color-primary);
+    background: #070707;
 }
 
 .auth-content-shell {
@@ -40,9 +40,8 @@ body.auth-dotgrid-page {
 }
 
 .split-card {
-    background: #000;
-    border: 1px solid var(--color-safety-orange);
-    box-shadow: 12px 12px 0 var(--color-safety-orange);
+    background: #090909;
+    border: 1px solid #1d1d1d;
     display: flex;
     width: 100%;
     max-width: 1000px;
@@ -60,8 +59,9 @@ body.auth-dotgrid-page {
 /* Side A: Form */
 .form-side {
     flex: 1.2;
-    background: #111;
-    padding: 60px;
+    background: #090909;
+    border-right: 1px solid #1d1d1d;
+    padding: 56px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -74,8 +74,9 @@ body.auth-dotgrid-page {
 /* Side B: Brand */
 .brand-side {
     flex: 0.8;
-    background: var(--color-safety-orange);
-    padding: 60px;
+    background: #070707;
+    border-top: 2px solid #FF4D30;
+    padding: 56px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -87,23 +88,15 @@ body.auth-dotgrid-page {
     flex: 0.6;
 }
 
-.brand-side::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    opacity: 0.05;
-    pointer-events: none;
-}
-
 .auth-title {
     font-family: var(--font-display);
-    font-size: 56px;
+    font-size: 48px;
     font-weight: 800;
-    letter-spacing: -2px;
-    line-height: 1;
-    margin-bottom: 12px;
+    letter-spacing: -0.04em;
+    line-height: 0.98;
+    margin-bottom: 10px;
     color: #fff;
+    text-transform: uppercase;
 }
 
 .auth-subtitle {
@@ -111,12 +104,12 @@ body.auth-dotgrid-page {
     font-style: italic;
     font-size: 18px;
     font-weight: 400;
-    color: #a0a0a0;
-    margin-bottom: 44px;
+    color: #9c9c9c;
+    margin-bottom: 40px;
 }
 
 .split-card.register-wide .auth-subtitle {
-    margin-bottom: 36px;
+    margin-bottom: 32px;
 }
 
 .premium-label {
@@ -124,46 +117,46 @@ body.auth-dotgrid-page {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #ccc;
-    margin-bottom: 10px;
+    color: #888;
+    margin-bottom: 8px;
 }
 
 .split-card.register-wide .premium-label {
-    font-size: 11px;
+    font-size: 10px;
     margin-bottom: 8px;
 }
 
 .label-req {
     font-family: var(--font-mono);
     text-transform: lowercase;
-    font-size: 11px;
+    font-size: 10px;
 }
 
 .premium-input {
     font-family: var(--font-sans);
     width: 100%;
-    background: #141414;
-    border: 1px solid #2d2d2d;
+    background: #070707;
+    border: 1px solid #262626;
     border-radius: 0 !important;
-    padding: 15px 16px;
-    color: #fff;
+    padding: 14px 16px;
+    color: #E5E5DF;
     font-weight: 500;
-    font-size: 15px;
-    transition: all 0.2s;
-    margin-bottom: 22px;
+    font-size: 14px;
+    transition: border-color 0.2s;
+    margin-bottom: 20px;
 }
 
 .role-selector-btn {
     font-family: var(--font-mono);
     width: 100%;
-    background: #141414;
-    border: 1px solid #2d2d2d;
+    background: #070707;
+    border: 1px solid #262626;
     border-radius: 0 !important;
-    padding: 14px 16px;
+    padding: 13px 16px;
     color: #888;
     font-weight: 700;
     font-size: 11px;
@@ -174,15 +167,14 @@ body.auth-dotgrid-page {
 }
 
 .role-selector-btn:hover {
-    border-color: var(--color-safety-orange);
+    border-color: #FF4D30;
     color: #fff;
 }
 
 .role-selector-btn.active {
-    background: var(--color-safety-orange);
-    border-color: var(--color-safety-orange);
-    color: #000;
-    box-shadow: 4px 4px 0 #fff;
+    background: #FF4D30;
+    border-color: #FF4D30;
+    color: #fff;
 }
 
 .split-card.register-wide .premium-input {
@@ -192,9 +184,9 @@ body.auth-dotgrid-page {
 }
 
 .premium-input:focus {
-    border-color: var(--color-safety-orange);
+    border-color: #FF4D30;
     outline: none;
-    background: #1d1d1d;
+    background: #0c0c0c;
 }
 
 .btn-brutal {
@@ -202,17 +194,16 @@ body.auth-dotgrid-page {
     width: 100%;
     background: #ECECE7;
     color: #000;
-    padding: 18px 20px;
-    font-size: 14px;
+    padding: 16px 20px;
+    font-size: 12px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.14em;
-    border: 2px solid #000;
+    border: 1px solid #ECECE7;
     border-radius: 0 !important;
-    box-shadow: 6px 6px 0 var(--color-safety-orange);
-    transition: all 0.15s;
+    transition: all 0.18s ease;
     cursor: pointer;
-    margin-top: 20px;
+    margin-top: 16px;
 }
 
 .split-card.register-wide .btn-brutal {
@@ -220,54 +211,50 @@ body.auth-dotgrid-page {
 }
 
 .btn-brutal:hover {
-    background: var(--color-safety-orange);
+    background: #FF4D30;
+    border-color: #FF4D30;
     color: #fff;
-    transform: translate(-2px, -2px);
-    box-shadow: 8px 8px 0 #fff;
-}
-
-.btn-brutal:active {
-    transform: translate(3px, 3px);
-    box-shadow: 3px 3px 0 var(--color-safety-orange);
 }
 
 .brand-title {
     font-family: var(--font-display);
-    font-size: 44px;
+    font-size: 38px;
     font-weight: 800;
-    color: #000;
-    letter-spacing: -2px;
+    color: #ffffff;
+    letter-spacing: -0.04em;
     line-height: 1;
 }
 
 .split-card.register-wide .brand-title {
-    font-size: 38px;
+    font-size: 34px;
 }
 
 .brand-quote {
     font-family: var(--font-body);
     font-style: italic;
-    font-size: 22px;
-    font-weight: 500;
-    color: rgba(0, 0, 0, 0.88);
-    line-height: 1.45;
-    margin-top: 32px;
+    font-size: 20px;
+    font-weight: 400;
+    color: #9c9c9c;
+    line-height: 1.5;
+    margin-top: 28px;
     max-width: 320px;
+    border-left: 2px solid #FF4D30;
+    padding-left: 16px;
 }
 
 .split-card.register-wide .brand-quote {
-    font-size: 19px;
+    font-size: 18px;
     margin-top: 24px;
     max-width: 280px;
 }
 
 .brand-footer {
     font-family: var(--font-mono);
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.14em;
-    color: rgba(0, 0, 0, 0.55);
+    color: #FF4D30;
 }
 
 .split-card.register-wide .brand-footer {

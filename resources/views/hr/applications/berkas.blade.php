@@ -3,21 +3,21 @@
 @push('styles')
 <style>
     .brutalist-profile-card {
-        background: var(--color-surface);
-        border: 2px solid var(--color-border);
+        background: #090909;
+        border: 1px solid #1d1d1d;
         padding: 40px;
-        box-shadow: 8px 8px 0 var(--color-border);
-        margin-bottom: 40px;
+        margin-bottom: 32px;
     }
     .profile-title {
         font-family: var(--font-display);
         font-size: 32px;
         font-weight: 800;
-        letter-spacing: -1.5px;
+        letter-spacing: -0.03em;
         margin-bottom: 32px;
-        border-left: 8px solid var(--color-accent);
+        border-left: 3px solid #FF4D30;
         padding-left: 20px;
         text-transform: uppercase;
+        color: #ffffff;
     }
     .info-grid {
         display: grid;
@@ -26,58 +26,65 @@
     }
     .info-group h4 {
         font-family: var(--font-mono);
-        font-size: 11px;
+        font-size: 10px;
         font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 2px;
-        color: var(--color-text-muted);
+        letter-spacing: 0.12em;
+        color: #FF4D30;
         margin-bottom: 8px;
     }
     .info-group p {
-        font-size: 16px;
-        font-weight: 600;
-        color: var(--color-text);
+        font-size: 15px;
+        font-weight: 500;
+        color: #E5E5DF;
     }
     .document-section {
         margin-top: 40px;
-        padding-top: 40px;
-        border-top: 2px solid var(--color-border);
+        padding-top: 32px;
+        border-top: 1px solid #1d1d1d;
     }
     .document-card {
-        background: var(--color-secondary);
-        border: 2px solid var(--color-border);
-        padding: 24px;
+        background: #070707;
+        border: 1px solid #1d1d1d;
+        padding: 20px 24px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 16px;
+        margin-bottom: 12px;
+        transition: border-color 0.2s;
     }
     .document-card:hover {
-        border-color: var(--color-accent);
+        border-color: #FF4D30;
     }
     .btn-brutalist-sm {
         font-family: var(--font-mono);
-        background: var(--color-accent);
-        color: white;
+        background: #ECECE7;
+        color: #000000;
         padding: 8px 16px;
-        font-size: 11px;
-        font-weight: 700;
-        letter-spacing: 0.08em;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
         text-transform: uppercase;
-        border: 2px solid black;
-        box-shadow: 3px 3px 0 black;
+        border: 1px solid #ECECE7;
         text-decoration: none;
+        transition: all 0.18s ease;
+    }
+    .btn-brutalist-sm:hover {
+        background: #FF4D30;
+        border-color: #FF4D30;
+        color: #ffffff;
     }
     .action-select-premium {
         font-family: var(--font-mono);
-        background: var(--color-surface);
-        border: 4px solid black;
+        background: #070707;
+        border: 1px solid #262626;
+        color: #E5E5DF;
         padding: 10px 16px;
         font-weight: 700;
         text-transform: uppercase;
-        font-size: 11px;
+        letter-spacing: 0.08em;
+        font-size: 10px;
         cursor: pointer;
-        box-shadow: 4px 4px 0 black;
         border-radius: 0;
     }
     .action-select-premium:hover {
@@ -352,12 +359,12 @@
 @endpush
 
 <div class="brutalist-profile-card">
-    <h3 class="font-black text-xl mb-6">Decision Center</h3>
-    <form action="{{ route('hr.applications.status', $application->id) }}" method="POST" class="flex gap-6">
+    <h3 class="c-title-card text-xl text-white uppercase mb-6">// Decision Center</h3>
+    <form action="{{ route('hr.applications.status', $application->id) }}" method="POST" class="flex flex-wrap gap-4">
         @csrf
-        <button name="status" value="accepted" class="bg-green-500 text-white px-8 py-4 font-black uppercase border-2 border-black shadow-[6px_6px_0_black] hover:translate-y-[2px] transition-all">Accept Candidate</button>
-        <button name="status" value="rejected" class="bg-red-500 text-white px-8 py-4 font-black uppercase border-2 border-black shadow-[6px_6px_0_black] hover:translate-y-[2px] transition-all">Reject Candidate</button>
-        <button name="status" value="pending" class="bg-yellow-500 text-black px-8 py-4 font-black uppercase border-2 border-black shadow-[6px_6px_0_black] hover:translate-y-[2px] transition-all">Keep in Review</button>
+        <button name="status" value="accepted" class="c-mono bg-green-500/10 hover:bg-green-500 text-green-400 hover:text-black px-6 py-3.5 text-xs font-bold uppercase tracking-widest border border-green-500/40 transition-colors cursor-pointer">Accept Candidate</button>
+        <button name="status" value="rejected" class="c-mono bg-red-500/10 hover:bg-red-500 text-red-400 hover:text-white px-6 py-3.5 text-xs font-bold uppercase tracking-widest border border-red-500/40 transition-colors cursor-pointer">Reject Candidate</button>
+        <button name="status" value="pending" class="c-mono bg-yellow-500/10 hover:bg-yellow-500 text-yellow-400 hover:text-black px-6 py-3.5 text-xs font-bold uppercase tracking-widest border border-yellow-500/40 transition-colors cursor-pointer">Keep in Review</button>
     </form>
 </div>
 @endsection

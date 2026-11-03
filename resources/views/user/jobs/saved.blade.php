@@ -11,16 +11,23 @@
 
 @section('content')
 <div class="saved-hero gsap-reveal">
+    <div class="flex flex-wrap items-center justify-between gap-4 border-b border-[#171717] pb-3 mb-6">
+        <div class="c-release-tag mb-0">
+            <span class="w-2 h-2 bg-[#FF4D30]"></span>
+            <span>CHALLORA // BOOKMARKED ROLES</span>
+        </div>
+        <div class="c-mono text-[11px] text-[#777]">CANDIDATE SHORTLIST</div>
+    </div>
     <h1 class="saved-title-giant">Saved Jobs</h1>
     <p class="saved-subtext">Positions you've bookmarked for careful review.</p>
 </div>
 
 <div class="job-list-area">
     @if ($savedJobs->isEmpty())
-        <div class="bg-secondary p-12 text-center border-2 border-dashed border-border gsap-reveal">
-            <h3 class="font-sans font-extrabold text-2xl mb-2">No saved jobs</h3>
-            <p class="font-serif italic text-text-muted text-lg">Your flagged positions will appear here for review.</p>
-            <a href="{{ route('jobs.index') }}" class="inline-block mt-6 bg-accent text-surface px-6 py-3 font-mono text-xs font-bold uppercase tracking-widest border-2 border-black shadow-[4px_4px_0_black] hover:translate-y-[2px] transition-all">Explore Boards</a>
+        <div class="bg-[#090909] p-16 text-center border border-[#1d1d1d] gsap-reveal">
+            <h3 class="c-title-card text-2xl mb-2 text-white uppercase">No saved jobs</h3>
+            <p class="c-motto text-base">Your flagged positions will appear here for review.</p>
+            <a href="{{ route('jobs.index') }}" class="c-btn-install mt-6">Explore Boards &rarr;</a>
         </div>
     @else
         <div id="jobs-container">

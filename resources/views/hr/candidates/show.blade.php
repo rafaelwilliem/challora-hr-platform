@@ -3,143 +3,142 @@
 @push('styles')
 <style>
     .candidate-show-container {
-        padding: 60px 0;
+        padding: 20px 0 60px;
     }
     .hero-glass {
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px);
-        border: 4px solid black;
-        box-shadow: 12px 12px 0 black;
-        padding: 60px;
-        margin-bottom: 60px;
+        background: #090909;
+        border: 1px solid #1d1d1d;
+        padding: 48px;
+        margin-bottom: 40px;
         position: relative;
         overflow: hidden;
     }
     .hero-glass::before {
         content: '';
         position: absolute;
-        top: 0; left: 0; width: 100%; height: 8px;
-        background: var(--color-accent);
+        top: 0; left: 0; width: 100%; height: 2px;
+        background: #FF4D30;
     }
     .candidate-name-giant {
         font-family: var(--font-display);
-        font-size: 80px;
+        font-size: clamp(2.5rem, 5vw, 4.25rem);
         font-weight: 800;
-        letter-spacing: -4px;
-        line-height: 0.9;
-        margin-bottom: 24px;
+        letter-spacing: -0.04em;
+        line-height: 0.95;
+        margin-bottom: 16px;
         text-transform: uppercase;
+        color: #ffffff;
     }
     .meta-tags-flex {
         display: flex;
         flex-wrap: wrap;
-        gap: 12px;
-        margin-top: 32px;
+        gap: 10px;
+        margin-top: 28px;
     }
     .tag-brutalist {
         font-family: var(--font-mono);
-        background: black;
-        color: white;
-        padding: 8px 16px;
+        background: #070707;
+        color: #b8b8b8;
+        padding: 6px 14px;
         font-weight: 700;
         text-transform: uppercase;
-        font-size: 11px;
-        letter-spacing: 1px;
-        border: 2px solid white;
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        border: 1px solid #262626;
     }
     .profile-grid-premium {
         display: grid;
-        grid-template-columns: 1fr 400px;
-        gap: 60px;
+        grid-template-columns: 1fr 380px;
+        gap: 40px;
     }
     .section-premium {
-        background: var(--color-surface);
-        border: 4px solid black;
-        box-shadow: 8px 8px 0 black;
-        padding: 48px;
-        margin-bottom: 48px;
+        background: #090909;
+        border: 1px solid #1d1d1d;
+        padding: 40px;
+        margin-bottom: 32px;
     }
     .section-label-giant {
         font-family: var(--font-display);
-        font-size: 40px;
+        font-size: 26px;
         font-weight: 800;
-        letter-spacing: -1px;
-        margin-bottom: 32px;
-        border-bottom: 8px solid var(--color-accent);
-        display: inline-block;
+        letter-spacing: -0.02em;
+        margin-bottom: 28px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #1d1d1d;
+        display: block;
         text-transform: uppercase;
+        color: #ffffff;
     }
     .biodata-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 32px;
+        gap: 28px;
     }
     .info-item label {
         font-family: var(--font-mono);
         display: block;
-        font-size: 11px;
+        font-size: 10px;
         font-weight: 700;
         text-transform: uppercase;
-        color: var(--color-text-muted);
-        letter-spacing: 1.5px;
-        margin-bottom: 8px;
+        color: #FF4D30;
+        letter-spacing: 0.12em;
+        margin-bottom: 6px;
     }
     .info-item span {
-        font-size: 18px;
-        font-weight: 700;
-        color: var(--color-text);
+        font-size: 16px;
+        font-weight: 600;
+        color: #E5E5DF;
     }
     .ai-score-card {
-        background: black;
+        background: #090909;
         color: white;
-        padding: 40px;
+        padding: 36px;
         text-align: center;
-        border: 4px solid var(--color-accent);
-        margin-bottom: 32px;
+        border: 1px solid #FF4D30;
+        margin-bottom: 24px;
     }
     .ai-score-number {
         font-family: var(--font-display);
-        font-size: 80px;
-        font-weight: 900;
-        color: var(--color-accent);
+        font-size: 64px;
+        font-weight: 800;
+        color: #FF4D30;
         line-height: 1;
     }
     .ai-label {
         font-family: var(--font-mono);
         font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 2px;
-        font-size: 12px;
+        letter-spacing: 0.12em;
+        font-size: 11px;
         margin-top: 8px;
     }
     .pro-con-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 24px;
-        margin-top: 32px;
+        gap: 20px;
+        margin-top: 24px;
     }
-    .pro-box { border-left: 8px solid #4ade80; padding-left: 20px; }
-    .con-box { border-left: 8px solid #f87171; padding-left: 20px; }
-    .box-title { font-family: var(--font-mono); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; font-size: 12px; margin-bottom: 12px; }
-    .box-list { font-family: var(--font-body); font-size: 15px; color: var(--color-text-muted); }
+    .pro-box { border-left: 2px solid #4ade80; padding-left: 16px; }
+    .con-box { border-left: 2px solid #f87171; padding-left: 16px; }
+    .box-title { font-family: var(--font-mono); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 11px; margin-bottom: 12px; }
+    .box-list { font-family: var(--font-body); font-size: 15px; color: #9c9c9c; }
     
     .timeline-item {
-        border-left: 4px solid black;
+        border-left: 1px solid #262626;
         padding-left: 24px;
-        padding-bottom: 32px;
+        padding-bottom: 28px;
         position: relative;
     }
     .timeline-item::before {
         content: '';
         position: absolute;
-        left: -12px; top: 0;
-        width: 20px; height: 20px;
-        background: var(--color-accent);
-        border: 4px solid black;
+        left: -5px; top: 0;
+        width: 9px; height: 9px;
+        background: #FF4D30;
     }
-    .timeline-date { font-family: var(--font-mono); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-accent); margin-bottom: 4px; }
-    .timeline-title { font-family: var(--font-display); font-size: 22px; font-weight: 800; margin-bottom: 8px; }
-    .timeline-subtitle { font-family: var(--font-body); font-style: italic; font-weight: 600; color: var(--color-text-muted); margin-bottom: 12px; }
+    .timeline-date { font-family: var(--font-mono); font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: #FF4D30; margin-bottom: 4px; }
+    .timeline-title { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: #ffffff; margin-bottom: 4px; }
+    .timeline-subtitle { font-family: var(--font-body); font-style: italic; font-weight: 400; color: #9c9c9c; margin-bottom: 10px; }
 </style>
 @endpush
 
