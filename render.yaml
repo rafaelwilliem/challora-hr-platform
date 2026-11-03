@@ -35,7 +35,7 @@ services:
       - key: MYSQL_ATTR_SSL_VERIFY_SERVER_CERT
         value: "false"
       - key: APP_VERSION
-        value: "5.0.0"
+        value: "5.2.0"
       - key: LOG_CHANNEL
         value: stderr
       - key: SESSION_DRIVER

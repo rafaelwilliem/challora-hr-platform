@@ -19,8 +19,6 @@ class JobController extends Controller
 
     public function index(Request $request)
     {
-        $jobs = $this->searchService->search($request);
-        
         $appliedJobIds = [];
         $savedJobIds = [];
         $isProfileComplete = true;
@@ -48,16 +46,13 @@ class JobController extends Controller
 
             if (empty($topJobRecommendationIds)) {
                 $dispatchLockKey = "user_{$user->id}_top_jobs_dispatch_lock";
-                $hasRecentPending = AiUserJobRecommendation::where('user_id', $user->id)
-                    ->whereIn('status', ['pending', 'processing'])
-                    ->where('updated_at', '>=', now()->subMinutes(10))
-                    ->exists();
-
-                if (!$hasRecentPending && Cache::add($dispatchLockKey, true, now()->addMinutes(10))) {
+                if (Cache::add($dispatchLockKey, true, now()->addMinutes(10))) {
                     GenerateTopJobsJob::dispatch($user->id);
                 }
             }
         }
+
+        $jobs = $this->searchService->search($request, 10, $topJobRecommendationIds);
 
         return view('user.jobs.index', [
             'jobs' => $jobs,

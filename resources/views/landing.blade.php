@@ -2,18 +2,16 @@
 
 @push('styles')
 <style>
-    /* ── RYOKU-INSPIRED REFINED BRUTALIST TOKENS ── */
+    /* ── CHALLORA HR DESIGN SYSTEM ── */
     :root {
         --c-accent: #FF4D30;
         --c-accent-hover: #e03e00;
         --c-black: #070707;
         --c-dark-surface: #0e0e0e;
-        --c-border: #1f1f1f;
-        --c-border-light: #2d2d2d;
-        --c-border-accent: rgba(255, 77, 48, 0.4);
+        --c-border: #1d1d1d;
+        --c-border-subtle: #171717;
         --c-white: #FFFFFF;
-        --c-cream: #E5E5E0;
-        --c-gray-light: #F4F4F4;
+        --c-cream: #E5E5DF;
         --c-gray-mid: #9E9E9E;
         --c-gray-dark: #555555;
         --nav-height: 80px;
@@ -60,16 +58,16 @@
     .c-motto {
         font-family: var(--font-body) !important;
         font-style: italic;
-        color: #8f8f8f;
-        font-size: clamp(1.1rem, 2vw, 1.4rem);
-        line-height: 1.4;
+        color: #9c9c9c;
+        font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+        line-height: 1.45;
     }
 
     .c-body-text {
         font-family: var(--font-body) !important;
-        color: #b5b5b5;
+        color: #b8b8b8;
         font-size: 1.05rem;
-        line-height: 1.65;
+        line-height: 1.7;
     }
 
     /* ── 3. Mini Text & Decoration: Monospace ── */
@@ -78,8 +76,8 @@
         letter-spacing: 0.06em;
     }
 
-    /* ── Ryoku-Style Zero-Radius Hero Layout ── */
-    .c-hero-container {
+    /* ── Pure Information Hero ── */
+    .c-hero-pure {
         min-height: calc(100vh - var(--nav-height));
         width: 100vw;
         position: relative;
@@ -89,124 +87,59 @@
         margin-right: -50vw;
         background-color: var(--c-black);
         border-bottom: 1px solid var(--c-border);
-        display: grid;
-        grid-template-columns: 1.15fr 0.85fr;
-        padding-top: var(--nav-height);
-        overflow: hidden;
+        padding-top: calc(var(--nav-height) + 3.5rem);
+        padding-bottom: 5rem;
     }
 
-    .c-hero-content {
-        padding: 4rem 4rem 4rem 6rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        z-index: 10;
-        position: relative;
+    .c-hero-inner {
+        max-width: 1360px;
+        margin: 0 auto;
+        padding: 0 3rem;
     }
 
-    /* Top Platform Pills (Ryoku distro-style) */
-    .c-platform-selector {
-        display: inline-flex;
-        align-items: center;
-        gap: 1.5rem;
-        padding: 0.35rem 0.85rem;
-        background: #0b0b0b;
-        border: 1px solid #202020;
-        margin-bottom: 2.25rem;
-        width: fit-content;
-    }
-
-    /* Release Kicker */
+    /* Kicker & Tags */
     .c-release-tag {
-        font-family: var(--font-mono) !important;
-        font-size: 0.72rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.14em;
-        color: #888888;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        margin-bottom: 1.25rem;
-    }
-
-    /* Ryoku Technical Architecture Specs Table */
-    .c-specs-table {
-        margin-top: 2rem;
-        border-top: 1px solid #1a1a1a;
-        width: 100%;
-        max-width: 620px;
-    }
-
-    .c-spec-row {
-        display: grid;
-        grid-template-columns: 150px 1fr;
-        align-items: baseline;
-        padding: 0.85rem 0;
-        border-bottom: 1px solid #141414;
-        gap: 1.5rem;
-    }
-
-    .c-spec-key {
         font-family: var(--font-mono) !important;
         font-size: 0.75rem;
         font-weight: 700;
-        letter-spacing: 0.1em;
         text-transform: uppercase;
-        color: #666666;
+        letter-spacing: 0.12em;
+        color: #777777;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        margin-bottom: 1.75rem;
     }
 
-    .c-spec-val {
-        color: #e0e0e0;
-        font-size: 0.95rem;
-    }
-
-    /* Ryoku 4-Box Telemetry Matrix */
-    .c-stat-matrix {
+    /* Feature Breakdown Grid */
+    .c-feature-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        border: 1px solid #222222;
-        background: #0a0a0a;
-        width: 100%;
-        max-width: 580px;
-        margin-top: 2.5rem;
+        border: 1px solid var(--c-border);
+        background: #090909;
+        margin-top: 3.5rem;
     }
 
-    .c-stat-cell {
-        padding: 1rem 1.25rem;
-        border-right: 1px solid #1c1c1c;
+    .c-feature-box {
+        padding: 1.75rem 1.75rem;
+        border-right: 1px solid var(--c-border);
         display: flex;
         flex-direction: column;
+        transition: background 0.2s ease;
     }
-    .c-stat-cell:last-child {
+    .c-feature-box:last-child {
         border-right: none;
     }
-
-    .c-stat-number {
-        font-family: var(--font-display) !important;
-        font-size: 1.75rem;
-        font-weight: 800;
-        color: #ffffff;
-        letter-spacing: -0.02em;
-        line-height: 1;
-        margin-bottom: 0.4rem;
+    .c-feature-box:hover {
+        background: #111111;
     }
 
-    .c-stat-label {
-        font-family: var(--font-mono) !important;
-        font-size: 0.625rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        color: #666666;
-    }
-
-    /* Ryoku-Style Zero-Radius Action Buttons */
+    /* Zero-Radius Buttons */
     .c-btn-install {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        padding: 0.9rem 2.25rem;
+        padding: 0.95rem 2.25rem;
         background-color: #ECECE7;
         color: #000000;
         font-family: var(--font-mono) !important;
@@ -231,7 +164,7 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        padding: 0.9rem 2.25rem;
+        padding: 0.95rem 2.25rem;
         background-color: transparent;
         color: #ECECE7;
         font-family: var(--font-mono) !important;
@@ -251,40 +184,10 @@
         color: #ffffff;
     }
 
-    /* Right Visual & Radial Wireframes */
-    .c-hero-visual {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        border-left: 1px solid var(--c-border);
-        background: radial-gradient(circle at 60% 50%, #151515 0%, #070707 70%);
-    }
-
-    .c-hero-visual img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center top;
-        filter: grayscale(100%) contrast(1.35) brightness(0.65);
-        mix-blend-mode: luminosity;
-        position: relative;
-        z-index: 2;
-    }
-
-    .c-orbital-grid {
-        position: absolute;
-        inset: 0;
-        z-index: 1;
-        pointer-events: none;
-        opacity: 0.28;
-    }
-
-    /* Marquee Ribbon */
+    /* Marquee */
     .c-marquee {
         background-color: #0c0c0c;
-        color: #888888;
+        color: #777777;
         padding: 0.85rem 0;
         overflow: hidden;
         white-space: nowrap;
@@ -303,17 +206,17 @@
     }
     .c-marquee span {
         display: inline-block;
-        animation: c-scroll 35s linear infinite;
+        animation: c-scroll 38s linear infinite;
     }
     @keyframes c-scroll {
         0% { transform: translateX(0); }
         100% { transform: translateX(-50%); }
     }
 
-    /* Sections */
+    /* Section Containers */
     .c-section {
-        padding: 6.5rem 4rem;
-        max-width: 1600px;
+        padding: 6.5rem 3rem;
+        max-width: 1360px;
         margin: 0 auto;
         width: 100%;
     }
@@ -344,17 +247,15 @@
     }
 
     /* Responsive */
-    @media (max-width: 1100px) {
-        .c-hero-container {
-            grid-template-columns: 1fr;
+    @media (max-width: 1024px) {
+        .c-feature-grid {
+            grid-template-columns: repeat(2, 1fr);
         }
-        .c-hero-content {
-            padding: 3rem 2rem;
+        .c-feature-box:nth-child(2) {
+            border-right: none;
         }
-        .c-hero-visual {
-            min-height: 400px;
-            border-left: none;
-            border-top: 1px solid var(--c-border);
+        .c-feature-box:nth-child(1), .c-feature-box:nth-child(2) {
+            border-bottom: 1px solid var(--c-border);
         }
         .c-grid-solutions {
             grid-template-columns: 1fr 1fr;
@@ -362,21 +263,19 @@
     }
 
     @media (max-width: 640px) {
-        .c-hero-content {
-            padding: 2rem 1.25rem;
+        .c-hero-inner {
+            padding: 0 1.25rem;
         }
-        .c-stat-matrix {
-            grid-template-columns: 1fr 1fr;
+        .c-hero-pure {
+            padding-top: calc(var(--nav-height) + 2rem);
+            padding-bottom: 3.5rem;
         }
-        .c-stat-cell:nth-child(2) {
-            border-right: none;
-        }
-        .c-stat-cell:nth-child(1), .c-stat-cell:nth-child(2) {
-            border-bottom: 1px solid #1c1c1c;
-        }
-        .c-spec-row {
+        .c-feature-grid {
             grid-template-columns: 1fr;
-            gap: 0.35rem;
+        }
+        .c-feature-box {
+            border-right: none;
+            border-bottom: 1px solid var(--c-border);
         }
         .c-grid-solutions {
             grid-template-columns: 1fr;
@@ -389,174 +288,105 @@
 @endpush
 
 @section('content')
-<div class="flex flex-col w-full bg-[#070707] text-[#E5E5E0] selection:bg-[#FF4D30] selection:text-white">
+<div class="flex flex-col w-full bg-[#070707] text-[#E5E5DF] selection:bg-[#FF4D30] selection:text-white">
 
-    <!-- 01 // RYOKU-INSPIRED HERO CONTAINER -->
-    <section class="c-hero-container">
-        
-        <!-- Left Hero Content: Big Title (Sans), Motto/Body (Serif), Meta (Mono) -->
-        <div class="c-hero-content">
+    <!-- 01 // PURE INFORMATION HERO SECTION -->
+    <section class="c-hero-pure">
+        <div class="c-hero-inner">
 
-            <!-- Top Environment Selector (Ryoku distro box style) -->
-            <div class="c-platform-selector">
-                <div class="flex items-center gap-3">
-                    <span class="c-mono text-[10px] text-[#666] font-bold tracking-wider uppercase">DEPLOYMENT</span>
-                    <span class="c-mono text-[11px] text-gray-300 flex items-center gap-1.5 font-medium">
-                        <span class="w-1.5 h-1.5 bg-[#FF4D30]"></span> Cloud Tier
-                    </span>
-                    <span class="c-mono text-[11px] text-gray-400">On-Prem VPC</span>
+            <!-- Top Tagline & Status -->
+            <div class="flex flex-wrap items-center justify-between gap-4 border-b border-[#1c1c1c] pb-4 mb-8">
+                <div class="c-release-tag mb-0">
+                    <span class="w-2 h-2 bg-[#FF4D30]"></span>
+                    <span>CHALLORA // HR &amp; TALENT PLATFORM</span>
                 </div>
-                <div class="w-px h-3 bg-[#262626]"></div>
-                <div class="flex items-center gap-3">
-                    <span class="c-mono text-[10px] text-[#666] font-bold tracking-wider uppercase">INTELLIGENCE</span>
-                    <span class="c-mono text-[11px] text-gray-300">Neural ATS v2.4</span>
-                    <span class="c-mono text-[11px] text-emerald-400">SOC-2</span>
+                <div class="c-mono text-[11px] text-gray-500 flex items-center gap-2">
+                    <span class="text-gray-400">CORE ATS</span>
+                    <span>/</span>
+                    <span>RECRUITMENT INTELLIGENCE</span>
                 </div>
             </div>
 
-            <!-- Version Release Kicker -->
-            <div class="c-release-tag">
-                <span class="text-[#FF4D30] font-bold">✦</span>
-                <span>CHALLORA 5.1 · NEURAL RECRUITMENT · RELEASED</span>
-            </div>
-
-            <!-- BIG TITLE: Bold Sans-Serif -->
-            <h1 class="c-title-display text-white text-5xl sm:text-6xl md:text-7xl lg:text-8xl mb-3">
-                Challora
+            <!-- Big Title (Sans-Serif) -->
+            <h1 class="c-title-display text-white text-6xl sm:text-7xl md:text-8xl lg:text-9xl mb-4">
+                Challora HR
             </h1>
 
-            <!-- MOTTO / SUBTITLE: Elegant Serif in Italics -->
-            <p class="c-motto mb-6">
-                人材と可能性のために &nbsp; <span class="text-gray-300">for the sake of talent, precision, and unbiased potential</span>
+            <!-- Motto / Sub-headline (Italic Serif) -->
+            <p class="c-motto max-w-3xl mb-8">
+                A focused talent acquisition platform — matching candidate potential with company growth through objective intelligence.
             </p>
 
-            <!-- Interactive Kinetic Terminal Typewriter Box -->
-            <div class="flex items-center gap-2 bg-[#0c0c0c] border border-[#1f1f1f] border-l-2 border-l-[#FF4D30] px-4 py-2.5 max-w-[620px] mb-4">
-                <span class="c-mono text-[11px] text-[#FF4D30] font-bold tracking-wider">// CHALLY &gt;</span>
-                <span id="hero-typewriter" class="c-mono text-[12px] text-gray-300 font-medium"></span>
-                <span class="c-mono text-[#FF4D30] font-bold animate-pulse">█</span>
+            <!-- Product Purpose (Clean Body Serif) -->
+            <div class="max-w-3xl mb-10 space-y-4">
+                <p class="c-body-text text-base sm:text-lg">
+                    Challora HR streamlines the end-to-end recruitment lifecycle. Candidates get a clear, transparent application process with instant profile coaching, while hiring teams gain automated resume evaluation, candidate scorecards, and visual stage pipelines in a single, focused workspace.
+                </p>
             </div>
 
-            <!-- RYOKU ARCHITECTURE SPECS TABLE -->
-            <div class="c-specs-table">
-                <div class="c-spec-row">
-                    <div class="c-spec-key">CV PARSER</div>
-                    <div class="c-spec-val">
-                        <div class="font-sans font-semibold text-white text-[15px] flex items-center gap-2">
-                            Semantic AST <span class="text-[#FF4D30]">⇄</span> Deep Extraction
-                        </div>
-                        <p class="c-serif italic text-xs text-gray-400 mt-0.5">
-                            Multilingual parsing across 40+ resume formats in 0.4s. Resists keyword gaming.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="c-spec-row">
-                    <div class="c-spec-key">BIAS CONTROL</div>
-                    <div class="c-spec-val">
-                        <div class="font-sans font-semibold text-white text-[15px]">
-                            Blind Competency Triage
-                        </div>
-                        <p class="c-serif italic text-xs text-gray-400 mt-0.5">
-                            Filters demographic cues, institution pedigree, and unconscious scoring biases.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="c-spec-row">
-                    <div class="c-spec-key">MATCH PIPELINE</div>
-                    <div class="c-spec-val">
-                        <div class="font-sans font-semibold text-white text-[15px]">
-                            Neural Trajectory &amp; Culture Velocity
-                        </div>
-                    </div>
-                </div>
-
-                <div class="c-spec-row">
-                    <div class="c-spec-key">INTELLIGENCE</div>
-                    <div class="c-spec-val">
-                        <div class="font-sans font-semibold text-white text-[15px]">
-                            Chally Autonomous ATS Agent
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- RYOKU 4-BOX TELEMETRY MATRIX -->
-            <div class="c-stat-matrix">
-                <div class="c-stat-cell">
-                    <div class="c-stat-number">0.4<span class="text-xs text-[#FF4D30]">s</span></div>
-                    <div class="c-stat-label">CV LATENCY</div>
-                </div>
-                <div class="c-stat-cell">
-                    <div class="c-stat-number">99.2<span class="text-xs text-[#FF4D30]">%</span></div>
-                    <div class="c-stat-label">MATCH RATE</div>
-                </div>
-                <div class="c-stat-cell">
-                    <div class="c-stat-number">0.0<span class="text-xs text-[#FF4D30]">%</span></div>
-                    <div class="c-stat-label">BIAS DRIFT</div>
-                </div>
-                <div class="c-stat-cell">
-                    <div class="c-stat-number">24/7</div>
-                    <div class="c-stat-label">AUTONOMOUS</div>
-                </div>
-            </div>
-
-            <!-- ZERO-RADIUS ACTION BUTTONS -->
-            <div class="flex flex-wrap items-center gap-4 mt-8">
+            <!-- Action Area (Zero-Radius Buttons) -->
+            <div class="flex flex-wrap items-center gap-4 mb-12">
                 <a href="{{ route('jobs.index') }}" class="c-btn-install">
-                    EXPLORE POSITIONS
+                    BROWSE OPEN POSITIONS &rarr;
                 </a>
-                <a href="{{ route('register') }}" class="c-btn-source">
-                    DEPLOY PIPELINE
+                @guest
+                <a href="{{ route('login') }}" class="c-btn-source">
+                    RECRUITER ACCESS
                 </a>
+                @else
+                <a href="{{ auth()->user()->isAdmin() ? route('hr.dashboard') : route('user.applications.index') }}" class="c-btn-source">
+                    GO TO DASHBOARD
+                </a>
+                @endguest
             </div>
 
-            <!-- METADATA FOOTNOTE (Ryoku Star/Fork Style) -->
-            <div class="c-mono text-[11px] text-[#666] flex items-center gap-3 mt-6">
-                <span class="text-[#FF4D30]">★</span>
-                <span>2,480 applicants scored</span>
-                <span class="text-[#333]">/</span>
-                <span>120 hiring teams</span>
-                <span class="text-[#333]">/</span>
-                <span>SOC-2 COMPLIANT</span>
+            <!-- Pure Information Breakdown Grid (The 4 Pillars of Challora HR) -->
+            <div class="c-feature-grid">
+                <div class="c-feature-box">
+                    <span class="c-mono text-[10px] text-[#FF4D30] font-bold tracking-widest uppercase mb-2">// 01 &middot; SCREENING</span>
+                    <h3 class="font-sans font-bold text-white text-base mb-1.5">AI Candidate Match</h3>
+                    <p class="c-serif text-xs text-gray-400 leading-relaxed">
+                        Evaluates skills and experience contextually against job requirements, bypassing superficial keyword tricks.
+                    </p>
+                </div>
+
+                <div class="c-feature-box">
+                    <span class="c-mono text-[10px] text-[#FF4D30] font-bold tracking-widest uppercase mb-2">// 02 &middot; WORKFLOW</span>
+                    <h3 class="font-sans font-bold text-white text-base mb-1.5">Pipeline Stages</h3>
+                    <p class="c-serif text-xs text-gray-400 leading-relaxed">
+                        Track candidate progression with clarity: Applied &rarr; Screening &rarr; Interview &rarr; Offered &rarr; Hired.
+                    </p>
+                </div>
+
+                <div class="c-feature-box">
+                    <span class="c-mono text-[10px] text-[#FF4D30] font-bold tracking-widest uppercase mb-2">// 03 &middot; DOSSIERS</span>
+                    <h3 class="font-sans font-bold text-white text-base mb-1.5">Decision Scorecards</h3>
+                    <p class="c-serif text-xs text-gray-400 leading-relaxed">
+                        Structured summaries providing hiring managers with quick, objective snapshots of applicant suitability.
+                    </p>
+                </div>
+
+                <div class="c-feature-box">
+                    <span class="c-mono text-[10px] text-[#FF4D30] font-bold tracking-widest uppercase mb-2">// 04 &middot; COACHING</span>
+                    <h3 class="font-sans font-bold text-white text-base mb-1.5">Applicant Coaching</h3>
+                    <p class="c-serif text-xs text-gray-400 leading-relaxed">
+                        Gives applicants constructive profile recommendations to highlight real strengths for future applications.
+                    </p>
+                </div>
             </div>
 
         </div>
-
-        <!-- Right Hero Visual: Dithered/Monochrome Artwork + Orbital Wireframe Grid -->
-        <div class="c-hero-visual">
-            <!-- Orbital Geometry Overlay (Concentric circles like Ryoku) -->
-            <svg class="c-orbital-grid" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="400" cy="400" r="380" stroke="#FFFFFF" stroke-width="1" stroke-dasharray="2 6"/>
-                <circle cx="400" cy="400" r="280" stroke="#FFFFFF" stroke-width="1"/>
-                <circle cx="400" cy="400" r="180" stroke="#FF4D30" stroke-width="1" stroke-dasharray="4 8"/>
-                <circle cx="400" cy="400" r="80" stroke="#FFFFFF" stroke-width="1"/>
-                <line x1="0" y1="400" x2="800" y2="400" stroke="#FFFFFF" stroke-width="0.5" stroke-dasharray="3 9"/>
-                <line x1="400" y1="0" x2="400" y2="800" stroke="#FFFFFF" stroke-width="0.5" stroke-dasharray="3 9"/>
-                <!-- Subtle Crosshairs -->
-                <path d="M390 400 H410 M400 390 V410" stroke="#FF4D30" stroke-width="1.5"/>
-            </svg>
-
-            <!-- Hero Image with High Contrast Editorial Treatment -->
-            <img src="{{ asset('hero.jpg') }}" alt="Challora Classical Visual">
-            
-            <!-- Vignette Gradients -->
-            <div class="absolute inset-0 bg-gradient-to-t from-[#070707] via-transparent to-[#070707]/60 z-[3]"></div>
-            <div class="absolute inset-0 bg-gradient-to-r from-[#070707] via-transparent to-transparent z-[3]"></div>
-        </div>
-
     </section>
 
-    <!-- 02 // TICKER MARQUEE -->
+    <!-- 02 // SUBTLE MONO MARQUEE -->
     <div class="c-marquee">
         <span>
-            ✦ NO KEYWORD BIAS &nbsp;&nbsp;&nbsp;&nbsp; // SMARTER HIRING &nbsp;&nbsp;&nbsp;&nbsp; // CHALLY HR INTELLIGENCE &nbsp;&nbsp;&nbsp;&nbsp; // FIND THE RIGHT TALENT &nbsp;&nbsp;&nbsp;&nbsp; // ZERO RESUME NOISE &nbsp;&nbsp;&nbsp;&nbsp; // ARCHITECTED FOR MODERN TEAMS &nbsp;&nbsp;&nbsp;&nbsp;
-            ✦ NO KEYWORD BIAS &nbsp;&nbsp;&nbsp;&nbsp; // SMARTER HIRING &nbsp;&nbsp;&nbsp;&nbsp; // CHALLY HR INTELLIGENCE &nbsp;&nbsp;&nbsp;&nbsp; // FIND THE RIGHT TALENT &nbsp;&nbsp;&nbsp;&nbsp; // ZERO RESUME NOISE &nbsp;&nbsp;&nbsp;&nbsp; // ARCHITECTED FOR MODERN TEAMS &nbsp;&nbsp;&nbsp;&nbsp;
+            ✦ APPLICANT TRACKING &nbsp;&nbsp;&nbsp;&nbsp; // &nbsp;&nbsp;&nbsp;&nbsp; CANDIDATE MATCHING &nbsp;&nbsp;&nbsp;&nbsp; // &nbsp;&nbsp;&nbsp;&nbsp; OBJECTIVE EVALUATION &nbsp;&nbsp;&nbsp;&nbsp; // &nbsp;&nbsp;&nbsp;&nbsp; STRUCTURED PIPELINES &nbsp;&nbsp;&nbsp;&nbsp; // &nbsp;&nbsp;&nbsp;&nbsp; CHALLORA HR PLATFORM &nbsp;&nbsp;&nbsp;&nbsp;
+            ✦ APPLICANT TRACKING &nbsp;&nbsp;&nbsp;&nbsp; // &nbsp;&nbsp;&nbsp;&nbsp; CANDIDATE MATCHING &nbsp;&nbsp;&nbsp;&nbsp; // &nbsp;&nbsp;&nbsp;&nbsp; OBJECTIVE EVALUATION &nbsp;&nbsp;&nbsp;&nbsp; // &nbsp;&nbsp;&nbsp;&nbsp; STRUCTURED PIPELINES &nbsp;&nbsp;&nbsp;&nbsp; // &nbsp;&nbsp;&nbsp;&nbsp; CHALLORA HR PLATFORM &nbsp;&nbsp;&nbsp;&nbsp;
         </span>
     </div>
 
-    <!-- 03 // SOLUTIONS SECTION -->
+    <!-- 03 // CAPABILITIES SECTION -->
     <section class="c-section">
         <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-[#202020] pb-6 gap-4">
             <div>
@@ -564,7 +394,7 @@
                 <h2 class="c-title-section text-white text-3xl sm:text-4xl md:text-5xl">RECRUITMENT INTELLIGENCE</h2>
             </div>
             <p class="c-body-text max-w-md">
-                Engineered to replace brute-force resume scanning with multidimensional contextual intelligence and human-calibrated evaluation.
+                Designed to make recruitment transparent, structured, and free of administrative bottlenecks.
             </p>
         </div>
         
@@ -573,15 +403,15 @@
             <div class="c-solution-card group">
                 <div class="flex items-center justify-between mb-6">
                     <span class="c-mono text-xs font-bold text-[#FF4D30]">// 01</span>
-                    <span class="c-mono text-[10px] text-gray-400 border border-[#2a2a2a] px-2 py-0.5 uppercase tracking-wider">SEMANTIC</span>
+                    <span class="c-mono text-[10px] text-gray-400 border border-[#262626] px-2 py-0.5 uppercase tracking-wider">PARSING</span>
                 </div>
-                <h3 class="c-title-card text-white text-xl mb-3 group-hover:text-[#FF4D30] transition-colors">AI CV Screening</h3>
+                <h3 class="c-title-card text-white text-xl mb-3 group-hover:text-[#FF4D30] transition-colors">CV Evaluation</h3>
                 <p class="c-body-text text-sm mb-8 flex-1">
-                    Analyze hundreds of resumes concurrently. Chally maps contextual experience, validates skill authenticity, and ranks applicants with zero pedigree bias.
+                    Extracts skills, work trajectories, and project contributions semantically to surface genuine qualifications without manual spreadsheet tracking.
                 </p>
                 <div class="mt-auto pt-4 border-t border-[#181818]">
-                    <a href="{{ route('register') }}" class="c-mono text-xs text-[#FF4D30] font-bold hover:underline flex items-center justify-between">
-                        <span>DEPLOY MODULE</span>
+                    <a href="{{ route('jobs.index') }}" class="c-mono text-xs text-[#FF4D30] font-bold hover:underline flex items-center justify-between">
+                        <span>EXPLORE ROLES</span>
                         <span>&rarr;</span>
                     </a>
                 </div>
@@ -591,15 +421,15 @@
             <div class="c-solution-card group">
                 <div class="flex items-center justify-between mb-6">
                     <span class="c-mono text-xs font-bold text-[#FF4D30]">// 02</span>
-                    <span class="c-mono text-[10px] text-gray-400 border border-[#2a2a2a] px-2 py-0.5 uppercase tracking-wider">NEURAL</span>
+                    <span class="c-mono text-[10px] text-gray-400 border border-[#262626] px-2 py-0.5 uppercase tracking-wider">PIPELINE</span>
                 </div>
-                <h3 class="c-title-card text-white text-xl mb-3 group-hover:text-[#FF4D30] transition-colors">Deep Job Matching</h3>
+                <h3 class="c-title-card text-white text-xl mb-3 group-hover:text-[#FF4D30] transition-colors">Applicant Tracking</h3>
                 <p class="c-body-text text-sm mb-8 flex-1">
-                    Moves past literal keyword matching. Synthesizes candidate competency trajectories against role complexity, tech stack demands, and organizational pace.
+                    Visual pipelines allow HR coordinators to transition applicants across stages with immediate status updates and centralized candidate records.
                 </p>
                 <div class="mt-auto pt-4 border-t border-[#181818]">
-                    <a href="{{ route('jobs.index') }}" class="c-mono text-xs text-[#FF4D30] font-bold hover:underline flex items-center justify-between">
-                        <span>EXPLORE POSITIONS</span>
+                    <a href="{{ route('register') }}" class="c-mono text-xs text-[#FF4D30] font-bold hover:underline flex items-center justify-between">
+                        <span>JOIN AS RECRUITER</span>
                         <span>&rarr;</span>
                     </a>
                 </div>
@@ -609,15 +439,15 @@
             <div class="c-solution-card group">
                 <div class="flex items-center justify-between mb-6">
                     <span class="c-mono text-xs font-bold text-[#FF4D30]">// 03</span>
-                    <span class="c-mono text-[10px] text-gray-400 border border-[#2a2a2a] px-2 py-0.5 uppercase tracking-wider">FEEDBACK</span>
+                    <span class="c-mono text-[10px] text-gray-400 border border-[#262626] px-2 py-0.5 uppercase tracking-wider">ASSESSMENT</span>
                 </div>
-                <h3 class="c-title-card text-white text-xl mb-3 group-hover:text-[#FF4D30] transition-colors">Profile Coach</h3>
+                <h3 class="c-title-card text-white text-xl mb-3 group-hover:text-[#FF4D30] transition-colors">Candidate Dossiers</h3>
                 <p class="c-body-text text-sm mb-8 flex-1">
-                    Delivers immediate, constructive diagnostic feedback for candidates. Pinpoints skill gaps, structural resume weaknesses, and portfolio recommendations.
+                    Automated candidate dossiers synthesize resume data, portfolio evidence, and skill breakdowns to give interviewers an objective summary.
                 </p>
                 <div class="mt-auto pt-4 border-t border-[#181818]">
                     <a href="{{ route('register') }}" class="c-mono text-xs text-[#FF4D30] font-bold hover:underline flex items-center justify-between">
-                        <span>GET COACHED</span>
+                        <span>VIEW WORKFLOW</span>
                         <span>&rarr;</span>
                     </a>
                 </div>
@@ -627,15 +457,15 @@
             <div class="c-solution-card group">
                 <div class="flex items-center justify-between mb-6">
                     <span class="c-mono text-xs font-bold text-[#FF4D30]">// 04</span>
-                    <span class="c-mono text-[10px] text-gray-400 border border-[#2a2a2a] px-2 py-0.5 uppercase tracking-wider">TELEMETRY</span>
+                    <span class="c-mono text-[10px] text-gray-400 border border-[#262626] px-2 py-0.5 uppercase tracking-wider">COACHING</span>
                 </div>
-                <h3 class="c-title-card text-white text-xl mb-3 group-hover:text-[#FF4D30] transition-colors">Velocity Dashboard</h3>
+                <h3 class="c-title-card text-white text-xl mb-3 group-hover:text-[#FF4D30] transition-colors">Applicant Feedback</h3>
                 <p class="c-body-text text-sm mb-8 flex-1">
-                    Equip HR leads with real-time pipeline telemetry: candidate score matrices, stage bottlenecks, and hiring velocity analytics in one unified terminal.
+                    Candidates receive actionable guidance on CV gaps, portfolio improvements, and skill positioning to strengthen their career trajectory.
                 </p>
                 <div class="mt-auto pt-4 border-t border-[#181818]">
                     <a href="{{ route('register') }}" class="c-mono text-xs text-[#FF4D30] font-bold hover:underline flex items-center justify-between">
-                        <span>VIEW DASHBOARD</span>
+                        <span>LEARN MORE</span>
                         <span>&rarr;</span>
                     </a>
                 </div>
@@ -643,7 +473,7 @@
         </div>
     </section>
 
-    <!-- 04 // OPEN POSITIONS (SHARP BRUTALIST GRID) -->
+    <!-- 04 // LIVE OPEN POSITIONS (SHARP BRUTALIST GRID) -->
     <section class="c-section pt-0">
         <div class="flex flex-col sm:flex-row sm:items-end justify-between border-b border-[#202020] pb-4 mb-8 gap-4">
             <div>
@@ -678,13 +508,13 @@
                         @endforeach
                     @else
                         <span class="border border-[#262626] bg-[#000] text-gray-400 px-2 py-0.5 c-mono text-[9px] uppercase tracking-wider">
-                            FULL-STACK
+                            TALENT
                         </span>
                     @endif
                 </div>
 
                 <div class="mt-auto pt-4 border-t border-[#181818] flex items-center justify-between">
-                    <span class="c-mono text-[10px] text-gray-500">ID: CHL-{{ str_pad($job->id, 4, '0', STR_PAD_LEFT) }}</span>
+                    <span class="c-mono text-[10px] text-gray-500">REF: CHL-{{ str_pad($job->id, 4, '0', STR_PAD_LEFT) }}</span>
                     <a href="{{ route('jobs.show', $job->id) }}" class="c-btn-install py-1.5 px-3 text-[10px]">
                         APPLY POSITION &rarr;
                     </a>
@@ -701,52 +531,3 @@
 
 </div>
 @endsection
-
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    // ── KINETIC TYPEWRITER ENGINE ──
-    const typewriterElement = document.getElementById('hero-typewriter');
-    if (typewriterElement) {
-        const phrases = [
-            "Parsing 1,200+ resumes concurrently with zero semantic hallucination...",
-            "Filtering keyword stuffing, prompt injection, and pedigree bias...",
-            "Ranking candidates by verified competencies and technical velocity...",
-            "Autonomous applicant triage calibrated to your engineering stack..."
-        ];
-
-        let phraseIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        let typingDelay = 42;
-
-        function type() {
-            const currentPhrase = phrases[phraseIndex];
-            
-            if (isDeleting) {
-                typewriterElement.textContent = currentPhrase.substring(0, charIndex - 1);
-                charIndex--;
-                typingDelay = 20;
-            } else {
-                typewriterElement.textContent = currentPhrase.substring(0, charIndex + 1);
-                charIndex++;
-                typingDelay = 45;
-            }
-
-            if (!isDeleting && charIndex === currentPhrase.length) {
-                typingDelay = 2200;
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                phraseIndex = (phraseIndex + 1) % phrases.length;
-                typingDelay = 400;
-            }
-
-            setTimeout(type, typingDelay);
-        }
-
-        setTimeout(type, 500);
-    }
-});
-</script>
-@endpush

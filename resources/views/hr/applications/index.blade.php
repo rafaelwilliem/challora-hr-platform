@@ -235,12 +235,12 @@
                         </td>
                         <td>
                             <div class="flex gap-2">
-                                @if($a->user->cv_path)
+                                @if($a->cv_path || $a->user->cv_path)
                                     <a href="{{ route('view.document', ['type' => 'cv', 'id' => $a->id]) }}" class="premium-btn-icon" title="View CV">
                                         <i class="bi bi-file-earmark-person"></i>
                                     </a>
                                 @endif
-                                @if($a->user->diploma_path)
+                                @if($a->diploma_path || $a->user->diploma_path)
                                     <a href="{{ route('view.document', ['type' => 'diploma', 'id' => $a->id]) }}" class="premium-btn-icon" title="View Diploma">
                                         <i class="bi bi-mortarboard"></i>
                                     </a>

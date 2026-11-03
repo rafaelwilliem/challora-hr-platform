@@ -183,15 +183,18 @@
         <h3 class="font-black text-xl mb-6">Verified Documentation</h3>
         
         @foreach(['cv' => 'Curriculum Vitae', 'diploma' => 'Educational Diploma', 'photo' => 'Formal Portrait'] as $key => $label)
-            @php $path = $key . '_path'; @endphp
+            @php
+                $path = $key . '_path';
+                $hasDoc = !empty($application->$path) || !empty($user->$path);
+            @endphp
             <div class="document-card">
                 <div>
                     <p class="font-black">{{ $label }}</p>
                     <p class="text-[10px] font-bold text-text-muted uppercase">
-                        {{ $user->$path ? 'Verified & Encrypted' : 'Not Provided' }}
+                        {{ $hasDoc ? 'Verified & Encrypted' : 'Not Provided' }}
                     </p>
                 </div>
-                @if($user->$path)
+                @if($hasDoc)
                     <div class="flex gap-4">
                         <a href="{{ route('view.document', ['type' => $key, 'id' => $application->id]) }}" target="_blank" class="btn-brutalist-sm">
                             View Document

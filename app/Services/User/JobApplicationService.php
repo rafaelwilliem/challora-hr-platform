@@ -50,6 +50,9 @@ class JobApplicationService
             'status'       => ApplicationStatus::PENDING,
         ]);
 
+        cache()->forget("user_{$user->id}_applied_jobs");
+        cache()->forget("hr_stats_dashboard_{$job->created_by}");
+
         // Automatically trigger AI scoring when a candidate applies
         GenerateCvRatingJob::dispatch($application->id);
         GenerateCandidateSummaryJob::dispatch($application->id);

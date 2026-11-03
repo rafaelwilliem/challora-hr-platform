@@ -3,15 +3,18 @@
 namespace App\Services\User;
 
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class ProfileSyncService
 {
     public function updateProfile(User $user, array $validatedData, array $workData, array $achievementData, array $orgData = []): void
     {
-        $user->update($validatedData);
-        $this->syncWorkExperiences($user, $workData);
-        $this->syncAchievements($user, $achievementData);
-        $this->syncOrganizationalExperiences($user, $orgData);
+        DB::transaction(function () use ($user, $validatedData, $workData, $achievementData, $orgData) {
+            $user->update($validatedData);
+            $this->syncWorkExperiences($user, $workData);
+            $this->syncAchievements($user, $achievementData);
+            $this->syncOrganizationalExperiences($user, $orgData);
+        });
     }
 
     private function syncOrganizationalExperiences(User $user, array $orgData): void

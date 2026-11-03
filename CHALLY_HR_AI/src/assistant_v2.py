@@ -200,3 +200,21 @@ Return ONLY a JSON array (no markdown, no explanation):
             for item in payload if isinstance(item, dict)
         ]
         return sorted(normalized, key=lambda x: x["match_score"], reverse=True)
+
+    def suggest_profile(self, target_role: str | None, profile: Dict[str, Any]) -> Dict[str, Any]:
+        role_context = target_role or "general professional roles"
+        prompt = f"""You are Chally AI career advisor. Analyze the user's profile for {role_context} and suggest actionable improvements. RESPOND IN ENGLISH ONLY.
+
+[USER PROFILE]
+{json.dumps(profile, ensure_ascii=False)}
+
+Return ONLY valid JSON, no markdown:
+{{"summary_suggestion":"Improved 2-3 sentence summary","missing_skills":["skill 1","skill 2"],"action_items":["improvement 1","improvement 2","improvement 3"]}}"""
+        text = self._chat(prompt)
+        payload = self._extract_json(text, default={}) or {}
+        if not isinstance(payload, dict):
+            payload = {}
+        payload.setdefault("summary_suggestion", "")
+        payload.setdefault("missing_skills", [])
+        payload.setdefault("action_items", [])
+        return payload

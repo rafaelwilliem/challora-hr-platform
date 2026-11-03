@@ -21,18 +21,8 @@
         </nav>
     </div>
 
-    <!-- Right Controls (Ryoku-Style Badges & Actions) -->
+    <!-- Right Controls -->
     <div class="flex items-center gap-3 pr-2">
-        <!-- Ryoku-style Version & Star Badges (Hidden on mobile) -->
-        <div class="hidden lg:flex items-center gap-2 mr-2">
-            <span class="c-mono text-[10px] text-gray-300 bg-[#111] border border-[#2a2a2a] px-2.5 py-1 flex items-center gap-1.5">
-                <span class="w-1.5 h-1.5 bg-[#FF4D30]"></span> v5.1.0
-            </span>
-            <span class="c-mono text-[10px] text-gray-300 bg-[#111] border border-[#2a2a2a] px-2.5 py-1 flex items-center gap-1">
-                <span class="text-[#FF4D30]">★</span> 2.4k
-            </span>
-        </div>
-
         @auth
             <div class="relative hidden md:block">
                 <div class="user-nav-trigger" id="user-menu-toggle">
@@ -56,11 +46,11 @@
                 </div>
             </div>
         @else
-            <a href="{{ route('jobs.index') }}" class="hidden sm:inline-flex c-mono text-[11px] font-bold text-gray-300 border border-[#333] hover:border-gray-400 px-3.5 py-2 uppercase tracking-wider transition-colors">
-                DOCS
-            </a>
             <a href="{{ route('login') }}" class="signin-btn-image c-mono text-[11px] font-bold tracking-wider hidden md:inline-flex">
                 SIGN IN
+            </a>
+            <a href="{{ route('register') }}" class="c-mono text-[11px] font-bold tracking-wider hidden md:inline-flex border border-white/30 text-white hover:bg-white hover:text-black transition-colors px-4 py-2">
+                REGISTER
             </a>
         @endauth
 

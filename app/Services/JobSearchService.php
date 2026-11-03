@@ -7,13 +7,13 @@ use Illuminate\Http\Request;
 
 class JobSearchService
 {
-    public function search(Request $request, int $perPage = 10)
+    public function search(Request $request, int $perPage = 10, ?array $topIds = null)
     {
         $query = JobPosting::query();
 
         // Top Choice Filter
         if ($request->get('top_choice') === '1' && auth()->check()) {
-            $topIds = \App\Models\AiUserJobRecommendation::where('user_id', auth()->id())
+            $topIds ??= \App\Models\AiUserJobRecommendation::where('user_id', auth()->id())
                 ->pluck('job_id')
                 ->toArray();
 
