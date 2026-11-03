@@ -14,9 +14,12 @@
  */
 
 :root {
-    /* --- Typography --- */
-    --font-sans: "Poppins", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    /* --- Typography (Ryoku-Style Typographical Hierarchy) --- */
+    --font-sans: "Space Grotesk", "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-serif: "Newsreader", "Georgia", "Cambria", serif;
+    --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
     --font-display: var(--font-sans);
+    --font-body: var(--font-serif);
 
 
     /* --- Brand (ubah di sini untuk tema baru) --- */

@@ -13,10 +13,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <!-- Vite Assets (Tailwind & JS) -->
+    <!-- Fonts: Sans-serif (Big Titles), Serif (Main Body), Monospace (Mini Text & Badges) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Poppins:wght@500;600;700;800;900&family=Space+Grotesk:wght@500;600;700;800&display=swap"
         rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.jsx'])
 

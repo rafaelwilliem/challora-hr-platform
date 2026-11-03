@@ -17,54 +17,6 @@ Route::get('/up', function () {
     return response('OK', 200);
 });
 
-Route::get('/debug-location/{loc}', function (string $loc) {
-    $results = \App\Models\JobPosting::where(function ($q) use ($loc) {
-        $q->where('location', 'like', "%{$loc}%")
-          ->orWhere('provinsi', 'like', "%{$loc}%")
-          ->orWhere('kota', 'like', "%{$loc}%");
-    })->get(['id', 'title', 'location', 'provinsi', 'kota']);
-
-    return response()->json([
-        'searching_for' => $loc,
-        'count' => $results->count(),
-        'results' => $results,
-        'sample_all' => \App\Models\JobPosting::limit(3)->get(['id', 'title', 'location', 'provinsi', 'kota']),
-    ], 200, [], JSON_PRETTY_PRINT);
-});
-
-// Temporary: test sending to a specific address — remove after use
-Route::get('/mail-test-to/{email}', function (string $email) {
-    try {
-        \Illuminate\Support\Facades\Mail::raw('Test email from Challora. If you received this, email is working!', function ($msg) use ($email) {
-            $msg->to($email)->subject('Challora Email Test');
-        });
-        return response()->json(['status' => 'ok', 'sent_to' => $email]);
-    } catch (\Exception $e) {
-        return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
-    }
-});
-
-Route::get('/dbcheck', function () {
-    try {
-        $pdo = \Illuminate\Support\Facades\DB::connection()->getPdo();
-        $tables = \Illuminate\Support\Facades\DB::select('SHOW TABLES');
-        return response()->json([
-            'status' => 'connected',
-            'host' => config('database.connections.mysql.host'),
-            'port' => config('database.connections.mysql.port'),
-            'database' => config('database.connections.mysql.database'),
-            'tables_count' => count($tables),
-            'tables' => array_map(fn($t) => array_values((array)$t)[0] ?? '', $tables),
-        ]);
-    } catch (\Throwable $e) {
-        return response()->json([
-            'status' => 'error',
-            'message' => $e->getMessage(),
-            'file' => $e->getFile() . ':' . $e->getLine(),
-        ], 200);
-    }
-});
-
 Route::get('/', function () {
     try {
         $latestJobs = \App\Models\JobPosting::with('creator')->latest()->take(3)->get();

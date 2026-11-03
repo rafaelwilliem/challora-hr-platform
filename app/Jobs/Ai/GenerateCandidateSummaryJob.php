@@ -37,7 +37,6 @@ class GenerateCandidateSummaryJob implements ShouldQueue
                 'skills' => $application->user?->skills
                     ? array_filter(array_map('trim', explode(',', $application->user->skills)))
                     : [],
-                'skills' => $application->user?->skills,
                 'work_experiences' => $application->user?->workExperiences?->map(fn ($exp) => [
                     'title' => $exp->title,
                     'company_name' => $exp->company_name,

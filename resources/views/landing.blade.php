@@ -2,120 +2,84 @@
 
 @push('styles')
 <style>
-    /* ── CHALLORA BRUTALIST DESIGN TOKENS ── */
+    /* ── RYOKU-INSPIRED REFINED BRUTALIST TOKENS ── */
     :root {
         --c-accent: #FF4D30;
         --c-accent-hover: #e03e00;
-        --c-black: #000000;
-        --c-dark: #0a0a0a;
-        --c-dark-surface: #111111;
-        --c-border: #222222;
+        --c-black: #070707;
+        --c-dark-surface: #0e0e0e;
+        --c-border: #1f1f1f;
+        --c-border-light: #2d2d2d;
         --c-border-accent: rgba(255, 77, 48, 0.4);
         --c-white: #FFFFFF;
+        --c-cream: #E5E5E0;
         --c-gray-light: #F4F4F4;
-        --c-gray-mid: #A0A0A0;
-        --c-gray-dark: #666666;
+        --c-gray-mid: #9E9E9E;
+        --c-gray-dark: #555555;
         --nav-height: 80px;
+
+        /* Typography Hierarchy */
+        --font-display: "Space Grotesk", "Poppins", -apple-system, BlinkMacSystemFont, sans-serif;
+        --font-body: "Newsreader", "Georgia", "Cambria", serif;
+        --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
     }
 
     body, html {
-        font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
         background-color: var(--c-black);
-        color: var(--c-white);
+        color: var(--c-cream);
+        font-family: var(--font-body) !important;
+        -webkit-font-smoothing: antialiased;
     }
 
-    /* ── Typography Scale & Rhythm ── */
-    .c-mono {
-        font-family: "JetBrains Mono", monospace;
-        letter-spacing: 0.06em;
-    }
-
-    .c-title-mega {
-        font-size: clamp(3.75rem, 9.5vw, 8.5rem);
-        font-weight: 900;
-        line-height: 0.88;
-        letter-spacing: -0.045em;
-        text-transform: uppercase;
+    /* ── 1. Big Titles: Sans-Serif ── */
+    .c-title-display {
+        font-family: var(--font-display) !important;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        line-height: 0.95;
     }
 
     .c-title-section {
-        font-size: clamp(2rem, 3.8vw, 3.25rem);
-        font-weight: 900;
-        line-height: 1.05;
+        font-family: var(--font-display) !important;
+        font-weight: 800;
         letter-spacing: -0.03em;
-        text-transform: uppercase;
+        line-height: 1.1;
     }
 
     .c-title-card {
-        font-size: 1.35rem;
-        font-weight: 800;
+        font-family: var(--font-display) !important;
+        font-weight: 700;
         letter-spacing: -0.02em;
-        line-height: 1.2;
     }
 
-    /* ── Zero-Radius Brutalist Buttons ── */
-    .c-btn {
-        display: inline-flex !important;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-        padding: 0.95rem 1.85rem;
-        border-radius: 0px !important;
-        font-family: "JetBrains Mono", monospace;
-        font-size: 0.825rem;
-        font-weight: 800;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        text-decoration: none;
-        transition: all 0.18s ease-in-out;
-        cursor: pointer;
-        position: relative;
+    /* ── 2. Main Font: Serif ── */
+    .c-serif {
+        font-family: var(--font-body) !important;
     }
 
-    .c-btn-accent {
-        background-color: var(--c-accent);
-        color: var(--c-white);
-        border: 2px solid var(--c-accent);
-    }
-    .c-btn-accent:hover {
-        background-color: var(--c-black);
-        color: var(--c-accent);
-        border-color: var(--c-accent);
-        box-shadow: 4px 4px 0px var(--c-accent);
-        transform: translate(-2px, -2px);
+    .c-motto {
+        font-family: var(--font-body) !important;
+        font-style: italic;
+        color: #8f8f8f;
+        font-size: clamp(1.1rem, 2vw, 1.4rem);
+        line-height: 1.4;
     }
 
-    .c-btn-outline {
-        background-color: transparent;
-        color: var(--c-white);
-        border: 2px solid #444444;
-    }
-    .c-btn-outline:hover {
-        background-color: var(--c-white);
-        color: var(--c-black);
-        border-color: var(--c-white);
-        box-shadow: 4px 4px 0px rgba(255, 255, 255, 0.4);
-        transform: translate(-2px, -2px);
+    .c-body-text {
+        font-family: var(--font-body) !important;
+        color: #b5b5b5;
+        font-size: 1.05rem;
+        line-height: 1.65;
     }
 
-    .c-btn-ghost-accent {
-        background-color: transparent;
-        color: var(--c-accent);
-        border: 1px solid var(--c-accent);
-        padding: 0.55rem 1.2rem;
-        font-size: 0.725rem;
-    }
-    .c-btn-ghost-accent:hover {
-        background-color: var(--c-accent);
-        color: var(--c-black);
-        box-shadow: 3px 3px 0px #ffffff;
-        transform: translate(-1px, -1px);
+    /* ── 3. Mini Text & Decoration: Monospace ── */
+    .c-mono {
+        font-family: var(--font-mono) !important;
+        letter-spacing: 0.06em;
     }
 
-    /* ── Split Hero Layout ── */
-    .c-hero {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+    /* ── Ryoku-Style Zero-Radius Hero Layout ── */
+    .c-hero-container {
         min-height: calc(100vh - var(--nav-height));
         width: 100vw;
         position: relative;
@@ -123,183 +87,230 @@
         right: 50%;
         margin-left: -50vw;
         margin-right: -50vw;
-        border-bottom: 2px solid var(--c-border);
         background-color: var(--c-black);
-    }
-
-    .c-hero-left {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        padding: calc(var(--nav-height) + 2.5rem) 4rem 4rem;
-        border-right: 2px solid var(--c-border);
-        background-color: var(--c-dark);
+        border-bottom: 1px solid var(--c-border);
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        padding-top: var(--nav-height);
         overflow: hidden;
     }
 
-    .c-hero-left-bg {
-        position: absolute;
-        inset: 0;
-        z-index: 1;
-    }
-    .c-hero-left-bg img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-        filter: grayscale(100%) contrast(1.25) brightness(0.45);
-    }
-
-    .c-hero-grid-overlay {
-        position: absolute;
-        inset: 0;
-        background-image: 
-            linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-        background-size: 40px 40px;
-        z-index: 2;
-        pointer-events: none;
-    }
-
-    .c-hero-left-content {
-        position: relative;
-        z-index: 3;
-    }
-
-    .c-hero-right {
-        background-color: var(--c-black);
-        color: var(--c-white);
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        padding: calc(var(--nav-height) + 2.5rem) 4rem 4rem;
-        position: relative;
-    }
-
-    /* ── Interactive Terminal Typewriter ── */
-    .c-typewriter-box {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        background: #0d0d0d;
-        border: 1px solid #262626;
-        border-left: 3px solid var(--c-accent);
-        padding: 0.75rem 1.25rem;
-        font-family: "JetBrains Mono", monospace;
-        font-size: 0.85rem;
-        color: #d1d5db;
-        margin-bottom: 2rem;
-        min-height: 48px;
-    }
-
-    .c-cursor {
-        display: inline-block;
-        color: var(--c-accent);
-        font-weight: 900;
-        animation: c-blink 0.9s infinite step-start;
-    }
-
-    @keyframes c-blink {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0; }
-    }
-
-    /* ── Sharp Technical System Status ── */
-    .c-status-panel {
-        margin-top: 3.5rem;
-        border-top: 1px solid #222222;
-        padding-top: 1.75rem;
-    }
-
-    .c-status-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 0.6rem 2rem;
-    }
-
-    .c-status-item {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        font-size: 0.8rem;
-        color: var(--c-gray-mid);
-        border-bottom: 1px solid #1a1a1a;
-        padding-bottom: 0.4rem;
-        transition: color 0.15s ease;
-    }
-    .c-status-item:hover {
-        color: var(--c-white);
-    }
-
-    .c-status-led {
-        width: 7px;
-        height: 7px;
-        border-radius: 0px !important;
-        background-color: var(--c-accent);
-        box-shadow: 0 0 6px var(--c-accent);
-    }
-
-    /* ── High-Impact Brutalist Metrics Bar ── */
-    .c-metrics-strip {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        border-bottom: 2px solid var(--c-border);
-        background: #090909;
-        width: 100vw;
-        position: relative;
-        left: 50%;
-        right: 50%;
-        margin-left: -50vw;
-        margin-right: -50vw;
-    }
-
-    .c-metric-cell {
-        padding: 2.25rem 2rem;
-        border-right: 1px solid var(--c-border);
+    .c-hero-content {
+        padding: 4rem 4rem 4rem 6rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        transition: background-color 0.2s ease;
-    }
-    .c-metric-cell:last-child {
-        border-right: none;
-    }
-    .c-metric-cell:hover {
-        background-color: #121212;
+        z-index: 10;
+        position: relative;
     }
 
-    /* ── Marquee Ribbon ── */
-    .c-marquee {
+    /* Top Platform Pills (Ryoku distro-style) */
+    .c-platform-selector {
+        display: inline-flex;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 0.35rem 0.85rem;
+        background: #0b0b0b;
+        border: 1px solid #202020;
+        margin-bottom: 2.25rem;
+        width: fit-content;
+    }
+
+    /* Release Kicker */
+    .c-release-tag {
+        font-family: var(--font-mono) !important;
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        color: #888888;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1.25rem;
+    }
+
+    /* Ryoku Technical Architecture Specs Table */
+    .c-specs-table {
+        margin-top: 2rem;
+        border-top: 1px solid #1a1a1a;
+        width: 100%;
+        max-width: 620px;
+    }
+
+    .c-spec-row {
+        display: grid;
+        grid-template-columns: 150px 1fr;
+        align-items: baseline;
+        padding: 0.85rem 0;
+        border-bottom: 1px solid #141414;
+        gap: 1.5rem;
+    }
+
+    .c-spec-key {
+        font-family: var(--font-mono) !important;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #666666;
+    }
+
+    .c-spec-val {
+        color: #e0e0e0;
+        font-size: 0.95rem;
+    }
+
+    /* Ryoku 4-Box Telemetry Matrix */
+    .c-stat-matrix {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        border: 1px solid #222222;
+        background: #0a0a0a;
+        width: 100%;
+        max-width: 580px;
+        margin-top: 2.5rem;
+    }
+
+    .c-stat-cell {
+        padding: 1rem 1.25rem;
+        border-right: 1px solid #1c1c1c;
+        display: flex;
+        flex-direction: column;
+    }
+    .c-stat-cell:last-child {
+        border-right: none;
+    }
+
+    .c-stat-number {
+        font-family: var(--font-display) !important;
+        font-size: 1.75rem;
+        font-weight: 800;
+        color: #ffffff;
+        letter-spacing: -0.02em;
+        line-height: 1;
+        margin-bottom: 0.4rem;
+    }
+
+    .c-stat-label {
+        font-family: var(--font-mono) !important;
+        font-size: 0.625rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #666666;
+    }
+
+    /* Ryoku-Style Zero-Radius Action Buttons */
+    .c-btn-install {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.9rem 2.25rem;
+        background-color: #ECECE7;
+        color: #000000;
+        font-family: var(--font-mono) !important;
+        font-size: 0.8rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        text-decoration: none;
+        border-radius: 0px !important;
+        border: 1px solid #ECECE7;
+        transition: all 0.18s ease;
+        cursor: pointer;
+    }
+    .c-btn-install:hover {
         background-color: var(--c-accent);
-        color: var(--c-black);
+        border-color: var(--c-accent);
+        color: #ffffff;
+        box-shadow: 4px 4px 0px rgba(255, 255, 255, 0.2);
+    }
+
+    .c-btn-source {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.9rem 2.25rem;
+        background-color: transparent;
+        color: #ECECE7;
+        font-family: var(--font-mono) !important;
+        font-size: 0.8rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        text-decoration: none;
+        border-radius: 0px !important;
+        border: 1px solid #333333;
+        transition: all 0.18s ease;
+        cursor: pointer;
+    }
+    .c-btn-source:hover {
+        background-color: #171717;
+        border-color: #777777;
+        color: #ffffff;
+    }
+
+    /* Right Visual & Radial Wireframes */
+    .c-hero-visual {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        border-left: 1px solid var(--c-border);
+        background: radial-gradient(circle at 60% 50%, #151515 0%, #070707 70%);
+    }
+
+    .c-hero-visual img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        filter: grayscale(100%) contrast(1.35) brightness(0.65);
+        mix-blend-mode: luminosity;
+        position: relative;
+        z-index: 2;
+    }
+
+    .c-orbital-grid {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        opacity: 0.28;
+    }
+
+    /* Marquee Ribbon */
+    .c-marquee {
+        background-color: #0c0c0c;
+        color: #888888;
         padding: 0.85rem 0;
         overflow: hidden;
         white-space: nowrap;
-        font-family: "JetBrains Mono", monospace;
-        font-weight: 900;
-        font-size: 0.95rem;
+        font-family: var(--font-mono) !important;
+        font-size: 0.85rem;
         text-transform: uppercase;
-        border-bottom: 2px solid var(--c-black);
+        border-bottom: 1px solid var(--c-border);
+        border-top: 1px solid var(--c-border);
         width: 100vw;
         position: relative;
         left: 50%;
         right: 50%;
         margin-left: -50vw;
         margin-right: -50vw;
-        letter-spacing: 0.08em;
+        letter-spacing: 0.1em;
     }
     .c-marquee span {
         display: inline-block;
-        animation: c-scroll 32s linear infinite;
+        animation: c-scroll 35s linear infinite;
     }
     @keyframes c-scroll {
         0% { transform: translateX(0); }
         100% { transform: translateX(-50%); }
     }
 
-    /* ── Sections & Grids (Sharp Corners Only) ── */
+    /* Sections */
     .c-section {
         padding: 6.5rem 4rem;
         max-width: 1600px;
@@ -310,213 +321,250 @@
     .c-grid-solutions {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        border-top: 1px solid #2a2a2a;
-        border-left: 1px solid #2a2a2a;
+        border-top: 1px solid var(--c-border);
+        border-left: 1px solid var(--c-border);
         margin-top: 3.5rem;
     }
 
     .c-solution-card {
-        border-right: 1px solid #2a2a2a;
-        border-bottom: 1px solid #2a2a2a;
-        padding: 2.5rem 2rem;
+        border-right: 1px solid var(--c-border);
+        border-bottom: 1px solid var(--c-border);
+        padding: 2.75rem 2rem;
         display: flex;
         flex-direction: column;
-        background: #070707;
+        background: #090909;
         position: relative;
         border-radius: 0px !important;
-        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: all 0.22s ease;
     }
 
     .c-solution-card:hover {
         background: #111111;
-        border-color: var(--c-accent);
-        z-index: 10;
-        box-shadow: inset 0 0 0 1px var(--c-accent);
+        border-color: #383838;
     }
 
-    .c-tag-sharp {
-        display: inline-flex;
-        align-items: center;
-        padding: 0.3rem 0.65rem;
-        border-radius: 0px !important;
-        border: 1px solid rgba(255, 77, 48, 0.4);
-        background-color: rgba(255, 77, 48, 0.06);
-        color: var(--c-accent);
-        font-family: "JetBrains Mono", monospace;
-        font-size: 0.68rem;
-        font-weight: 700;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-    }
-
-    /* ── Responsive Adaptations ── */
-    @media (max-width: 1200px) {
-        .c-metrics-strip { grid-template-columns: repeat(2, 1fr); }
-        .c-metric-cell:nth-child(2) { border-right: none; }
-        .c-metric-cell:nth-child(1), .c-metric-cell:nth-child(2) { border-bottom: 1px solid var(--c-border); }
-        .c-grid-solutions { grid-template-columns: 1fr 1fr; }
-    }
-
-    @media (max-width: 900px) {
-        .c-hero { grid-template-columns: 1fr; }
-        .c-hero-left { min-height: 45vh; padding: calc(var(--nav-height) + 1.5rem) 1.5rem 2.5rem; border-right: none; border-bottom: 2px solid var(--c-border); }
-        .c-hero-right { padding: 2.5rem 1.5rem; }
-        .c-section { padding: 4rem 1.5rem; }
+    /* Responsive */
+    @media (max-width: 1100px) {
+        .c-hero-container {
+            grid-template-columns: 1fr;
+        }
+        .c-hero-content {
+            padding: 3rem 2rem;
+        }
+        .c-hero-visual {
+            min-height: 400px;
+            border-left: none;
+            border-top: 1px solid var(--c-border);
+        }
+        .c-grid-solutions {
+            grid-template-columns: 1fr 1fr;
+        }
     }
 
     @media (max-width: 640px) {
-        .c-metrics-strip { grid-template-columns: 1fr; }
-        .c-metric-cell { border-right: none; border-bottom: 1px solid var(--c-border); padding: 1.5rem; }
-        .c-grid-solutions { grid-template-columns: 1fr; }
-        .c-status-grid { grid-template-columns: 1fr; }
-        .c-title-mega { font-size: clamp(3rem, 14vw, 4.5rem); }
-        .c-title-section { font-size: clamp(1.75rem, 8vw, 2.5rem); }
+        .c-hero-content {
+            padding: 2rem 1.25rem;
+        }
+        .c-stat-matrix {
+            grid-template-columns: 1fr 1fr;
+        }
+        .c-stat-cell:nth-child(2) {
+            border-right: none;
+        }
+        .c-stat-cell:nth-child(1), .c-stat-cell:nth-child(2) {
+            border-bottom: 1px solid #1c1c1c;
+        }
+        .c-spec-row {
+            grid-template-columns: 1fr;
+            gap: 0.35rem;
+        }
+        .c-grid-solutions {
+            grid-template-columns: 1fr;
+        }
+        .c-section {
+            padding: 4rem 1.25rem;
+        }
     }
 </style>
 @endpush
 
 @section('content')
-<div class="flex flex-col w-full bg-black text-white selection:bg-[#FF4D30] selection:text-black">
+<div class="flex flex-col w-full bg-[#070707] text-[#E5E5E0] selection:bg-[#FF4D30] selection:text-white">
 
-    <!-- 01 // SPLIT HERO SECTION -->
-    <section class="c-hero">
-        <!-- Left Column: Visual & Mission Architecture -->
-        <div class="c-hero-left">
-            <div class="c-hero-left-bg">
-                <img src="{{ asset('hero.jpg') }}" alt="Challora Autonomous HR Platform">
-            </div>
-            <div class="c-hero-grid-overlay"></div>
-            
-            <!-- Top Metadata -->
-            <div class="c-hero-left-content flex items-center justify-between border-b border-white/20 pb-4">
-                <span class="c-mono text-[11px] font-bold text-white tracking-widest uppercase">// CHL-KERNEL-CORE</span>
-                <span class="c-mono text-[11px] text-white/70">ARCH: NEURAL.ATS</span>
-            </div>
+    <!-- 01 // RYOKU-INSPIRED HERO CONTAINER -->
+    <section class="c-hero-container">
+        
+        <!-- Left Hero Content: Big Title (Sans), Motto/Body (Serif), Meta (Mono) -->
+        <div class="c-hero-content">
 
-            <!-- Lower Quote / Statement -->
-            <div class="c-hero-left-content mt-auto pt-16">
-                <div class="c-mono text-xs text-[#FF4D30] font-bold tracking-widest mb-3 uppercase">
-                    [ OBJECTIVE : UNBIASED TALENT MATCHING ]
+            <!-- Top Environment Selector (Ryoku distro box style) -->
+            <div class="c-platform-selector">
+                <div class="flex items-center gap-3">
+                    <span class="c-mono text-[10px] text-[#666] font-bold tracking-wider uppercase">DEPLOYMENT</span>
+                    <span class="c-mono text-[11px] text-gray-300 flex items-center gap-1.5 font-medium">
+                        <span class="w-1.5 h-1.5 bg-[#FF4D30]"></span> Cloud Tier
+                    </span>
+                    <span class="c-mono text-[11px] text-gray-400">On-Prem VPC</span>
                 </div>
-                <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight tracking-tight text-white max-w-xl">
-                    High-precision recruitment calibrated for skill depth, cultural velocity, and zero human bias.
-                </h2>
-                <div class="mt-6 flex items-center gap-4 text-xs c-mono text-gray-400">
-                    <span class="inline-block w-2 h-2 bg-[#FF4D30]"></span>
-                    <span>STANDARDIZED ATS PROTOCOL 2026</span>
+                <div class="w-px h-3 bg-[#262626]"></div>
+                <div class="flex items-center gap-3">
+                    <span class="c-mono text-[10px] text-[#666] font-bold tracking-wider uppercase">INTELLIGENCE</span>
+                    <span class="c-mono text-[11px] text-gray-300">Neural ATS v2.4</span>
+                    <span class="c-mono text-[11px] text-emerald-400">SOC-2</span>
                 </div>
             </div>
-        </div>
 
-        <!-- Right Column: Mega Title, Typewriter & Status Board -->
-        <div class="c-hero-right">
-            <div>
-                <!-- Top Status Badge -->
-                <div class="flex items-center justify-between mb-8 pb-3 border-b border-[#222]">
-                    <div class="flex items-center gap-2">
-                        <span class="w-2 h-2 bg-[#FF4D30] animate-pulse"></span>
-                        <span class="c-mono text-[11px] font-bold text-gray-300 uppercase tracking-widest">CHALLY SYSTEM : OPERATIONAL</span>
+            <!-- Version Release Kicker -->
+            <div class="c-release-tag">
+                <span class="text-[#FF4D30] font-bold">✦</span>
+                <span>CHALLORA 5.1 · NEURAL RECRUITMENT · RELEASED</span>
+            </div>
+
+            <!-- BIG TITLE: Bold Sans-Serif -->
+            <h1 class="c-title-display text-white text-5xl sm:text-6xl md:text-7xl lg:text-8xl mb-3">
+                Challora
+            </h1>
+
+            <!-- MOTTO / SUBTITLE: Elegant Serif in Italics -->
+            <p class="c-motto mb-6">
+                人材と可能性のために &nbsp; <span class="text-gray-300">for the sake of talent, precision, and unbiased potential</span>
+            </p>
+
+            <!-- Interactive Kinetic Terminal Typewriter Box -->
+            <div class="flex items-center gap-2 bg-[#0c0c0c] border border-[#1f1f1f] border-l-2 border-l-[#FF4D30] px-4 py-2.5 max-w-[620px] mb-4">
+                <span class="c-mono text-[11px] text-[#FF4D30] font-bold tracking-wider">// CHALLY &gt;</span>
+                <span id="hero-typewriter" class="c-mono text-[12px] text-gray-300 font-medium"></span>
+                <span class="c-mono text-[#FF4D30] font-bold animate-pulse">█</span>
+            </div>
+
+            <!-- RYOKU ARCHITECTURE SPECS TABLE -->
+            <div class="c-specs-table">
+                <div class="c-spec-row">
+                    <div class="c-spec-key">CV PARSER</div>
+                    <div class="c-spec-val">
+                        <div class="font-sans font-semibold text-white text-[15px] flex items-center gap-2">
+                            Semantic AST <span class="text-[#FF4D30]">⇄</span> Deep Extraction
+                        </div>
+                        <p class="c-serif italic text-xs text-gray-400 mt-0.5">
+                            Multilingual parsing across 40+ resume formats in 0.4s. Resists keyword gaming.
+                        </p>
                     </div>
-                    <span class="c-mono text-[11px] text-gray-500">PING: 14MS</span>
                 </div>
 
-                <!-- Interactive Typewriter Microcopy -->
-                <div class="c-typewriter-box">
-                    <span class="text-[#FF4D30] font-bold tracking-wider">// RUN &gt;</span>
-                    <span id="hero-typewriter" class="text-white font-medium"></span>
-                    <span class="c-cursor">█</span>
+                <div class="c-spec-row">
+                    <div class="c-spec-key">BIAS CONTROL</div>
+                    <div class="c-spec-val">
+                        <div class="font-sans font-semibold text-white text-[15px]">
+                            Blind Competency Triage
+                        </div>
+                        <p class="c-serif italic text-xs text-gray-400 mt-0.5">
+                            Filters demographic cues, institution pedigree, and unconscious scoring biases.
+                        </p>
+                    </div>
                 </div>
 
-                <!-- Mega Headline -->
-                <h1 class="c-title-mega mb-8 text-white">
-                    HR /<br>
-                    <span class="text-[#FF4D30]">INTELLIGENCE</span>
-                </h1>
-
-                <p class="text-gray-400 text-base md:text-lg leading-relaxed max-w-lg mb-10 font-normal">
-                    Transforming messy applicant noise into ranked, verified talent. Chally semantically evaluates candidate competencies in seconds without keyword games.
-                </p>
-
-                <!-- Sharp CTA Buttons (Zero Rounding) -->
-                <div class="flex flex-wrap gap-4 items-center">
-                    <a href="{{ route('jobs.index') }}" class="c-btn c-btn-accent">
-                        <span>EXPLORE POSITIONS</span>
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </a>
-                    <a href="{{ route('register') }}" class="c-btn c-btn-outline">
-                        <span>DEPLOY HIRING PIPELINE</span>
-                    </a>
-                </div>
-            </div>
-
-            <!-- System Status Matrix -->
-            <div class="c-status-panel">
-                <div class="flex items-center justify-between mb-3">
-                    <span class="c-mono text-[11px] font-bold text-gray-400 uppercase tracking-widest">// SYSTEM MATRIX HEALTH</span>
-                    <span class="c-mono text-[10px] text-emerald-400 font-bold bg-emerald-950/60 border border-emerald-800/80 px-2 py-0.5">ALL NODES NOMINAL</span>
-                </div>
-                <div class="c-mono c-status-grid">
-                    @php $statuses = [
-                        ['01', 'CV Parser', 'ONLINE'],       ['02', 'Match Engine', 'ACTIVE'],
-                        ['03', 'Bias Filter', 'ENGAGED'],    ['04', 'Skill Extractor', 'ONLINE'],
-                        ['05', 'Score Ranking', 'ONLINE'],   ['06', 'Profile Coach', 'STANDBY'],
-                        ['07', 'Job Indexer', 'ONLINE'],     ['08', 'Candidate DB', 'SECURE'],
-                    ]; @endphp
-                    @foreach($statuses as $s)
-                    <div class="c-status-item">
-                        <span class="tracking-wider">{{ $s[0] }}. {{ $s[1] }}</span>
-                        <div class="flex items-center gap-2">
-                            <span class="text-[9px] text-gray-500">{{ $s[2] }}</span>
-                            <div class="c-status-led"></div>
+                <div class="c-spec-row">
+                    <div class="c-spec-key">MATCH PIPELINE</div>
+                    <div class="c-spec-val">
+                        <div class="font-sans font-semibold text-white text-[15px]">
+                            Neural Trajectory &amp; Culture Velocity
                         </div>
                     </div>
-                    @endforeach
+                </div>
+
+                <div class="c-spec-row">
+                    <div class="c-spec-key">INTELLIGENCE</div>
+                    <div class="c-spec-val">
+                        <div class="font-sans font-semibold text-white text-[15px]">
+                            Chally Autonomous ATS Agent
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <!-- RYOKU 4-BOX TELEMETRY MATRIX -->
+            <div class="c-stat-matrix">
+                <div class="c-stat-cell">
+                    <div class="c-stat-number">0.4<span class="text-xs text-[#FF4D30]">s</span></div>
+                    <div class="c-stat-label">CV LATENCY</div>
+                </div>
+                <div class="c-stat-cell">
+                    <div class="c-stat-number">99.2<span class="text-xs text-[#FF4D30]">%</span></div>
+                    <div class="c-stat-label">MATCH RATE</div>
+                </div>
+                <div class="c-stat-cell">
+                    <div class="c-stat-number">0.0<span class="text-xs text-[#FF4D30]">%</span></div>
+                    <div class="c-stat-label">BIAS DRIFT</div>
+                </div>
+                <div class="c-stat-cell">
+                    <div class="c-stat-number">24/7</div>
+                    <div class="c-stat-label">AUTONOMOUS</div>
+                </div>
+            </div>
+
+            <!-- ZERO-RADIUS ACTION BUTTONS -->
+            <div class="flex flex-wrap items-center gap-4 mt-8">
+                <a href="{{ route('jobs.index') }}" class="c-btn-install">
+                    EXPLORE POSITIONS
+                </a>
+                <a href="{{ route('register') }}" class="c-btn-source">
+                    DEPLOY PIPELINE
+                </a>
+            </div>
+
+            <!-- METADATA FOOTNOTE (Ryoku Star/Fork Style) -->
+            <div class="c-mono text-[11px] text-[#666] flex items-center gap-3 mt-6">
+                <span class="text-[#FF4D30]">★</span>
+                <span>2,480 applicants scored</span>
+                <span class="text-[#333]">/</span>
+                <span>120 hiring teams</span>
+                <span class="text-[#333]">/</span>
+                <span>SOC-2 COMPLIANT</span>
+            </div>
+
         </div>
+
+        <!-- Right Hero Visual: Dithered/Monochrome Artwork + Orbital Wireframe Grid -->
+        <div class="c-hero-visual">
+            <!-- Orbital Geometry Overlay (Concentric circles like Ryoku) -->
+            <svg class="c-orbital-grid" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="400" cy="400" r="380" stroke="#FFFFFF" stroke-width="1" stroke-dasharray="2 6"/>
+                <circle cx="400" cy="400" r="280" stroke="#FFFFFF" stroke-width="1"/>
+                <circle cx="400" cy="400" r="180" stroke="#FF4D30" stroke-width="1" stroke-dasharray="4 8"/>
+                <circle cx="400" cy="400" r="80" stroke="#FFFFFF" stroke-width="1"/>
+                <line x1="0" y1="400" x2="800" y2="400" stroke="#FFFFFF" stroke-width="0.5" stroke-dasharray="3 9"/>
+                <line x1="400" y1="0" x2="400" y2="800" stroke="#FFFFFF" stroke-width="0.5" stroke-dasharray="3 9"/>
+                <!-- Subtle Crosshairs -->
+                <path d="M390 400 H410 M400 390 V410" stroke="#FF4D30" stroke-width="1.5"/>
+            </svg>
+
+            <!-- Hero Image with High Contrast Editorial Treatment -->
+            <img src="{{ asset('hero.jpg') }}" alt="Challora Classical Visual">
+            
+            <!-- Vignette Gradients -->
+            <div class="absolute inset-0 bg-gradient-to-t from-[#070707] via-transparent to-[#070707]/60 z-[3]"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-[#070707] via-transparent to-transparent z-[3]"></div>
+        </div>
+
     </section>
 
-    <!-- 02 // REAL-TIME METRICS BAR -->
-    <div class="c-metrics-strip">
-        <div class="c-metric-cell">
-            <span class="c-mono text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-1">// SCREENING SPEED</span>
-            <div class="text-3xl lg:text-4xl font-extrabold text-white tracking-tight">0.4 SEC</div>
-            <p class="text-xs text-gray-400 mt-1">Average semantic CV evaluation latency</p>
-        </div>
-        <div class="c-metric-cell">
-            <span class="c-mono text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-1">// MATCH ACCURACY</span>
-            <div class="text-3xl lg:text-4xl font-extrabold text-[#FF4D30] tracking-tight">99.2%</div>
-            <p class="text-xs text-gray-400 mt-1">Competency-to-role semantic alignment</p>
-        </div>
-        <div class="c-metric-cell">
-            <span class="c-mono text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-1">// COGNITIVE BIAS</span>
-            <div class="text-3xl lg:text-4xl font-extrabold text-white tracking-tight">0.00%</div>
-            <p class="text-xs text-gray-400 mt-1">Blind candidate evaluation algorithm</p>
-        </div>
-        <div class="c-metric-cell">
-            <span class="c-mono text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-1">// PIPELINE AVAILABILITY</span>
-            <div class="text-3xl lg:text-4xl font-extrabold text-white tracking-tight">24/7</div>
-            <p class="text-xs text-gray-400 mt-1">Autonomous candidate scoring &amp; triage</p>
-        </div>
-    </div>
-
-    <!-- 03 // TICKER MARQUEE -->
+    <!-- 02 // TICKER MARQUEE -->
     <div class="c-marquee">
         <span>
-            // NO KEYWORD BIAS &nbsp;&nbsp;&nbsp;&nbsp; // SMARTER HIRING &nbsp;&nbsp;&nbsp;&nbsp; // CHALLY HR INTELLIGENCE &nbsp;&nbsp;&nbsp;&nbsp; // FIND THE RIGHT TALENT &nbsp;&nbsp;&nbsp;&nbsp; // NOT JUST RESUME BUZZWORDS &nbsp;&nbsp;&nbsp;&nbsp; // ZERO GUESSWORK &nbsp;&nbsp;&nbsp;&nbsp; // ARCHITECTED FOR MODERN TEAMS &nbsp;&nbsp;&nbsp;&nbsp;
-            // NO KEYWORD BIAS &nbsp;&nbsp;&nbsp;&nbsp; // SMARTER HIRING &nbsp;&nbsp;&nbsp;&nbsp; // CHALLY HR INTELLIGENCE &nbsp;&nbsp;&nbsp;&nbsp; // FIND THE RIGHT TALENT &nbsp;&nbsp;&nbsp;&nbsp; // NOT JUST RESUME BUZZWORDS &nbsp;&nbsp;&nbsp;&nbsp; // ZERO GUESSWORK &nbsp;&nbsp;&nbsp;&nbsp; // ARCHITECTED FOR MODERN TEAMS &nbsp;&nbsp;&nbsp;&nbsp;
+            ✦ NO KEYWORD BIAS &nbsp;&nbsp;&nbsp;&nbsp; // SMARTER HIRING &nbsp;&nbsp;&nbsp;&nbsp; // CHALLY HR INTELLIGENCE &nbsp;&nbsp;&nbsp;&nbsp; // FIND THE RIGHT TALENT &nbsp;&nbsp;&nbsp;&nbsp; // ZERO RESUME NOISE &nbsp;&nbsp;&nbsp;&nbsp; // ARCHITECTED FOR MODERN TEAMS &nbsp;&nbsp;&nbsp;&nbsp;
+            ✦ NO KEYWORD BIAS &nbsp;&nbsp;&nbsp;&nbsp; // SMARTER HIRING &nbsp;&nbsp;&nbsp;&nbsp; // CHALLY HR INTELLIGENCE &nbsp;&nbsp;&nbsp;&nbsp; // FIND THE RIGHT TALENT &nbsp;&nbsp;&nbsp;&nbsp; // ZERO RESUME NOISE &nbsp;&nbsp;&nbsp;&nbsp; // ARCHITECTED FOR MODERN TEAMS &nbsp;&nbsp;&nbsp;&nbsp;
         </span>
     </div>
 
-    <!-- 04 // SOLUTIONS GRID -->
+    <!-- 03 // SOLUTIONS SECTION -->
     <section class="c-section">
-        <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-[#262626] pb-6 gap-4">
+        <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-[#202020] pb-6 gap-4">
             <div>
-                <span class="c-mono text-xs text-[#FF4D30] font-bold tracking-widest uppercase mb-2 block">// CORE CAPABILITIES</span>
-                <h2 class="c-title-section text-white">RECRUITMENT INTELLIGENCE</h2>
+                <span class="c-mono text-xs text-[#FF4D30] font-bold tracking-widest uppercase mb-2 block">// CAPABILITY MATRIX</span>
+                <h2 class="c-title-section text-white text-3xl sm:text-4xl md:text-5xl">RECRUITMENT INTELLIGENCE</h2>
             </div>
-            <p class="text-gray-400 max-w-md text-sm leading-relaxed">
-                Engineered to replace brute-force resume scanning with multidimensional contextual intelligence.
+            <p class="c-body-text max-w-md">
+                Engineered to replace brute-force resume scanning with multidimensional contextual intelligence and human-calibrated evaluation.
             </p>
         </div>
         
@@ -525,15 +573,16 @@
             <div class="c-solution-card group">
                 <div class="flex items-center justify-between mb-6">
                     <span class="c-mono text-xs font-bold text-[#FF4D30]">// 01</span>
-                    <span class="c-tag-sharp">SEMANTIC</span>
+                    <span class="c-mono text-[10px] text-gray-400 border border-[#2a2a2a] px-2 py-0.5 uppercase tracking-wider">SEMANTIC</span>
                 </div>
-                <h3 class="c-title-card text-white mb-3 group-hover:text-[#FF4D30] transition-colors">AI CV Screening</h3>
-                <p class="text-sm text-gray-400 leading-relaxed mb-8 flex-1">
+                <h3 class="c-title-card text-white text-xl mb-3 group-hover:text-[#FF4D30] transition-colors">AI CV Screening</h3>
+                <p class="c-body-text text-sm mb-8 flex-1">
                     Analyze hundreds of resumes concurrently. Chally maps contextual experience, validates skill authenticity, and ranks applicants with zero pedigree bias.
                 </p>
-                <div class="mt-auto pt-4 border-t border-[#1c1c1c]">
-                    <a href="{{ route('register') }}" class="c-btn c-btn-ghost-accent w-full text-center">
-                        DEPLOY MODULE &rarr;
+                <div class="mt-auto pt-4 border-t border-[#181818]">
+                    <a href="{{ route('register') }}" class="c-mono text-xs text-[#FF4D30] font-bold hover:underline flex items-center justify-between">
+                        <span>DEPLOY MODULE</span>
+                        <span>&rarr;</span>
                     </a>
                 </div>
             </div>
@@ -542,15 +591,16 @@
             <div class="c-solution-card group">
                 <div class="flex items-center justify-between mb-6">
                     <span class="c-mono text-xs font-bold text-[#FF4D30]">// 02</span>
-                    <span class="c-tag-sharp">NEURAL</span>
+                    <span class="c-mono text-[10px] text-gray-400 border border-[#2a2a2a] px-2 py-0.5 uppercase tracking-wider">NEURAL</span>
                 </div>
-                <h3 class="c-title-card text-white mb-3 group-hover:text-[#FF4D30] transition-colors">Deep Job Matching</h3>
-                <p class="text-sm text-gray-400 leading-relaxed mb-8 flex-1">
+                <h3 class="c-title-card text-white text-xl mb-3 group-hover:text-[#FF4D30] transition-colors">Deep Job Matching</h3>
+                <p class="c-body-text text-sm mb-8 flex-1">
                     Moves past literal keyword matching. Synthesizes candidate competency trajectories against role complexity, tech stack demands, and organizational pace.
                 </p>
-                <div class="mt-auto pt-4 border-t border-[#1c1c1c]">
-                    <a href="{{ route('jobs.index') }}" class="c-btn c-btn-ghost-accent w-full text-center">
-                        EXPLORE POSITIONS &rarr;
+                <div class="mt-auto pt-4 border-t border-[#181818]">
+                    <a href="{{ route('jobs.index') }}" class="c-mono text-xs text-[#FF4D30] font-bold hover:underline flex items-center justify-between">
+                        <span>EXPLORE POSITIONS</span>
+                        <span>&rarr;</span>
                     </a>
                 </div>
             </div>
@@ -559,15 +609,16 @@
             <div class="c-solution-card group">
                 <div class="flex items-center justify-between mb-6">
                     <span class="c-mono text-xs font-bold text-[#FF4D30]">// 03</span>
-                    <span class="c-tag-sharp">FEEDBACK</span>
+                    <span class="c-mono text-[10px] text-gray-400 border border-[#2a2a2a] px-2 py-0.5 uppercase tracking-wider">FEEDBACK</span>
                 </div>
-                <h3 class="c-title-card text-white mb-3 group-hover:text-[#FF4D30] transition-colors">Profile Coach</h3>
-                <p class="text-sm text-gray-400 leading-relaxed mb-8 flex-1">
+                <h3 class="c-title-card text-white text-xl mb-3 group-hover:text-[#FF4D30] transition-colors">Profile Coach</h3>
+                <p class="c-body-text text-sm mb-8 flex-1">
                     Delivers immediate, constructive diagnostic feedback for candidates. Pinpoints skill gaps, structural resume weaknesses, and portfolio recommendations.
                 </p>
-                <div class="mt-auto pt-4 border-t border-[#1c1c1c]">
-                    <a href="{{ route('register') }}" class="c-btn c-btn-ghost-accent w-full text-center">
-                        GET COACHED &rarr;
+                <div class="mt-auto pt-4 border-t border-[#181818]">
+                    <a href="{{ route('register') }}" class="c-mono text-xs text-[#FF4D30] font-bold hover:underline flex items-center justify-between">
+                        <span>GET COACHED</span>
+                        <span>&rarr;</span>
                     </a>
                 </div>
             </div>
@@ -576,36 +627,37 @@
             <div class="c-solution-card group">
                 <div class="flex items-center justify-between mb-6">
                     <span class="c-mono text-xs font-bold text-[#FF4D30]">// 04</span>
-                    <span class="c-tag-sharp">ANALYTICS</span>
+                    <span class="c-mono text-[10px] text-gray-400 border border-[#2a2a2a] px-2 py-0.5 uppercase tracking-wider">TELEMETRY</span>
                 </div>
-                <h3 class="c-title-card text-white mb-3 group-hover:text-[#FF4D30] transition-colors">Velocity Dashboard</h3>
-                <p class="text-sm text-gray-400 leading-relaxed mb-8 flex-1">
+                <h3 class="c-title-card text-white text-xl mb-3 group-hover:text-[#FF4D30] transition-colors">Velocity Dashboard</h3>
+                <p class="c-body-text text-sm mb-8 flex-1">
                     Equip HR leads with real-time pipeline telemetry: candidate score matrices, stage bottlenecks, and hiring velocity analytics in one unified terminal.
                 </p>
-                <div class="mt-auto pt-4 border-t border-[#1c1c1c]">
-                    <a href="{{ route('register') }}" class="c-btn c-btn-ghost-accent w-full text-center">
-                        VIEW DASHBOARD &rarr;
+                <div class="mt-auto pt-4 border-t border-[#181818]">
+                    <a href="{{ route('register') }}" class="c-mono text-xs text-[#FF4D30] font-bold hover:underline flex items-center justify-between">
+                        <span>VIEW DASHBOARD</span>
+                        <span>&rarr;</span>
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 05 // OPEN POSITIONS (SHARP BRUTALIST GRID) -->
+    <!-- 04 // OPEN POSITIONS (SHARP BRUTALIST GRID) -->
     <section class="c-section pt-0">
-        <div class="flex flex-col sm:flex-row sm:items-end justify-between border-b-2 border-white/20 pb-4 mb-8 gap-4">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between border-b border-[#202020] pb-4 mb-8 gap-4">
             <div>
-                <span class="c-mono text-xs text-[#FF4D30] font-bold tracking-widest uppercase mb-1 block">// ACTIVE PIPELINE</span>
-                <h2 class="c-title-section text-white">OPEN ROLES</h2>
+                <span class="c-mono text-xs text-[#FF4D30] font-bold tracking-widest uppercase mb-1 block">// ACTIVE REQUISITIONS</span>
+                <h2 class="c-title-section text-white text-2xl sm:text-3xl">OPEN POSITIONS</h2>
             </div>
-            <a href="{{ route('jobs.index') }}" class="c-btn c-btn-outline text-xs py-2 px-5">
+            <a href="{{ route('jobs.index') }}" class="c-mono text-xs border border-[#333] px-4 py-2 text-gray-300 hover:text-white hover:border-gray-400 transition-colors">
                 VIEW ALL POSITIONS &rarr;
             </a>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-t border-l border-[#262626]">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-t border-l border-[#202020]">
             @forelse($latestJobs as $job)
-            <div class="border-r border-b border-[#262626] p-8 relative group bg-[#080808] hover:bg-[#121212] transition-colors flex flex-col">
+            <div class="border-r border-b border-[#202020] p-8 relative group bg-[#090909] hover:bg-[#121212] transition-colors flex flex-col">
                 <div class="flex items-center justify-between mb-4">
                     <span class="c-mono text-[10px] text-[#FF4D30] font-bold uppercase tracking-wider">
                         LOC // {{ strtoupper($job->location ?? 'REMOTE') }}
@@ -613,35 +665,35 @@
                     <span class="w-1.5 h-1.5 bg-[#FF4D30]"></span>
                 </div>
 
-                <h3 class="text-xl sm:text-2xl font-bold mb-4 leading-snug text-white group-hover:text-[#FF4D30] transition-colors">
+                <h3 class="c-title-card text-xl font-bold mb-3 text-white group-hover:text-[#FF4D30] transition-colors">
                     {{ $job->title }}
                 </h3>
 
                 <div class="flex flex-wrap gap-1.5 mb-8">
                     @if(!empty($job->skills_json) && is_array($job->skills_json))
                         @foreach(array_slice($job->skills_json, 0, 3) as $skill)
-                        <span class="border border-[#333] bg-[#000] text-gray-300 px-2.5 py-1 c-mono text-[9px] uppercase tracking-wider">
+                        <span class="border border-[#262626] bg-[#000] text-gray-400 px-2 py-0.5 c-mono text-[9px] uppercase tracking-wider">
                             {{ $skill }}
                         </span>
                         @endforeach
                     @else
-                        <span class="border border-[#333] bg-[#000] text-gray-400 px-2.5 py-1 c-mono text-[9px] uppercase tracking-wider">
+                        <span class="border border-[#262626] bg-[#000] text-gray-400 px-2 py-0.5 c-mono text-[9px] uppercase tracking-wider">
                             FULL-STACK
                         </span>
                     @endif
                 </div>
 
-                <div class="mt-auto pt-4 border-t border-[#1a1a1a] flex items-center justify-between">
+                <div class="mt-auto pt-4 border-t border-[#181818] flex items-center justify-between">
                     <span class="c-mono text-[10px] text-gray-500">ID: CHL-{{ str_pad($job->id, 4, '0', STR_PAD_LEFT) }}</span>
-                    <a href="{{ route('jobs.show', $job->id) }}" class="c-btn c-btn-ghost-accent py-2 px-4 text-[10px]">
+                    <a href="{{ route('jobs.show', $job->id) }}" class="c-btn-install py-1.5 px-3 text-[10px]">
                         APPLY POSITION &rarr;
                     </a>
                 </div>
             </div>
             @empty
-            <div class="col-span-full py-16 text-center border-r border-b border-[#262626] bg-[#080808]">
+            <div class="col-span-full py-16 text-center border-r border-b border-[#202020] bg-[#090909]">
                 <p class="c-mono text-gray-400 text-sm mb-4">// NO ACTIVE PUBLIC REQUISITIONS DETECTED</p>
-                <a href="{{ route('register') }}" class="c-btn c-btn-accent text-xs">CREATE FIRST JOB REQUISITION</a>
+                <a href="{{ route('register') }}" class="c-btn-install text-xs">CREATE FIRST JOB REQUISITION</a>
             </div>
             @endforelse
         </div>
@@ -674,7 +726,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isDeleting) {
                 typewriterElement.textContent = currentPhrase.substring(0, charIndex - 1);
                 charIndex--;
-                typingDelay = 22;
+                typingDelay = 20;
             } else {
                 typewriterElement.textContent = currentPhrase.substring(0, charIndex + 1);
                 charIndex++;
@@ -682,48 +734,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (!isDeleting && charIndex === currentPhrase.length) {
-                typingDelay = 2400; // Pause at end of sentence
+                typingDelay = 2200;
                 isDeleting = true;
             } else if (isDeleting && charIndex === 0) {
                 isDeleting = false;
                 phraseIndex = (phraseIndex + 1) % phrases.length;
-                typingDelay = 450; // Pause before new phrase
+                typingDelay = 400;
             }
 
             setTimeout(type, typingDelay);
         }
 
-        // Initialize typewriter after brief delay
-        setTimeout(type, 600);
-    }
-
-    // ── GSAP SCROLL ANIMATIONS ──
-    if (window.gsap && window.ScrollTrigger) {
-        gsap.registerPlugin(ScrollTrigger);
-
-        gsap.from(".c-solution-card", {
-            y: 30,
-            opacity: 0,
-            duration: 0.65,
-            stagger: 0.08,
-            ease: "power2.out",
-            scrollTrigger: {
-                trigger: ".c-grid-solutions",
-                start: "top 82%"
-            }
-        });
-
-        gsap.from(".c-metric-cell", {
-            opacity: 0,
-            y: 20,
-            duration: 0.5,
-            stagger: 0.08,
-            ease: "power2.out",
-            scrollTrigger: {
-                trigger: ".c-metrics-strip",
-                start: "top 88%"
-            }
-        });
+        setTimeout(type, 500);
     }
 });
 </script>
