@@ -3,22 +3,23 @@
 @push('styles')
 <style>
     .jf-wrap { max-width: 900px; margin: 0 auto; }
-    .jf-title { font-size: 32px; font-weight: 800; color: var(--color-text); letter-spacing: -1.5px; margin-bottom: 32px; border-bottom: 4px solid var(--color-accent); padding-bottom: 12px; display: inline-block; }
+    .jf-title { font-family: var(--font-display); font-size: 32px; font-weight: 800; color: var(--color-text); letter-spacing: -1.5px; margin-bottom: 32px; border-bottom: 4px solid var(--color-accent); padding-bottom: 12px; display: inline-block; text-transform: uppercase; }
     .jf-section { background: var(--color-surface); border: 2px solid var(--color-border); padding: 32px; margin-bottom: 24px; box-shadow: 6px 6px 0 var(--color-border); }
-    .jf-section-title { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--color-accent); margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+    .jf-section-title { font-family: var(--font-mono); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--color-accent); margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
     .jf-section-title::after { content: ''; flex: 1; height: 2px; background: var(--color-border); opacity: 0.3; }
     .jf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
     .jf-field { margin-bottom: 24px; }
-    .jf-label { display: block; font-size: 11px; font-weight: 800; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
+    .jf-label { font-family: var(--font-mono); display: block; font-size: 11px; font-weight: 700; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
     .jf-label .req { color: var(--color-accent); }
     .jf-input, .jf-textarea, .jf-select {
-        width: 100%; background: var(--color-secondary); border: 2px solid var(--color-border);
+        width: 100%; background: var(--color-secondary); border: 2px solid var(--color-border); border-radius: 0;
         color: var(--color-text); padding: 14px 16px; font-size: 14px; font-weight: 600; transition: all 0.2s;
     }
+    .jf-textarea { font-family: var(--font-body); font-size: 16px; font-weight: 400; line-height: 1.65; }
     .jf-input:focus, .jf-textarea:focus, .jf-select:focus { border-color: var(--color-accent); outline: none; box-shadow: 4px 4px 0 var(--color-accent-muted); }
-    .jf-btn-submit { background: var(--color-accent); color: white; padding: 16px 32px; font-size: 16px; font-weight: 800; text-transform: uppercase; border: 2px solid black; box-shadow: 6px 6px 0 black; cursor: pointer; transition: all 0.2s; }
+    .jf-btn-submit { font-family: var(--font-mono); background: var(--color-accent); color: white; padding: 16px 32px; font-size: 14px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; border: 2px solid black; box-shadow: 6px 6px 0 black; cursor: pointer; transition: all 0.2s; }
     .jf-btn-submit:hover { transform: translate(-2px, -2px); box-shadow: 10px 10px 0 black; }
-    .btn-danger-brutalist { background: #fee2e2; color: #dc2626; border: 2px solid #dc2626; padding: 16px 32px; font-size: 16px; font-weight: 800; text-transform: uppercase; cursor: pointer; box-shadow: 4px 4px 0 #dc2626; }
+    .btn-danger-brutalist { font-family: var(--font-mono); background: #fee2e2; color: #dc2626; border: 2px solid #dc2626; padding: 16px 32px; font-size: 14px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; box-shadow: 4px 4px 0 #dc2626; }
     .btn-danger-brutalist:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 #dc2626; }
 </style>
 @endpush

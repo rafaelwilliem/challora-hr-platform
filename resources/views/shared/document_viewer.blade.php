@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="lowercase mb-8 flex justify-between items-center">
-    <a href="javascript:history.back()" class="font-black text-accent uppercase tracking-widest text-sm flex items-center gap-2">
+<div class="lowercase mb-8 flex justify-between items-center" style="font-family: var(--font-mono);">
+    <a href="javascript:history.back()" class="font-bold text-accent uppercase tracking-widest text-xs flex items-center gap-2">
         <i class="bi bi-arrow-left"></i> back to previous page
     </a>
     <span class="text-[10px] font-bold text-text-muted uppercase tracking-widest">
@@ -21,14 +21,14 @@
 
     <!-- Read Only Label -->
     <div class="absolute top-0 right-0 p-4 pointer-events-none">
-        <div class="bg-accent text-white px-3 py-1 text-[9px] font-black uppercase tracking-tighter border border-black">
+        <div class="bg-accent text-white px-3 py-1 text-[9px] font-bold uppercase tracking-widest border border-black" style="font-family: var(--font-mono);">
             Locked Document
         </div>
     </div>
 </div>
 
 <div class="mt-8 text-center">
-    <p class="text-[10px] font-bold text-text-muted uppercase tracking-widest">
+    <p class="text-[10px] font-bold text-text-muted uppercase tracking-widest" style="font-family: var(--font-mono);">
         If you cannot see the document, <a href="{{ $url }}" target="_blank" class="text-accent underline">click here to open in new tab</a>.
     </p>
 </div>

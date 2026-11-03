@@ -7,13 +7,14 @@
         position: relative;
     }
     .back-btn-brutalist {
+        font-family: var(--font-mono);
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        font-weight: 800;
+        font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 1px;
-        font-size: 13px;
+        letter-spacing: 0.12em;
+        font-size: 12px;
         color: var(--color-text-muted);
         text-decoration: none;
         margin-bottom: 32px;
@@ -23,23 +24,28 @@
         color: var(--color-accent);
     }
     .job-title-giant {
-        font-size: 72px;
+        font-family: var(--font-display);
+        font-size: 68px;
         font-weight: 800;
-        letter-spacing: -4px;
-        line-height: 0.9;
+        letter-spacing: -3.5px;
+        line-height: 0.92;
         color: var(--color-text);
         margin-bottom: 24px;
     }
     .company-badge-premium {
+        font-family: var(--font-body);
+        font-style: italic;
         display: flex;
         align-items: center;
         gap: 16px;
-        font-size: 24px;
-        font-weight: 700;
+        font-size: 22px;
+        font-weight: 500;
         color: var(--color-text);
         margin-bottom: 40px;
     }
     .company-icon-frame {
+        font-family: var(--font-display);
+        font-style: normal;
         width: 48px;
         height: 48px;
         background: var(--color-text);
@@ -58,11 +64,13 @@
         gap: 12px;
     }
     .meta-pill {
+        font-family: var(--font-mono);
         background: var(--color-accent);
         border: 2px solid black;
         padding: 8px 16px;
         font-size: 11px;
-        font-weight: 900;
+        font-weight: 700;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
         color: black;
     }
@@ -76,7 +84,8 @@
         margin-bottom: 60px;
     }
     .section-headline {
-        font-size: 32px;
+        font-family: var(--font-display);
+        font-size: 30px;
         font-weight: 800;
         letter-spacing: -1px;
         margin-bottom: 24px;
@@ -88,14 +97,15 @@
         bottom: -8px;
         left: 0;
         width: 40px;
-        height: 6px;
+        height: 4px;
         background: var(--color-accent);
     }
     .rich-text-premium {
-        font-size: 18px;
-        line-height: 1.6;
-        color: var(--color-text-muted);
-        font-weight: 500;
+        font-family: var(--font-body);
+        font-size: 19px;
+        line-height: 1.75;
+        color: #c8c8c8;
+        font-weight: 400;
     }
     .rich-text-premium ul {
         list-style: none;
@@ -108,9 +118,10 @@
         gap: 12px;
     }
     .rich-text-premium li::before {
+        font-family: var(--font-mono);
         content: '→';
         color: var(--color-accent);
-        font-weight: 800;
+        font-weight: 700;
         flex-shrink: 0;
     }
     .sidebar-card-premium {
@@ -123,10 +134,11 @@
         border-radius: 0;
     }
     .sidebar-salary {
-        font-size: 40px;
+        font-family: var(--font-display);
+        font-size: 38px;
         font-weight: 800;
         color: var(--color-accent);
-        letter-spacing: -2px;
+        letter-spacing: -1.5px;
         margin-bottom: 32px;
         line-height: 1;
     }
@@ -142,31 +154,37 @@
         font-size: 14px;
     }
     .stat-row label {
-        font-weight: 800;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 0.1em;
         color: var(--color-text-muted);
     }
     .stat-row span {
+        font-family: var(--font-sans);
         font-weight: 700;
         color: var(--color-text);
     }
     .apply-btn-giant {
+        font-family: var(--font-mono);
         display: block;
         width: 100%;
         background: var(--color-accent);
         color: var(--color-surface);
         text-align: center;
-        padding: 24px;
-        font-size: 20px;
+        padding: 20px 24px;
+        font-size: 14px;
         font-weight: 800;
         text-transform: uppercase;
-        letter-spacing: 2px;
+        letter-spacing: 0.14em;
         border: 2px solid black;
+        border-radius: 0 !important;
         box-shadow: 6px 6px 0 black;
         transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
         text-decoration: none;
         margin-bottom: 16px;
+        cursor: pointer;
     }
     .apply-btn-giant:hover {
         transform: translate(-2px, -2px);

@@ -10,12 +10,14 @@
         margin-bottom: 40px;
     }
     .profile-title {
+        font-family: var(--font-display);
         font-size: 32px;
         font-weight: 800;
         letter-spacing: -1.5px;
         margin-bottom: 32px;
         border-left: 8px solid var(--color-accent);
         padding-left: 20px;
+        text-transform: uppercase;
     }
     .info-grid {
         display: grid;
@@ -23,8 +25,9 @@
         gap: 32px;
     }
     .info-group h4 {
+        font-family: var(--font-mono);
         font-size: 11px;
-        font-weight: 800;
+        font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 2px;
         color: var(--color-text-muted);
@@ -53,25 +56,29 @@
         border-color: var(--color-accent);
     }
     .btn-brutalist-sm {
+        font-family: var(--font-mono);
         background: var(--color-accent);
         color: white;
         padding: 8px 16px;
-        font-size: 12px;
-        font-weight: 800;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
         border: 2px solid black;
         box-shadow: 3px 3px 0 black;
         text-decoration: none;
     }
     .action-select-premium {
+        font-family: var(--font-mono);
         background: var(--color-surface);
         border: 4px solid black;
         padding: 10px 16px;
-        font-weight: 800;
+        font-weight: 700;
         text-transform: uppercase;
         font-size: 11px;
         cursor: pointer;
         box-shadow: 4px 4px 0 black;
+        border-radius: 0;
     }
     .action-select-premium:hover {
         border-color: var(--color-accent);
@@ -157,23 +164,23 @@
 
         <div class="info-group col-span-full">
             <h4>Professional Summary</h4>
-            <p class="font-medium leading-relaxed">{{ $user->user_summary ?: 'No summary provided.' }}</p>
+            <p class="font-normal leading-relaxed" style="font-family: var(--font-body); font-size: 18px;">{{ $user->user_summary ?: 'No summary provided.' }}</p>
         </div>
     </div>
 
     @if($user->workExperiences->count() > 0)
         <div class="mt-12">
-            <h4 class="font-black text-xs uppercase tracking-widest text-text-muted mb-6">Work History</h4>
+            <h4 class="font-bold text-xs uppercase tracking-widest text-text-muted mb-6" style="font-family: var(--font-mono);">Work History</h4>
             @foreach($user->workExperiences as $exp)
                 <div class="mb-6 pb-6 border-b border-border last:border-0">
                     <div class="flex justify-between items-start">
                         <div>
-                            <p class="font-black text-lg">{{ $exp->title }}</p>
+                            <p class="font-extrabold text-lg uppercase" style="font-family: var(--font-display);">{{ $exp->title }}</p>
                             <p class="font-bold text-accent">{{ $exp->company_name }}</p>
                         </div>
-                        <p class="text-sm font-black text-text-muted">{{ $exp->year_start }} — {{ $exp->year_end ?: 'Present' }}</p>
+                        <p class="text-xs font-bold text-text-muted uppercase" style="font-family: var(--font-mono);">{{ $exp->year_start }} — {{ $exp->year_end ?: 'Present' }}</p>
                     </div>
-                    <p class="mt-2 text-sm">{{ $exp->description }}</p>
+                    <p class="mt-2 text-base" style="font-family: var(--font-body);">{{ $exp->description }}</p>
                 </div>
             @endforeach
         </div>

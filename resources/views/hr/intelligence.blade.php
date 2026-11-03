@@ -1,84 +1,84 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="bg-[#1a1a1a] border-4 border-black rounded p-6 mb-5">
+<div class="bg-[#1a1a1a] border-4 border-black shadow-[8px_8px_0_#000] p-6 mb-6">
     <div class="flex justify-between items-center">
         <div>
-            <h1 class="text-xl font-bold text-white">HR Intelligence</h1>
-            <p class="text-base text-gray-300">Top candidates, compatibility list, and AI insights per job.</p>
+            <h1 class="text-3xl font-extrabold text-white uppercase tracking-tight" style="font-family: var(--font-display);">HR Intelligence</h1>
+            <p class="text-base text-gray-300 italic mt-1" style="font-family: var(--font-body);">Top candidates, compatibility list, and AI insights per job.</p>
         </div>
-        <a href="{{ route('hr.applications.index') }}" class="px-3 py-2 text-xs rounded bg-accent text-black font-bold uppercase">Manage Pipeline</a>
+        <a href="{{ route('hr.applications.index') }}" class="px-4 py-2.5 text-xs bg-accent text-black font-bold uppercase tracking-widest border-2 border-black shadow-[4px_4px_0_#000]" style="font-family: var(--font-mono);">Manage Pipeline</a>
     </div>
 </div>
 
-<div class="grid md:grid-cols-2 gap-5">
-    <div class="space-y-5">
-        <div class="bg-[#1a1a1a] border-4 border-black rounded p-5">
-            <h2 class="text-sm uppercase tracking-wider font-bold text-gray-400 mb-3">Top Candidates Per Job</h2>
+<div class="grid md:grid-cols-2 gap-6">
+    <div class="space-y-6">
+        <div class="bg-[#1a1a1a] border-4 border-black shadow-[6px_6px_0_#000] p-6">
+            <h2 class="text-xs uppercase tracking-widest font-bold text-gray-400 mb-4 border-b border-gray-800 pb-2" style="font-family: var(--font-mono);">Top Candidates Per Job</h2>
             @forelse($topCandidatesByJob as $item)
-                <div class="mb-4">
-                    <div class="text-white font-bold mb-2">{{ $item['job']['title'] }}</div>
+                <div class="mb-5 last:mb-0">
+                    <div class="text-white font-extrabold uppercase tracking-tight mb-2" style="font-family: var(--font-display);">{{ $item['job']['title'] }}</div>
                     @foreach($item['candidates'] as $candidate)
-                        <button class="candidate-trigger w-full text-left border border-gray-700 rounded p-2 mb-2 {{ ($defaultSelectedApplicationId ?? null) === $candidate['application_id'] ? 'ring-2 ring-accent' : '' }}" data-application-id="{{ $candidate['application_id'] }}">
-                            <div class="flex justify-between">
-                                <span class="text-sm text-white">{{ $candidate['candidate_name'] }}</span>
-                                <span class="text-xs text-accent font-bold">Score {{ number_format($candidate['score_total'] / 10, 1) }}/10</span>
+                        <button class="candidate-trigger w-full text-left border border-gray-700 bg-[#111] hover:border-accent p-3 mb-2 transition-colors {{ ($defaultSelectedApplicationId ?? null) === $candidate['application_id'] ? 'ring-2 ring-accent' : '' }}" data-application-id="{{ $candidate['application_id'] }}">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-bold text-white" style="font-family: var(--font-display);">{{ $candidate['candidate_name'] }}</span>
+                                <span class="text-xs text-accent font-bold uppercase tracking-wider" style="font-family: var(--font-mono);">Score {{ number_format($candidate['score_total'] / 10, 1) }}/10</span>
                             </div>
                         </button>
                     @endforeach
                 </div>
             @empty
-                <p class="text-base text-gray-300">No candidates with AI score yet.</p>
+                <p class="text-base text-gray-400 italic" style="font-family: var(--font-body);">No candidates with AI score yet.</p>
             @endforelse
         </div>
 
-        <div class="bg-[#1a1a1a] border-4 border-black rounded p-5">
-            <h2 class="text-sm uppercase tracking-wider font-bold text-gray-400 mb-3">Available Compatible Candidate</h2>
+        <div class="bg-[#1a1a1a] border-4 border-black shadow-[6px_6px_0_#000] p-6">
+            <h2 class="text-xs uppercase tracking-widest font-bold text-gray-400 mb-4 border-b border-gray-800 pb-2" style="font-family: var(--font-mono);">Available Compatible Candidate</h2>
             @forelse($availableCompatibleCandidates as $candidate)
-                <button class="candidate-trigger w-full text-left border-b border-gray-700 py-2 {{ ($defaultSelectedApplicationId ?? null) === $candidate['application_id'] ? 'text-accent' : 'text-white' }}" data-application-id="{{ $candidate['application_id'] }}">
-                    <div class="flex justify-between">
-                        <span>{{ $candidate['candidate_name'] }}</span>
-                        <span class="text-xs">Score {{ number_format($candidate['score_total'] / 10, 1) }}/10</span>
+                <button class="candidate-trigger w-full text-left border-b border-gray-800 py-3 hover:bg-white/5 px-2 transition-colors {{ ($defaultSelectedApplicationId ?? null) === $candidate['application_id'] ? 'text-accent' : 'text-white' }}" data-application-id="{{ $candidate['application_id'] }}">
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold" style="font-family: var(--font-display);">{{ $candidate['candidate_name'] }}</span>
+                        <span class="text-xs font-bold uppercase tracking-wider" style="font-family: var(--font-mono);">Score {{ number_format($candidate['score_total'] / 10, 1) }}/10</span>
                     </div>
-                    <div class="text-xs text-gray-400">{{ $candidate['job_title'] }}</div>
+                    <div class="text-xs text-gray-400 italic mt-0.5" style="font-family: var(--font-body);">{{ $candidate['job_title'] }}</div>
                 </button>
             @empty
-                <p class="text-base text-gray-300">No compatible candidates yet.</p>
+                <p class="text-base text-gray-400 italic" style="font-family: var(--font-body);">No compatible candidates yet.</p>
             @endforelse
         </div>
     </div>
 
-    <div class="bg-[#1a1a1a] border-4 border-black rounded p-5">
-        <h2 class="text-sm uppercase tracking-wider font-bold text-gray-400 mb-3">Candidate Insight</h2>
+    <div class="bg-[#1a1a1a] border-4 border-black shadow-[6px_6px_0_#000] p-6">
+        <h2 class="text-xs uppercase tracking-widest font-bold text-gray-400 mb-4 border-b border-gray-800 pb-2" style="font-family: var(--font-mono);">Candidate Insight</h2>
         <div id="insight-empty" class="{{ $selectedCandidateDetail ? 'hidden' : '' }}">
-            <p class="text-base text-gray-300">Select a candidate to view insights.</p>
+            <p class="text-base text-gray-400 italic" style="font-family: var(--font-body);">Select a candidate to view insights.</p>
         </div>
         <div id="insight-body" class="{{ $selectedCandidateDetail ? '' : 'hidden' }}">
-            <div class="mb-3">
-                <div id="insight-name" class="text-lg font-bold text-white"></div>
-                <div id="insight-job" class="text-base text-gray-300"></div>
+            <div class="mb-4 pb-3 border-b border-gray-800">
+                <div id="insight-name" class="text-2xl font-extrabold text-white uppercase tracking-tight" style="font-family: var(--font-display);"></div>
+                <div id="insight-job" class="text-base text-gray-300 italic mt-0.5" style="font-family: var(--font-body);"></div>
             </div>
-            <div class="grid grid-cols-2 gap-3 mb-4">
-                <div class="border border-gray-700 rounded p-2 text-center">
-                    <div class="text-xs text-gray-400">AI Score</div>
-                    <div id="insight-score" class="text-white font-bold">0</div>
+            <div class="grid grid-cols-2 gap-3 mb-5">
+                <div class="border-2 border-gray-700 bg-[#111] p-3 text-center">
+                    <div class="text-[11px] uppercase tracking-widest text-gray-400 mb-1" style="font-family: var(--font-mono);">AI Score</div>
+                    <div id="insight-score" class="text-xl text-white font-extrabold" style="font-family: var(--font-display);">0</div>
                 </div>
-                <div class="border border-gray-700 rounded p-2 text-center">
-                    <div class="text-xs text-gray-400">Confidence</div>
-                    <div id="insight-confidence" class="text-white font-bold">0%</div>
+                <div class="border-2 border-gray-700 bg-[#111] p-3 text-center">
+                    <div class="text-[11px] uppercase tracking-widest text-gray-400 mb-1" style="font-family: var(--font-mono);">Confidence</div>
+                    <div id="insight-confidence" class="text-xl text-white font-extrabold" style="font-family: var(--font-display);">0%</div>
                 </div>
             </div>
-            <div class="mb-3">
-                <h3 class="text-sm font-bold text-green-400">Plus</h3>
-                <ul id="insight-pros" class="list-disc list-inside text-base text-gray-300"></ul>
+            <div class="mb-4">
+                <h3 class="text-xs uppercase tracking-widest font-bold text-green-400 mb-1.5" style="font-family: var(--font-mono);">Plus</h3>
+                <ul id="insight-pros" class="list-disc list-inside text-base text-gray-300 space-y-1" style="font-family: var(--font-body);"></ul>
             </div>
-            <div class="mb-3">
-                <h3 class="text-sm font-bold text-red-400">Minus</h3>
-                <ul id="insight-cons" class="list-disc list-inside text-base text-gray-300"></ul>
+            <div class="mb-4">
+                <h3 class="text-xs uppercase tracking-widest font-bold text-red-400 mb-1.5" style="font-family: var(--font-mono);">Minus</h3>
+                <ul id="insight-cons" class="list-disc list-inside text-base text-gray-300 space-y-1" style="font-family: var(--font-body);"></ul>
             </div>
-            <div>
-                <h3 class="text-sm font-bold text-accent">Summary</h3>
-                <p id="insight-summary" class="text-base text-gray-300"></p>
+            <div class="pt-3 border-t border-gray-800">
+                <h3 class="text-xs uppercase tracking-widest font-bold text-accent mb-1.5" style="font-family: var(--font-mono);">Summary</h3>
+                <p id="insight-summary" class="text-base text-gray-300 leading-relaxed" style="font-family: var(--font-body);"></p>
             </div>
         </div>
     </div>

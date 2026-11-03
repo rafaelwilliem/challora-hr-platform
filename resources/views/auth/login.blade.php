@@ -71,14 +71,14 @@
             </div>
 
             <a href="{{ route('password.request') }}"
-                class="text-accent-500 hover:text-accent-400 font-black text-xs uppercase tracking-widest inline-block mb-8">Forgot
+                class="text-accent-500 hover:text-accent-400 font-mono font-bold text-xs uppercase tracking-widest inline-block mb-6">Forgot
                 Password?</a>
 
             <button type="submit" class="btn-brutal">
                 LOG-IN
             </button>
 
-            <div class="mt-12 text-center">
+            <div class="mt-10 text-center font-mono">
                 <p class="text-[11px] font-bold text-gray-500 uppercase tracking-widest">
                     New Here? <a href="{{ route('register') }}"
                         class="text-accent-500 hover:text-white transition-colors duration-300">Sign-Up</a>
@@ -93,14 +93,17 @@
     <!-- BRAND SIDE -->
     <div class="brand-side">
         <div class="gsap-item">
-            <div class="brand-title">Challora</div>
+            <div class="flex items-center gap-3 mb-2">
+                <img src="{{ asset('web-icon.png') }}" alt="Challora" class="w-10 h-10 object-contain border-2 border-black">
+                <div class="brand-title">Challora</div>
+            </div>
             <div class="brand-quote">
-                Intelligence is not just about what you know, but how you connect the dots.
+                “Intelligence is not just about what you know, but how you connect the dots.”
             </div>
         </div>
 
         <div class="brand-footer gsap-item">
-            AUTH PROTOCOL — V{{ $appVersion }}
+            CHALLORA HR // AUTHENTICATION
         </div>
     </div>
 </div>

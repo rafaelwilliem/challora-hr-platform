@@ -176,8 +176,9 @@ html.is-animating .transition-fade {
 }
 
 .profile-name {
+    font-family: var(--font-display);
     font-size: 64px;
-    font-weight: 900;
+    font-weight: 800;
     line-height: 0.9;
     letter-spacing: -3px;
     text-transform: uppercase;
@@ -186,14 +187,15 @@ html.is-animating .transition-fade {
 }
 
 .profile-role-badge {
+    font-family: var(--font-mono);
     display: inline-block;
     background: var(--color-accent);
     color: var(--color-surface);
     padding: 4px 12px;
-    font-weight: 800;
-    font-size: 14px;
+    font-weight: 700;
+    font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.1em;
 }
 
 .profile-grid {
@@ -244,10 +246,11 @@ html.is-animating .transition-fade {
 }
 
 .info-card-title {
+    font-family: var(--font-display);
     font-size: 24px;
-    font-weight: 900;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: -1px;
+    letter-spacing: -0.5px;
     margin-bottom: 32px;
     display: flex;
     align-items: center;
@@ -263,24 +266,27 @@ html.is-animating .transition-fade {
 }
 
 .data-label {
-    font-size: 16px;
-    font-weight: 800;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
     text-transform: uppercase;
     color: var(--color-accent);
-    letter-spacing: 2px;
-    margin-bottom: 4px;
+    letter-spacing: 0.12em;
+    margin-bottom: 6px;
 }
 
 .data-value {
+    font-family: var(--font-sans);
     font-size: 18px;
     font-weight: 700;
     color: var(--color-text);
 }
 
 .summary-text {
-    font-size: 20px;
-    font-weight: 600;
-    line-height: 1.6;
+    font-family: var(--font-body);
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 1.7;
     color: var(--color-text);
 }
 
@@ -303,14 +309,16 @@ html.is-animating .transition-fade {
 }
 
 .btn-edit-float {
+    font-family: var(--font-mono);
     position: fixed;
     bottom: 40px;
     right: 40px;
     background: var(--color-accent);
     color: var(--color-surface);
-    padding: 20px 40px;
-    font-size: 18px;
-    font-weight: 900;
+    padding: 18px 34px;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     border: 3px solid black;
     box-shadow: 8px 8px 0 black;
@@ -329,15 +337,17 @@ html.is-animating .transition-fade {
 }
 
 .sidebar-title {
-    font-size: 14px;
-    font-weight: 900;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.12em;
     margin-bottom: 20px;
     color: var(--color-text-muted);
 }
 
 .doc-link {
+    font-family: var(--font-mono);
     display: flex;
     align-items: center;
     gap: 12px;
@@ -375,9 +385,10 @@ html.is-animating .transition-fade {
     border-bottom: 4px solid var(--color-border);
 }
 .edit-title {
-    font-size: 36px;
+    font-family: var(--font-display);
+    font-size: 40px;
     font-weight: 800;
-    letter-spacing: -1px;
+    letter-spacing: -1.5px;
     color: var(--color-text);
     margin: 0;
 }
@@ -389,6 +400,7 @@ html.is-animating .transition-fade {
     box-shadow: 6px 6px 0 var(--color-border);
 }
 .edit-section-title {
+    font-family: var(--font-display);
     font-size: 20px;
     font-weight: 800;
     margin-bottom: 24px;
@@ -404,11 +416,12 @@ html.is-animating .transition-fade {
     margin-bottom: 20px;
 }
 .form-label {
+    font-family: var(--font-mono);
     display: block;
     font-size: 11px;
-    font-weight: 800;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
+    letter-spacing: 0.12em;
     color: var(--color-text-muted);
     margin-bottom: 6px;
 }
@@ -416,11 +429,18 @@ html.is-animating .transition-fade {
     width: 100%;
     background: var(--color-secondary);
     border: 2px solid var(--color-border);
+    border-radius: 0 !important;
     padding: 12px 16px;
     color: var(--color-text);
     font-size: 14px;
     font-weight: 600;
     transition: all 0.2s;
+}
+.form-textarea {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.6;
 }
 .form-input:focus, .form-select:focus, .form-textarea:focus {
     border-color: var(--color-accent);
@@ -428,13 +448,16 @@ html.is-animating .transition-fade {
     box-shadow: 4px 4px 0 var(--color-accent-muted);
 }
 .btn-submit {
+    font-family: var(--font-mono);
     background: var(--color-accent);
     color: var(--color-surface);
     padding: 16px 32px;
-    font-size: 16px;
+    font-size: 13px;
     font-weight: 800;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     border: 2px solid black;
+    border-radius: 0 !important;
     cursor: pointer;
     transition: all 0.2s;
     display: inline-block;
@@ -444,13 +467,16 @@ html.is-animating .transition-fade {
     box-shadow: 6px 6px 0 black;
 }
 .btn-cancel {
+    font-family: var(--font-mono);
     background: var(--color-secondary);
     color: var(--color-text);
     padding: 16px 32px;
-    font-size: 16px;
+    font-size: 13px;
     font-weight: 800;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     border: 2px solid var(--color-border);
+    border-radius: 0 !important;
     cursor: pointer;
     text-decoration: none;
     display: inline-block;
@@ -501,7 +527,7 @@ html.is-animating .transition-fade {
 .avatar-preview-lg {
     width: 120px;
     height: 120px;
-    border-radius: 50%;
+    border-radius: 0;
     border: 4px solid var(--color-accent);
     overflow: hidden;
     background: var(--color-surface);

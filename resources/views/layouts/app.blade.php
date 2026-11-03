@@ -79,7 +79,7 @@
                     <span class="tracking-tight uppercase">{{ session('flash_toast')['message'] }}</span>
                 </div>
                 <button onclick="this.parentElement.remove()"
-                    class="opacity-50 hover:opacity-100 transition-opacity bg-black text-white p-1 rounded-sm">
+                    class="opacity-50 hover:opacity-100 transition-opacity bg-black text-white p-1">
                     <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
                         </path>
@@ -125,11 +125,11 @@
             </div>
 
             <!-- LAYER 2: THE CONTROL CENTER -->
-            <div class="bg-[#1A1A1A] text-white rounded-[48px] m-4 md:m-8 p-10 md:p-20 relative flex flex-col justify-between" style="min-height: 60vh;">
+            <div class="bg-[#1A1A1A] text-white border-4 border-black m-4 md:m-8 p-10 md:p-20 relative flex flex-col justify-between" style="min-height: 60vh;">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-10 relative z-10 mb-20">
                     <!-- Col 1: Logo -->
-                    <div class="text-accent">
-                        <div class="w-16 h-16 border-4 border-accent flex items-center justify-center font-black text-4xl">C</div>
+                    <div>
+                        <img src="{{ asset('web-icon.png') }}" alt="Challora" class="w-16 h-16 object-contain">
                     </div>
 
                     <!-- Col 2: Platform links -->
@@ -154,8 +154,8 @@
                 </div>
 
                 <!-- Mega Wordmark — full height characters, zero gap to bottom edge -->
-                <div class="absolute bottom-0 left-0 w-full pointer-events-none overflow-hidden rounded-b-[48px]" style="height: 13vw;">
-                    <div class="font-black text-center tracking-tighter text-[#2a2a2a] select-none w-full" style="font-size: 15.5vw; line-height: 1; position: absolute; bottom: -0.15em; left: 0;">
+                <div class="absolute bottom-0 left-0 w-full pointer-events-none overflow-hidden" style="height: 13vw;">
+                    <div class="font-black text-center tracking-tighter text-[#2a2a2a] select-none w-full" style="font-family: var(--font-display); font-size: 15.5vw; line-height: 1; position: absolute; bottom: -0.15em; left: 0;">
                         CHALLORA
                     </div>
                 </div>

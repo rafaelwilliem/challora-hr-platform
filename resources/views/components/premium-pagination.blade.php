@@ -8,11 +8,11 @@
 @endphp
 
 @if ($paginator->hasPages() || $paginator->total() > 0)
-    <nav class="flex justify-between items-center w-full mt-8 border-t-2 border-border pt-4 flex-wrap gap-4">
+    <nav class="flex justify-between items-center w-full mt-8 border-t-2 border-border pt-4 flex-wrap gap-4" style="font-family: var(--font-mono);">
 
         {{-- Left: Showing X rows info + per-page selector --}}
         <div class="flex items-center gap-4">
-            <div class="text-sm font-black uppercase text-accent">
+            <div class="text-xs font-bold uppercase tracking-wider text-accent">
                 @if($paginator->total() > 0)
                     Showing {{ $paginator->firstItem() }} to {{ $paginator->lastItem() }} of {{ $paginator->total() }} rows
                 @else

@@ -4,9 +4,10 @@
     <link rel="stylesheet" href="{{ asset('css/jobs-style.css') }}">
     <style>
         .brutalist-title {
+            font-family: var(--font-display);
             font-size: 64px;
-            font-weight: 900;
-            letter-spacing: -4px;
+            font-weight: 800;
+            letter-spacing: -3.5px;
             color: var(--color-text);
             margin-bottom: 60px;
             padding-bottom: 24px;
@@ -32,16 +33,19 @@
         }
 
         .brutalist-job-name {
+            font-family: var(--font-display);
             font-size: 28px;
-            font-weight: 900;
+            font-weight: 800;
             color: var(--color-text);
             text-decoration: none;
-            letter-spacing: -1.5px;
+            letter-spacing: -1px;
             text-transform: uppercase;
         }
 
         .brutalist-job-desc {
-            opacity: 0.6;
+            font-family: var(--font-body);
+            font-style: italic;
+            opacity: 0.75;
         }
 
         .brutalist-job-row:hover .brutalist-job-name {
@@ -72,29 +76,33 @@
         }
 
         .brutalist-status {
-            font-size: 14px;
-            font-weight: 900;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 700;
             color: black;
             background: var(--color-accent);
             border: 2px solid black;
-            padding: 4px 12px;
+            padding: 6px 14px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.1em;
         }
 
         .brutalist-meta {
-            font-size: 14px;
+            font-family: var(--font-mono);
+            font-size: 12px;
             color: var(--color-text-muted);
             font-weight: 500;
         }
 
         .brutalist-pill {
+            font-family: var(--font-mono);
             padding: 6px 12px;
             border: 2px solid black;
             background: black;
             color: white;
-            font-size: 11px;
-            font-weight: 900;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
         }
 
@@ -103,17 +111,20 @@
         }
 
         .saved-title-giant {
+            font-family: var(--font-display);
             font-size: 64px;
             font-weight: 800;
             letter-spacing: -3px;
             color: var(--color-text);
             line-height: 1;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
         .saved-subtext {
-            font-size: 18px;
-            font-weight: 600;
+            font-family: var(--font-body);
+            font-style: italic;
+            font-size: 20px;
+            font-weight: 400;
             color: var(--color-text-muted);
         }
 

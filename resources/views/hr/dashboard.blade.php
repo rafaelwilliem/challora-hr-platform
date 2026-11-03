@@ -13,17 +13,20 @@
         box-shadow: 8px 8px 0 black;
     }
     .hr-header-text {
-        font-size: 15px;
+        font-family: var(--font-body);
+        font-style: italic;
+        font-size: 16px;
         color: #d1d5db;
-        font-weight: 500;
+        font-weight: 400;
     }
     .btn-orange {
         background-color: #f97316;
         color: #fff;
         padding: 10px 16px;
-        border-radius: 6px;
-        font-weight: 600;
-        font-size: 13px;
+        border-radius: 0;
+        font-family: var(--font-mono);
+        font-weight: 700;
+        font-size: 11px;
         display: inline-flex;
         align-items: center;
         gap: 8px;
@@ -39,9 +42,10 @@
         background-color: transparent;
         color: #d1d5db;
         padding: 10px 16px;
-        border-radius: 6px;
-        font-weight: 600;
-        font-size: 13px;
+        border-radius: 0;
+        font-family: var(--font-mono);
+        font-weight: 700;
+        font-size: 11px;
         text-decoration: none;
         border: 1px solid #4b5563;
         transition: background 0.2s;
@@ -60,29 +64,34 @@
     .kpi-card {
         background-color: #1a1a1a;
         border: 1px solid #2d2d2d;
-        border-radius: 8px;
+        border-radius: 0;
         padding: 24px;
         display: flex;
         flex-direction: column;
     }
     .kpi-title {
-        font-size: 12px;
+        font-family: var(--font-mono);
+        font-size: 11px;
         font-weight: 700;
         color: #9ca3af;
-        letter-spacing: 0.5px;
+        letter-spacing: 0.1em;
         margin-bottom: 16px;
         text-transform: uppercase;
     }
     .kpi-val {
+        font-family: var(--font-display);
         font-size: 36px;
-        font-weight: 700;
+        font-weight: 800;
         color: #fff;
         line-height: 1;
         margin-bottom: 8px;
+        letter-spacing: -0.02em;
     }
     .kpi-sub {
-        font-size: 12px;
-        color: #6b7280;
+        font-family: var(--font-body);
+        font-style: italic;
+        font-size: 13px;
+        color: #9ca3af;
         margin-bottom: 12px;
     }
     .live-badge {
@@ -90,15 +99,18 @@
         align-items: center;
         gap: 6px;
         padding: 4px 10px;
-        border-radius: 20px;
+        border-radius: 0;
         background-color: rgba(255,255,255,0.05);
         border: 1px solid #374151;
-        font-size: 11px;
-        font-weight: 600;
+        font-family: var(--font-mono);
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
         color: #fff;
         width: max-content;
     }
-    .dot { width: 6px; height: 6px; border-radius: 50%; }
+    .dot { width: 6px; height: 6px; border-radius: 0; }
     .dot.green { background-color: #22c55e; box-shadow: 0 0 6px #22c55e; }
     .dot.yellow { background-color: #eab308; box-shadow: 0 0 6px #eab308; }
     .dot.red { background-color: #ef4444; box-shadow: 0 0 6px #ef4444; }
@@ -112,14 +124,15 @@
     .panel-card {
         background-color: #1a1a1a;
         border: 1px solid #2d2d2d;
-        border-radius: 8px;
+        border-radius: 0;
         padding: 24px;
     }
     .panel-header {
-        font-size: 12px;
+        font-family: var(--font-mono);
+        font-size: 11px;
         font-weight: 700;
         color: #9ca3af;
-        letter-spacing: 0.5px;
+        letter-spacing: 0.1em;
         text-transform: uppercase;
         margin-bottom: 20px;
     }
@@ -139,28 +152,29 @@
         display: flex;
         flex-direction: column;
     }
-    .funnel-num { font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 4px; }
-    .funnel-lbl { font-size: 12px; color: #d1d5db; font-weight: 500; }
-    .funnel-pct { font-size: 11px; color: #6b7280; margin-top: 4px; }
+    .funnel-num { font-family: var(--font-display); font-size: 32px; font-weight: 800; color: #fff; margin-bottom: 4px; letter-spacing: -0.02em; }
+    .funnel-lbl { font-family: var(--font-body); font-style: italic; font-size: 13px; color: #d1d5db; font-weight: 400; }
+    .funnel-pct { font-family: var(--font-mono); font-size: 11px; color: #6b7280; margin-top: 4px; }
 
     .region-item {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 12px;
+        font-family: var(--font-mono);
     }
     .region-bar-bg {
         flex: 1;
         height: 6px;
         background-color: #374151;
-        border-radius: 4px;
+        border-radius: 0;
         margin: 0 16px;
         overflow: hidden;
     }
     .region-bar-fill {
         height: 100%;
         background-color: #f97316;
-        border-radius: 4px;
+        border-radius: 0;
     }
 
     .table-container {
@@ -171,10 +185,11 @@
     .table-container th {
         text-align: left;
         color: #9ca3af;
+        font-family: var(--font-mono);
         font-size: 11px;
         font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
+        letter-spacing: 0.08em;
         padding: 12px 16px;
         border-bottom: 1px solid #374151;
     }
@@ -191,9 +206,12 @@
         background-color: rgba(249, 115, 22, 0.1);
         color: #f97316;
         padding: 4px 10px;
-        border-radius: 4px;
-        font-size: 11px;
-        font-weight: 600;
+        border-radius: 0;
+        font-family: var(--font-mono);
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
     }
 </style>
 @endpush
@@ -264,17 +282,17 @@
             <div style="position: relative; width: 140px; height: 140px;">
                 <canvas id="donutChart"></canvas>
             </div>
-            <div style="margin-left: 40px; display: flex; flex-direction: column; gap: 12px; font-size: 12px; flex: 1;">
+            <div style="margin-left: 40px; display: flex; flex-direction: column; gap: 12px; font-size: 12px; flex: 1; font-family: var(--font-mono);">
                 <div class="flex justify-between items-center text-gray-300">
-                    <span class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-yellow-500"></div> Under Review</span>
+                    <span class="flex items-center gap-2"><div class="w-2 h-2 bg-yellow-500"></div> Under Review</span>
                     <span class="font-bold text-white">{{ $stats->pending }}</span>
                 </div>
                 <div class="flex justify-between items-center text-gray-300">
-                    <span class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-green-500"></div> Accepted</span>
+                    <span class="flex items-center gap-2"><div class="w-2 h-2 bg-green-500"></div> Accepted</span>
                     <span class="font-bold text-white">{{ $stats->accepted }}</span>
                 </div>
                 <div class="flex justify-between items-center text-gray-300">
-                    <span class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-red-500"></div> Rejected</span>
+                    <span class="flex items-center gap-2"><div class="w-2 h-2 bg-red-500"></div> Rejected</span>
                     <span class="font-bold text-white">{{ $stats->rejected }}</span>
                 </div>
             </div>

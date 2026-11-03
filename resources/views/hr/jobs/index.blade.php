@@ -11,10 +11,11 @@
         border-radius: 0;
     }
     .panel-header {
-        font-size: 14px;
+        font-family: var(--font-mono);
+        font-size: 13px;
         font-weight: 700;
         color: #9ca3af;
-        letter-spacing: 0.5px;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
         margin-bottom: 20px;
     }
@@ -22,9 +23,11 @@
         background-color: var(--color-accent);
         color: #000;
         padding: 12px 24px;
-        font-weight: 900;
+        font-family: var(--font-mono);
+        font-weight: 800;
         text-transform: uppercase;
-        font-size: 13px;
+        letter-spacing: 0.06em;
+        font-size: 12px;
         display: inline-flex;
         align-items: center;
         gap: 8px;
@@ -45,10 +48,11 @@
     .table-container th {
         text-align: left;
         color: #9ca3af;
+        font-family: var(--font-mono);
         font-size: 11px;
         font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
+        letter-spacing: 0.08em;
         padding: 12px 16px;
         border-bottom: 1px solid #374151;
     }
@@ -65,13 +69,17 @@
         background-color: rgba(249, 115, 22, 0.1);
         color: #f97316;
         padding: 4px 10px;
-        border-radius: 4px;
-        font-size: 11px;
-        font-weight: 600;
+        border-radius: 0;
+        font-family: var(--font-mono);
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
     }
     .action-btn {
         padding: 6px 12px;
-        border-radius: 4px;
+        border-radius: 0;
+        font-family: var(--font-mono);
         font-size: 12px;
         font-weight: 600;
         background-color: transparent;
@@ -94,8 +102,8 @@
 @section('content')
 <div class="flex justify-between items-center mb-8">
     <div>
-        <h1 class="text-3xl font-black text-white mb-2 uppercase tracking-tight">Manage Listings</h1>
-        <p class="text-gray-400 text-sm font-bold uppercase tracking-widest opacity-60">Overview of your published positions</p>
+        <h1 class="text-3xl font-extrabold text-white mb-2 uppercase tracking-tight" style="font-family: var(--font-display);">Manage Listings</h1>
+        <p class="text-gray-400 text-base italic opacity-80" style="font-family: var(--font-body);">Overview of your published positions</p>
     </div>
     <a href="{{ route('hr.jobs.create') }}" class="btn-orange">
         <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"></path></svg>

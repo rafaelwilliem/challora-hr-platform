@@ -39,7 +39,7 @@
                         <h2 class="info-card-title">Skills</h2>
                         <div class="flex flex-wrap gap-2">
                             @foreach(array_filter(array_map('trim', explode(',', $user->skills))) as $skill)
-                                <span class="border-2 border-accent text-accent px-3 py-1 text-xs font-black uppercase tracking-widest">{{ $skill }}</span>
+                                <span class="border-2 border-accent text-accent px-3 py-1 text-xs font-bold uppercase tracking-widest" style="font-family: var(--font-mono);">{{ $skill }}</span>
                             @endforeach
                         </div>
                     </section>
@@ -99,14 +99,14 @@
                         <div class="experience-item">
                             <div class="flex justify-between items-start">
                                 <div>
-                                    <h3 class="text-xl font-black uppercase">{{ $exp->title }}</h3>
+                                    <h3 class="text-xl font-extrabold uppercase" style="font-family: var(--font-display);">{{ $exp->title }}</h3>
                                     <p class="text-accent font-bold">{{ $exp->company_name }}</p>
                                 </div>
-                                <span class="bg-black text-white px-3 py-1 text-xs font-black">
+                                <span class="bg-black text-white px-3 py-1 text-xs font-bold" style="font-family: var(--font-mono);">
                                     {{ $exp->year_start }} — {{ $exp->year_end }}
                                 </span>
                             </div>
-                            <p class="mt-4 text-text-muted font-medium">{{ $exp->description }}</p>
+                            <p class="mt-4 text-text-muted" style="font-family: var(--font-body); font-size: 16px;">{{ $exp->description }}</p>
                         </div>
                     @empty
                         <p class="text-text-muted italic font-bold">No work experience added yet.</p>
@@ -119,14 +119,14 @@
                         <div class="experience-item">
                             <div class="flex justify-between items-start">
                                 <div>
-                                    <h3 class="text-xl font-black uppercase">{{ $org->organization_name }}</h3>
+                                    <h3 class="text-xl font-extrabold uppercase" style="font-family: var(--font-display);">{{ $org->organization_name }}</h3>
                                     <p class="text-accent font-bold">{{ $org->position }}</p>
                                 </div>
-                                <span class="bg-black text-white px-3 py-1 text-xs font-black">
+                                <span class="bg-black text-white px-3 py-1 text-xs font-bold" style="font-family: var(--font-mono);">
                                     {{ $org->start_year }} — {{ $org->year_end }}
                                 </span>
                             </div>
-                            <p class="mt-4 text-text-muted font-medium">{{ $org->description }}</p>
+                            <p class="mt-4 text-text-muted" style="font-family: var(--font-body); font-size: 16px;">{{ $org->description }}</p>
                         </div>
                     @empty
                         <p class="text-text-muted italic font-bold">No organizational history added yet.</p>

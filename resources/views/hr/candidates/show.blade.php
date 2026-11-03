@@ -22,11 +22,13 @@
         background: var(--color-accent);
     }
     .candidate-name-giant {
+        font-family: var(--font-display);
         font-size: 80px;
         font-weight: 800;
         letter-spacing: -4px;
         line-height: 0.9;
         margin-bottom: 24px;
+        text-transform: uppercase;
     }
     .meta-tags-flex {
         display: flex;
@@ -35,10 +37,11 @@
         margin-top: 32px;
     }
     .tag-brutalist {
+        font-family: var(--font-mono);
         background: black;
         color: white;
         padding: 8px 16px;
-        font-weight: 900;
+        font-weight: 700;
         text-transform: uppercase;
         font-size: 11px;
         letter-spacing: 1px;
@@ -57,12 +60,14 @@
         margin-bottom: 48px;
     }
     .section-label-giant {
+        font-family: var(--font-display);
         font-size: 40px;
         font-weight: 800;
         letter-spacing: -1px;
         margin-bottom: 32px;
         border-bottom: 8px solid var(--color-accent);
         display: inline-block;
+        text-transform: uppercase;
     }
     .biodata-grid {
         display: grid;
@@ -70,9 +75,10 @@
         gap: 32px;
     }
     .info-item label {
+        font-family: var(--font-mono);
         display: block;
         font-size: 11px;
-        font-weight: 900;
+        font-weight: 700;
         text-transform: uppercase;
         color: var(--color-text-muted);
         letter-spacing: 1.5px;
@@ -92,16 +98,18 @@
         margin-bottom: 32px;
     }
     .ai-score-number {
+        font-family: var(--font-display);
         font-size: 80px;
         font-weight: 900;
         color: var(--color-accent);
         line-height: 1;
     }
     .ai-label {
-        font-weight: 800;
+        font-family: var(--font-mono);
+        font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 2px;
-        font-size: 14px;
+        font-size: 12px;
         margin-top: 8px;
     }
     .pro-con-grid {
@@ -112,8 +120,8 @@
     }
     .pro-box { border-left: 8px solid #4ade80; padding-left: 20px; }
     .con-box { border-left: 8px solid #f87171; padding-left: 20px; }
-    .box-title { font-weight: 900; text-transform: uppercase; font-size: 12px; margin-bottom: 12px; }
-    .box-list { font-size: 15px; color: var(--color-text-muted); }
+    .box-title { font-family: var(--font-mono); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; font-size: 12px; margin-bottom: 12px; }
+    .box-list { font-family: var(--font-body); font-size: 15px; color: var(--color-text-muted); }
     
     .timeline-item {
         border-left: 4px solid black;
@@ -129,9 +137,9 @@
         background: var(--color-accent);
         border: 4px solid black;
     }
-    .timeline-date { font-weight: 800; font-size: 12px; color: var(--color-accent); margin-bottom: 4px; }
-    .timeline-title { font-size: 22px; font-weight: 800; margin-bottom: 8px; }
-    .timeline-subtitle { font-weight: 700; color: var(--color-text-muted); margin-bottom: 12px; }
+    .timeline-date { font-family: var(--font-mono); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-accent); margin-bottom: 4px; }
+    .timeline-title { font-family: var(--font-display); font-size: 22px; font-weight: 800; margin-bottom: 8px; }
+    .timeline-subtitle { font-family: var(--font-body); font-style: italic; font-weight: 600; color: var(--color-text-muted); margin-bottom: 12px; }
 </style>
 @endpush
 

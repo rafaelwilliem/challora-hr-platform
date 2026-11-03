@@ -11,15 +11,19 @@
         padding-bottom: 32px;
     }
     .hr-title-giant {
+        font-family: var(--font-display);
         font-size: 64px;
         font-weight: 800;
         letter-spacing: -4px;
         line-height: 1;
         color: var(--color-text);
+        text-transform: uppercase;
     }
     .hr-subtitle {
+        font-family: var(--font-body);
+        font-style: italic;
         font-size: 18px;
-        font-weight: 700;
+        font-weight: 400;
         color: var(--color-text-muted);
         margin-top: 12px;
     }
@@ -38,8 +42,9 @@
         background: var(--color-secondary);
         padding: 24px;
         text-align: left;
+        font-family: var(--font-mono);
         font-size: 11px;
-        font-weight: 800;
+        font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 2px;
         color: var(--color-text-muted);
@@ -51,13 +56,15 @@
         vertical-align: middle;
     }
     .applicant-name {
+        font-family: var(--font-display);
         font-size: 20px;
         font-weight: 800;
         color: var(--color-text);
         letter-spacing: -0.5px;
     }
     .applicant-contact {
-        font-size: 14px;
+        font-family: var(--font-mono);
+        font-size: 12px;
         font-weight: 600;
         color: var(--color-text-muted);
     }
@@ -66,7 +73,8 @@
         align-items: center;
         gap: 8px;
         padding: 6px 16px;
-        font-weight: 800;
+        font-family: var(--font-mono);
+        font-weight: 700;
         text-transform: uppercase;
         font-size: 11px;
         letter-spacing: 1px;
@@ -80,11 +88,13 @@
         background: var(--color-surface);
         border: 4px solid black;
         padding: 12px 16px;
-        font-weight: 800;
+        font-family: var(--font-mono);
+        font-weight: 700;
         text-transform: uppercase;
         font-size: 11px;
         cursor: pointer;
         box-shadow: 4px 4px 0 black;
+        border-radius: 0;
     }
     .action-select-premium:focus {
         border-color: var(--color-accent);

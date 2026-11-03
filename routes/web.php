@@ -25,7 +25,7 @@ Route::get('/', function () {
     }
 
     return view('landing', [
-        'pageTitle' => 'Rekrutmen Cerdas (Powered by Chally)',
+        'pageTitle' => 'Challora — Intelligent Recruitment (Powered by Chally)',
         'latestJobs' => $latestJobs
     ]);
 })->name('landing');

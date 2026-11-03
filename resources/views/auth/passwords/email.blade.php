@@ -58,7 +58,7 @@
                 SEND RESET LINK
             </button>
 
-            <div class="mt-12 text-center">
+            <div class="mt-10 text-center font-mono">
                 <p class="text-[11px] font-bold text-gray-500 uppercase tracking-widest">
                     Remembered your password?
                     <a href="{{ route('login') }}" class="text-accent-500 hover:text-white transition-colors duration-300">Sign In</a>
@@ -70,13 +70,16 @@
     <!-- BRAND SIDE -->
     <div class="brand-side">
         <div class="gsap-item">
-            <div class="brand-title">Challora</div>
+            <div class="flex items-center gap-3 mb-2">
+                <img src="{{ asset('web-icon.png') }}" alt="Challora" class="w-10 h-10 object-contain border-2 border-black">
+                <div class="brand-title">Challora</div>
+            </div>
             <div class="brand-quote">
-                No worries. It happens to the best of us.
+                “Account recovery is one step away. Check your inbox for the reset link.”
             </div>
         </div>
         <div class="brand-footer gsap-item">
-            AUTH PROTOCOL — V{{ $appVersion }}
+            CHALLORA HR // RECOVERY
         </div>
     </div>
 </div>

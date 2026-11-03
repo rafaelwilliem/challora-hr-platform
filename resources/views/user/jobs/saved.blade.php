@@ -4,23 +4,23 @@
     <link rel="stylesheet" href="{{ asset('css/jobs-style.css') }}">
     <style>
         .saved-hero { margin-bottom: 60px; }
-        .saved-title-giant { font-size: 64px; font-weight: 800; letter-spacing: -3px; color: var(--color-text); line-height: 1; margin-bottom: 16px; }
-        .saved-subtext { font-size: 18px; font-weight: 600; color: var(--color-text-muted); }
+        .saved-title-giant { font-family: var(--font-display); font-size: 64px; font-weight: 800; letter-spacing: -3px; color: var(--color-text); line-height: 1; margin-bottom: 14px; }
+        .saved-subtext { font-family: var(--font-body); font-style: italic; font-size: 20px; font-weight: 400; color: var(--color-text-muted); }
     </style>
 @endpush
 
 @section('content')
 <div class="saved-hero gsap-reveal">
     <h1 class="saved-title-giant">Saved Jobs</h1>
-    <p class="saved-subtext">Positions you've saved for later.</p>
+    <p class="saved-subtext">Positions you've bookmarked for careful review.</p>
 </div>
 
 <div class="job-list-area">
     @if ($savedJobs->isEmpty())
         <div class="bg-secondary p-12 text-center border-2 border-dashed border-border gsap-reveal">
-            <h3 class="font-black text-2xl mb-2">No saved jobs</h3>
-            <p class="text-text-muted font-bold">Your flagged positions will appear here for review.</p>
-            <a href="{{ route('jobs.index') }}" class="inline-block mt-6 bg-accent text-surface px-6 py-3 font-black uppercase tracking-widest border-2 border-black shadow-[4px_4px_0_black] hover:translate-y-[2px] transition-all">Explore Boards</a>
+            <h3 class="font-sans font-extrabold text-2xl mb-2">No saved jobs</h3>
+            <p class="font-serif italic text-text-muted text-lg">Your flagged positions will appear here for review.</p>
+            <a href="{{ route('jobs.index') }}" class="inline-block mt-6 bg-accent text-surface px-6 py-3 font-mono text-xs font-bold uppercase tracking-widest border-2 border-black shadow-[4px_4px_0_black] hover:translate-y-[2px] transition-all">Explore Boards</a>
         </div>
     @else
         <div id="jobs-container">

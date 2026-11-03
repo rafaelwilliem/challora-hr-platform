@@ -160,9 +160,9 @@
                 CREATE ACCOUNT
             </button>
 
-            <div class="mt-12 text-center">
+            <div class="mt-10 text-center font-mono">
                 <p class="text-[11px] font-bold text-gray-500 uppercase tracking-widest">
-                    Already Has An Account? <a href="{{ route('login') }}"
+                    Already Have An Account? <a href="{{ route('login') }}"
                         class="text-accent-500 hover:text-white transition-colors duration-300">Log-In</a>
                 </p>
                 <p class="text-[11px] font-bold text-gray-500 uppercase tracking-widest mt-3">
@@ -175,14 +175,17 @@
     <!-- BRAND SIDE -->
     <div class="brand-side">
         <div class="gsap-item">
-            <div class="brand-title">Challora</div>
+            <div class="flex items-center gap-3 mb-2">
+                <img src="{{ asset('web-icon.png') }}" alt="Challora" class="w-10 h-10 object-contain border-2 border-black">
+                <div class="brand-title">Challora</div>
+            </div>
             <div class="brand-quote">
-                Build your professional profile and unlock global career opportunities.
+                “Build your professional profile and unlock verified career opportunities.”
             </div>
         </div>
 
         <div class="brand-footer gsap-item">
-            AUTH PROTOCOL — V{{ $appVersion }}
+            CHALLORA HR // REGISTRATION
         </div>
     </div>
 </div>
