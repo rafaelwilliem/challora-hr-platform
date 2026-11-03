@@ -200,8 +200,19 @@
 
 @section('content')
 <div class="hr-header-bar">
-    <div class="hr-header-text">
-        <b class="text-white">{{ $stats->pending }}</b> applicants awaiting review &nbsp;·&nbsp; <b class="text-white">{{ $totalJobs }}</b> active listings
+    <div>
+        <div class="hr-header-text">
+            <b class="text-white">{{ $stats->pending }}</b> applicants awaiting review &nbsp;·&nbsp; <b class="text-white">{{ $totalJobs }}</b> active listings
+        </div>
+        <div class="flex items-center gap-3 mt-2 text-xs text-gray-400">
+            <span class="uppercase font-bold tracking-wider">Recruiter Invite Code:</span>
+            <code id="hr-invite-code-display" class="px-2 py-1 bg-black border border-gray-700 text-orange-400 font-mono font-bold select-all">{{ $hrInviteCode }}</code>
+            <button type="button" onclick="navigator.clipboard.writeText(document.getElementById('hr-invite-code-display').innerText); this.innerText='Copied!'; setTimeout(()=>this.innerText='Copy', 1500);" class="text-[11px] uppercase font-bold text-white hover:text-orange-400 underline cursor-pointer bg-transparent border-0">Copy</button>
+            <form method="post" action="{{ route('hr.invite_code.regenerate') }}" class="inline">
+                @csrf
+                <button type="submit" class="text-[11px] uppercase font-bold text-gray-400 hover:text-white underline cursor-pointer bg-transparent border-0">Regenerate</button>
+            </form>
+        </div>
     </div>
     <div class="flex gap-3 items-center">
         <a href="{{ route('hr.applications.index') }}" class="btn-orange border-2 border-black font-black uppercase text-[11px] tracking-widest bg-accent">

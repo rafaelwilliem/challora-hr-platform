@@ -77,6 +77,7 @@ Route::middleware('auth')->group(function () {
     // HR Routes
     Route::middleware('role:hr')->prefix('hr')->name('hr.')->group(function () {
         Route::get('/dashboard', \App\Http\Controllers\Hr\DashboardController::class)->name('dashboard');
+        Route::post('/invite-code/regenerate', [\App\Http\Controllers\Hr\DashboardController::class, 'regenerateInviteCode'])->name('invite_code.regenerate');
         Route::get('/intelligence', [HrIntelligenceController::class, 'index'])->name('intelligence');
         Route::get('/intelligence/candidates/{application}', [HrIntelligenceController::class, 'showCandidate'])
             ->name('intelligence.candidates.show');

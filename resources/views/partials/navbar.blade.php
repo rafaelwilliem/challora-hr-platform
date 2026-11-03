@@ -2,7 +2,7 @@
     <div class="flex h-full items-center">
         <a href="{{ auth()->check() && auth()->user()->isAdmin() ? route('hr.dashboard') : route('landing') }}"
             class="brand-accent-box">
-            <div class="brand-logo-c">C</div>
+            <img src="{{ asset('web-icon.png') }}" alt="Challora" class="w-8 h-8 object-contain">
             <span class="brand-name-text font-sans font-extrabold tracking-tight">challora</span>
         </a>
 

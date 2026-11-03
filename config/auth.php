@@ -114,4 +114,6 @@ return [
 
     'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
 
+    'hr_invite_code' => env('HR_INVITE_CODE', 'CHALLORA-HR-2026'),
+
 ];

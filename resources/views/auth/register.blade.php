@@ -27,6 +27,55 @@
         <form method="post" action="{{ route('register') }}" class="gsap-item">
             @csrf
 
+            @php
+                $selectedRole = old('role', 'user');
+                $requiresCode = $requiresHrInviteCode ?? true;
+            @endphp
+            <div class="mb-6">
+                <label class="premium-label">
+                    <span class="flex items-center gap-2 text-white text-[10px]">
+                        ACCOUNT ROLE
+                    </span>
+                    <span class="text-accent-600 label-req">*select role</span>
+                </label>
+                <input type="hidden" name="role" id="role-input" value="{{ $selectedRole }}">
+                <div class="grid grid-cols-2 gap-4">
+                    <button type="button" data-role-btn="user"
+                        class="role-selector-btn {{ $selectedRole === 'user' ? 'active' : '' }}">
+                        CANDIDATE
+                    </button>
+                    <button type="button" data-role-btn="hr"
+                        class="role-selector-btn {{ $selectedRole === 'hr' ? 'active' : '' }}">
+                        RECRUITER (HR)
+                    </button>
+                </div>
+            </div>
+
+            <div id="hr-invite-wrapper" data-requires-code="{{ $requiresCode ? '1' : '0' }}" class="mb-4 {{ $selectedRole === 'hr' ? '' : 'hidden' }}">
+                @if($requiresCode)
+                    <label class="premium-label">
+                        <span class="flex items-center gap-2 text-white text-[10px]">
+                            HR INVITE CODE
+                            <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                    d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z">
+                                </path>
+                            </svg>
+                        </span>
+                        <span class="text-accent-600 label-req">*ask an existing recruiter</span>
+                    </label>
+                    <input type="password" name="hr_invite_code" id="hr-invite-input"
+                        placeholder="Enter HR invite code from a colleague's dashboard"
+                        value="{{ old('hr_invite_code') }}"
+                        {{ $selectedRole === 'hr' ? 'required' : '' }}
+                        class="premium-input">
+                @else
+                    <div class="p-3 border border-accent-600 bg-black text-xs font-bold text-gray-300 uppercase tracking-wider">
+                        First Recruiter Bootstrap: No invite code required to claim the initial HR account.
+                    </div>
+                @endif
+            </div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6">
                 <div class="mb-2">
                     <label class="premium-label">
@@ -137,4 +186,37 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const roleInput = document.getElementById('role-input');
+        const inviteWrapper = document.getElementById('hr-invite-wrapper');
+        const inviteInput = document.getElementById('hr-invite-input');
+        const roleButtons = document.querySelectorAll('[data-role-btn]');
+
+        roleButtons.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                const role = btn.getAttribute('data-role-btn');
+                roleInput.value = role;
+
+                roleButtons.forEach(function (b) {
+                    b.classList.toggle('active', b === btn);
+                });
+
+                if (role === 'hr') {
+                    inviteWrapper.classList.remove('hidden');
+                    if (inviteInput) {
+                        inviteInput.setAttribute('required', 'required');
+                    }
+                } else {
+                    inviteWrapper.classList.add('hidden');
+                    if (inviteInput) {
+                        inviteInput.removeAttribute('required');
+                        inviteInput.value = '';
+                    }
+                }
+            });
+        });
+    });
+</script>
 @endsection
