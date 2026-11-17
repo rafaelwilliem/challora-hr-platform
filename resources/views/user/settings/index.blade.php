@@ -174,6 +174,21 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="info-card border border-red-500/40 bg-[#090909] mt-6">
+                    <h3 class="font-black uppercase text-xs text-red-400 mb-2">Data Privacy &amp; Erasure</h3>
+                    <p class="text-xs text-text-muted mb-4">
+                        Exercise your right to erasure under our <a href="{{ route('legal.privacy') }}" class="text-accent underline">Privacy Policy</a>. This permanently deletes your account, applications, and uploaded documents.
+                    </p>
+                    <form method="post" action="{{ route('user.settings.destroy') }}"
+                        onsubmit="return confirm('Are you sure you want to permanently delete your account, applications, and uploaded documents? This cannot be undone.');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="w-full py-2.5 px-4 bg-red-600/20 border border-red-500 text-red-400 hover:bg-red-600 hover:text-white font-black uppercase text-[11px] tracking-widest transition-colors cursor-pointer">
+                            Delete My Account
+                        </button>
+                    </form>
+                </div>
             </aside>
         </div>
     </div>

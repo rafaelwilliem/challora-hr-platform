@@ -35,7 +35,7 @@ services:
       - key: MYSQL_ATTR_SSL_VERIFY_SERVER_CERT
         value: "false"
       - key: APP_VERSION
-        value: "5.2.1"
+        value: "5.3.0"
       - key: HR_INVITE_CODE
         sync: false
       - key: LOG_CHANNEL

@@ -165,4 +165,31 @@ class ProfileController extends Controller
             'message' => 'AI profile suggestions are being generated.',
         ]);
     }
+
+    public function destroy(Request $request)
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
+        $filePaths = array_filter([
+            $user->avatar_path,
+            $user->cv_path,
+            $user->diploma_path,
+            $user->photo_path,
+        ]);
+
+        Auth::logout();
+        $user->delete();
+
+        foreach ($filePaths as $path) {
+            $this->fileService->delete($path);
+        }
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('landing')->with('flash_toast', [
+            'message' => 'Your account and personal documents have been permanently deleted.',
+        ]);
+    }
 }

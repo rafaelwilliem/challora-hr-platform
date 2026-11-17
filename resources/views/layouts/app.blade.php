@@ -148,8 +148,10 @@
                 <div class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-8 c-mono text-[11px] text-[#666] uppercase tracking-wider">
                     <div>&copy; {{ date('Y') }} CHALLORA HR PLATFORM. ALL RIGHTS RESERVED.</div>
                     <div class="flex flex-wrap justify-center gap-6">
+                        <a href="{{ route('legal.privacy') }}" class="hover:text-white transition-colors">PRIVACY &amp; AI POLICY</a>
+                        <a href="{{ route('legal.cookies') }}" class="hover:text-white transition-colors">COOKIE POLICY</a>
+                        <a href="{{ route('legal.terms') }}" class="hover:text-white transition-colors">TERMS OF SERVICE</a>
                         <a href="{{ route('jobs.index') }}" class="hover:text-white transition-colors">OPEN ROLES</a>
-                        <a href="{{ route('login') }}" class="hover:text-white transition-colors">RECRUITER ACCESS</a>
                     </div>
                 </div>
             </div>

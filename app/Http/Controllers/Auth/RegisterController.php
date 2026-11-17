@@ -47,6 +47,9 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'role' => ['nullable', 'string', 'in:user,hr'],
             'hr_invite_code' => [$isHr && $requiresHrInviteCode ? 'required' : 'nullable', 'string'],
+            'terms' => ['accepted'],
+        ], [
+            'terms.accepted' => 'You must agree to the Privacy Policy and Terms of Service.',
         ]);
 
         if ($isHr && $requiresHrInviteCode) {

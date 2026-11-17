@@ -85,6 +85,10 @@
                 </p>
                 <p class="text-[11px] font-bold text-gray-500 uppercase tracking-widest mt-3">
                     <a href="{{ route('landing') }}" class="hover:text-white transition-colors duration-300">← Back to Home</a>
+                    &nbsp;&middot;&nbsp;
+                    <a href="{{ route('legal.privacy') }}" class="hover:text-white transition-colors duration-300">Privacy</a>
+                    &nbsp;&middot;&nbsp;
+                    <a href="{{ route('legal.terms') }}" class="hover:text-white transition-colors duration-300">Terms</a>
                 </p>
             </div>
         </form>

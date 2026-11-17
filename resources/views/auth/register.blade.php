@@ -156,6 +156,20 @@
                 </div>
             </div>
 
+            <div class="mb-6">
+                <label class="flex items-start gap-3 cursor-pointer text-xs text-gray-400 leading-relaxed">
+                    <input type="checkbox" name="terms" value="1" required {{ old('terms') ? 'checked' : '' }}
+                        class="mt-1 accent-[#ff4500] w-4 h-4 cursor-pointer">
+                    <span>
+                        I agree to the
+                        <a href="{{ route('legal.privacy') }}" target="_blank" class="text-white underline hover:text-accent-500">Privacy &amp; AI Policy</a>,
+                        <a href="{{ route('legal.cookies') }}" target="_blank" class="text-white underline hover:text-accent-500">Cookie Policy</a>,
+                        and
+                        <a href="{{ route('legal.terms') }}" target="_blank" class="text-white underline hover:text-accent-500">Terms of Service</a>.
+                    </span>
+                </label>
+            </div>
+
             <button type="submit" class="btn-brutal">
                 CREATE ACCOUNT
             </button>
@@ -167,6 +181,10 @@
                 </p>
                 <p class="text-[11px] font-bold text-gray-500 uppercase tracking-widest mt-3">
                     <a href="{{ route('landing') }}" class="hover:text-white transition-colors duration-300">← Back to Home</a>
+                    &nbsp;&middot;&nbsp;
+                    <a href="{{ route('legal.privacy') }}" class="hover:text-white transition-colors duration-300">Privacy</a>
+                    &nbsp;&middot;&nbsp;
+                    <a href="{{ route('legal.terms') }}" class="hover:text-white transition-colors duration-300">Terms</a>
                 </p>
             </div>
         </form>

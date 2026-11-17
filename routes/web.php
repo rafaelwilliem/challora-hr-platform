@@ -43,9 +43,12 @@ Route::middleware('guest')->group(function () {
     Route::post('/reset-password', [ForgotPasswordController::class, 'reset'])->name('password.update');
 });
 
-// Public / Guest accessible Job Listing and Detail
+// Public / Guest accessible Job Listing, Detail, and Legal Pages
 Route::get('/jobs', [JobController::class, 'index'])->name('jobs.index');
 Route::get('/jobs/{job}', [JobController::class, 'show'])->name('jobs.show');
+Route::view('/privacy-policy', 'legal.privacy', ['pageTitle' => 'Privacy, AI & Cookie Policy'])->name('legal.privacy');
+Route::view('/terms-of-service', 'legal.terms', ['pageTitle' => 'Terms of Service'])->name('legal.terms');
+Route::get('/cookie-policy', fn () => redirect()->to(route('legal.privacy') . '#cookies'))->name('legal.cookies');
 
 // Authenticated Routes
 Route::middleware('auth')->group(function () {
@@ -65,6 +68,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/settings/avatar', [ProfileController::class, 'uploadAvatar'])->name('settings.avatar');
         Route::post('/settings/upload/{field}', [ProfileController::class, 'uploadDocument'])->name('settings.upload');
         Route::post('/settings/ai-suggestion', [ProfileController::class, 'requestAiSuggestion'])->name('settings.ai_suggestion');
+        Route::delete('/settings/account', [ProfileController::class, 'destroy'])->name('settings.destroy');
         
         Route::get('/applications', [UserApplicationController::class, 'index'])->name('applications.index');
         Route::post('/jobs/{job}/apply', [UserApplicationController::class, 'apply'])->name('jobs.apply');
